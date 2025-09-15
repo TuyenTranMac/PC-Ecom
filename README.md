@@ -19,15 +19,88 @@ Xây dựng hệ thống **E-commerce bán gear máy tính** tích hợp **AI g�
 
 ---
 
-## 📅 Timeline 12 tuần
 
-### Pre-start (20 ngày trước)
-- [ ] Chuẩn bị repo GitHub (monorepo hoặc multi-repo).  
-- [ ] Docker-compose cho Postgres + Redis.  
-- [ ] Khởi tạo NestJS + React skeleton.  
-- [ ] Thiết kế ERD + API spec (OpenAPI/Postman).  
-- [ ] Tạo CI/CD skeleton (GitHub Actions build + lint + test).  
-- [ ] Wireframe giao diện (Figma cơ bản).  
+## 🎯 Mục tiêu 20 ngày chuẩn bị
+- Ôn lại kiến thức cốt lõi (JS/TS, NestJS, ReactJS, Docker).
+- Chuẩn bị đầy đủ hạ tầng (repo, CI/CD, Docker, base project).
+- Chuẩn bị học thuật (outline, tài liệu tham khảo, nhật ký).
+- Đảm bảo khi bước vào 3 tháng khóa luận có thể bắt tay làm ngay.
+
+---
+
+## 📚 Nhóm 1: Ôn tập + Làm nóng
+
+### JavaScript / TypeScript
+- [ ] Ôn cú pháp ES6+, async/await, promise.
+- [ ] Ôn module system (import/export).
+- [ ] TypeScript cơ bản: type, interface, generics.
+- [ ] Thực hành: viết 3 hàm tiện ích (sort, filter, group) bằng JS → convert sang TS.
+
+### NestJS
+- [ ] Tạo mini API CRUD (User).
+- [ ] Ôn lại: Controller, Service, Module, DTO, Entity.
+- [ ] Thêm validation (class-validator).
+- [ ] Kết nối PostgreSQL (TypeORM).
+- [ ] Viết unit test cơ bản bằng Jest.
+
+### ReactJS
+- [ ] Ôn hook cơ bản: useState, useEffect, useContext, useReducer.
+- [ ] Ôn React Router.
+- [ ] Tạo mini dashboard: login form, table CRUD demo.
+- [ ] Thử kết nối mini API NestJS.
+
+### Docker
+- [ ] Ôn Dockerfile (Node app).
+- [ ] Tạo Docker Compose (Postgres + pgAdmin).
+- [ ] Build & run local stack.
+- [ ] Push image lên DockerHub (demo).
+
+---
+
+## 🛠 Nhóm 2: Chuẩn bị hạ tầng dự án
+
+### Repo & Project Base
+- [ ] Tạo GitHub repo (public/private).
+- [ ] Thêm file: `README.md`, `THESIS_PLAN.md`, `PREP_PLAN.md`, `.gitignore`, `LICENSE`.
+- [ ] Tạo folder `backend/` (NestJS) → `nest new backend`.
+- [ ] Tạo folder `frontend/` (ReactJS + Vite).
+- [ ] Push base code lên repo.
+
+### Database & Docker
+- [ ] Viết Docker Compose (Postgres + pgAdmin).
+- [ ] Config backend kết nối Postgres qua Docker.
+- [ ] Test: tạo bảng User + insert demo.
+
+### CI/CD & Workflow
+- [ ] Thiết lập branch strategy: `main` (release), `dev` (integration), `feature/*`.
+- [ ] Thêm GitHub Actions: lint + build + test (backend + frontend).
+- [ ] Deploy thử backend (Heroku/Render/Railway free tier).
+- [ ] Deploy thử frontend (Vercel/Netlify).
+
+---
+
+## 📑 Nhóm 3: Chuẩn bị học thuật
+
+### Đề tài & Outline
+- [ ] Viết tóm tắt 1 trang: tên đề tài, mục tiêu, phạm vi.
+- [ ] Xác định chức năng chính của hệ thống (Admin, Mod, User).
+- [ ] Vẽ sơ đồ use case tổng quan.
+- [ ] Soạn outline báo cáo (Mở đầu → Cơ sở lý thuyết → Hệ thống → Demo → Kết quả).
+
+### Tài liệu & Nhật ký
+- [ ] Tạo folder `docs/` trong repo.
+- [ ] Lưu các reference (bài báo, docs, repo GitHub).
+- [ ] Tạo `log.md` → ghi nhanh nhật ký phát triển mỗi ngày.
+- [ ] Thêm file `refs.bib` hoặc `refs.md` để cuối ghép vào “Tài liệu tham khảo”.
+
+---
+
+## ✅ Kết quả mong đợi sau 20 ngày
+- Thành thạo lại cú pháp & workflow cơ bản JS/TS, NestJS, ReactJS, Docker.
+- Repo GitHub sẵn sàng, có base code, CI/CD hoạt động.
+- Database & Docker Compose chạy ổn.
+- Có outline báo cáo, nhật ký, tài liệu tham khảo.
+- Tự tin bước vào 3 tháng khóa luận. 
 
 ---
 

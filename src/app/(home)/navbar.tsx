@@ -54,17 +54,18 @@ const Navbar = () => {
         ))}
       </div>
       <div className="hidden lg:flex">
+        
         <Button 
-          variant={"secondary"}
+          variant={"elevated"}
           className="border-1 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-non 
-          hover:bg-white transition-colors text-lg hover:text-black bg-teal-500 "
+          transition-colors text-lg hover:text-black bg-teal-500  hover:bg-white "
         >
           Login
         </Button>
         <Button
-          variant={"secondary"}
+          variant={"elevated"}
           className="border-l border-t-0 border-b-0 border-r-0 px-12 h-full rounded-non 
-          hover:bg-amber-300 transition-colors text-lg hover:text-black bg-teal-500"
+          transition-colors text-lg hover:text-black bg-teal-500 hover:bg-white"
         >
           Start Selling
         </Button>

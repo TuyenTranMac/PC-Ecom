@@ -11,16 +11,7 @@ import { Progress } from "@/components/ui/progress";
 export default function Home() {
   return (
    <div className=" flex flex-col gap-y-4">
-      <Label>HELLO WELCOME PAGE</Label>
-      <Input placeholder="enter" ></Input>
-      <Textarea placeholder={"I am here"}></Textarea>
-      <Button variant={"elevated"} >LICK ME</Button>
-      <Checkbox value={"checked"}></Checkbox>
-      <Progress value={50}></Progress>
-      <div>
-        <Button variant={"elevated"}>Lick</Button>  
-      </div>   
-   </div>
+        </div>
    
   );
 }

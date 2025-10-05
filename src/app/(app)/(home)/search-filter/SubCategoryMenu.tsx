@@ -10,7 +10,7 @@ interface SubDropdownProps{
 }
 
 export const  SubcategoryMenu = ({category,isOpen,position}:SubDropdownProps) => {
-  if(!isOpen || !category.subcategories || category.subcategories?.length === 0){
+  if(!isOpen || !category.subcategories || category.subcategories.length === 0){
     return null;
   }
   const backgroundColor = category.color || "#F5F5F5";
@@ -23,6 +23,7 @@ export const  SubcategoryMenu = ({category,isOpen,position}:SubDropdownProps) =>
         }}
     >
         <div className="h-3 w-60"/>
+         <div className="h-3 w-60"/>
         <div
           style={{backgroundColor}}
           className="w-60 text-black rounded-md overflow-hidden border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[2px] -translate-0-y[2px] ">

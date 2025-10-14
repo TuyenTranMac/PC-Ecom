@@ -5,6 +5,7 @@ import { getPayload } from "payload";
 import configPromise from '@payload-config'
 import { Category } from "@/payload-types";
 import { format } from "path";
+import { CategoryUI } from "@/lib/formatters/categoryFormatter";
 
 
 
@@ -25,24 +26,27 @@ const layout = async ({children} : Props) => {
     pagination:false,
     where:{
       parent:{
-        exists:true
+        exists:false
       }
     }
   })
-
-  const formatedData = data.docs.map((doc) => ({
-    ...doc,
-    subcategories: (doc.subcategories?.docs ?? [].map((doc) => ({
-    ...(doc as Category), //Category type from payload
-        subcategories:undefined
-  })))
-  }))
- 
+  
+  const formattedData = CategoryUI(data.docs);
+  // const formatedData = data.docs.map((doc) => ({
+  //   ...doc,
+  //   subcategories: (doc.subcategories?.docs ?? [].map((doc) => ({
+  //   ...(doc as Category), //Category type from payload
+  //       subcategories:undefined
+  // })))
+  // }))
+      console.log(  formattedData)
+      console.log('default date:',data)
   return (
+
     <div className="flex flex-col min-h-screen">
       <Navbar/>
       <SearchFilter
-        data={formatedData}
+        data={formattedData}
       />
       <div className="flex-1">
         {children}

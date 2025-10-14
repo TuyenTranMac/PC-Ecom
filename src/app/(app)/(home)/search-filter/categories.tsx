@@ -1,5 +1,6 @@
 import { Category } from "@/payload-types"
 import CategoryDropdown from "./CategoryDropdown"
+import { CategoryUI } from "@/lib/formatters/categoryFormatter"
 interface CategoriesProps{
     categoriesData:any
 }
@@ -8,8 +9,10 @@ interface CategoriesProps{
 
 const categories = ({categoriesData}:CategoriesProps) => {
   return (
-    <div>
-        {categoriesData.map((categories:Category) => (
+    <div className="relative w-full">
+    
+        <div className="flex flex-nowrap items-center">
+            {categoriesData.map((categories:CategoryUI) => (
             <div key={categories.id}>
                 <CategoryDropdown
                     category={categories}
@@ -18,7 +21,9 @@ const categories = ({categoriesData}:CategoriesProps) => {
                 />
             </div>
         ))}
+        </div>
     </div>
+    
   )
 }
 

@@ -2,34 +2,33 @@ import { Leaf } from "lucide-react";
 import { RefObject } from "react";
 
 export const useDropDownPosition = (
-    ref: RefObject<HTMLDivElement | null > | RefObject<HTMLDivElement>
+  ref: RefObject<HTMLDivElement | null> | RefObject<HTMLDivElement>
 ) => {
-    const getDropdownPosition = () =>{
-        if(!ref.current) return {top: 0,left:0}
-        const rect = ref.current.getBoundingClientRect()
-        const dropdownWidth = 240;
+  const getDropdownPosition = () => {
+    if (!ref.current) return { top: 0, left: 0 };
 
-        //cal initial position
-        let left = rect.left + window.scrollX;
-        const  top = rect.bottom + window.scrollY;
+    const rect = ref.current.getBoundingClientRect();
+    const dropdownWidth = 240;
 
-        //check if dropdown go off the right edge of the viewport
-        if(left + dropdownWidth > window.innerWidth) {
-              //Align to right edge of button instead
-            left = rect.right + window.scrollX -dropdownWidth
-            //if still off-screen, align to the right edge of viewport with some padding
-            if(left <0 ){
-                left = window.innerWidth -dropdownWidth -16
-            }
-        }
-        
-        //ensure dropdown does not go off to the left screen
-        if(left < 0){
-            left = 16;
-        }
-        return {top,left}
-      
+    // tính vị trí top (dưới parent)
+    const top = rect.bottom + window.scrollY;
+
+    // căn giữa dropdown với parent
+    let left =
+      rect.left + window.scrollX + rect.width / 2 - dropdownWidth / 2;
+
+    // check tràn bên phải
+    if (left + dropdownWidth > window.innerWidth) {
+      left = rect.right + window.scrollX - dropdownWidth;
     }
-    return{getDropdownPosition}
 
-}
+    // check tràn bên trái
+    if (left < 0) {
+      left = 16;
+    }
+
+    return { top, left };
+  };
+
+  return { getDropdownPosition };
+};

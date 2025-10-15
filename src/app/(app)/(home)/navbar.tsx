@@ -42,9 +42,9 @@ export const Navbar = () => {
   const pathName = usePathname()
   const [isSideBarOpen, setIsSideBarOpen] = useState(false)
   return (
-    <nav className="h-20 flex border-b justify-between  font-medium bg-teal-500">
+    <nav className="h-20 flex border-b justify-between  font-medium bg-secondary">
       <Link href="" className="pl-6 flex items-center">
-        <span className={cn("text-5xl font-semibold", poppins.className)}>JustGear</span>
+        <span className={cn("text-5xl font-semibold ", poppins.className)}>JustGear</span>
       </Link>
       <NavBarSideBar
         items={navbarItems}
@@ -69,7 +69,7 @@ export const Navbar = () => {
           asChild
           variant={"elevated"}
           className="border-1 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-non 
-          transition-colors text-lg hover:text-black bg-teal-500 hover:bg-white "
+          transition-colors text-lg hover:text-secondary bg-secondary hover:bg-blue-400 "
         >
            <Link href={"/login"}>
             Login
@@ -79,7 +79,7 @@ export const Navbar = () => {
           asChild
           variant={"elevated"}
           className="border-l border-t-0 border-b-0 border-r-0 px-12 font-bold font-stretch-95% h-full rounded-non 
-          transition-colors text-lg hover:text-black bg-teal-500 hover:bg-white"
+          transition-colors text-lg hover:text-primary bg-secondary hover:bg-amber-300"
         >
           <Link href={"/sign-up"}>
             Start Selling

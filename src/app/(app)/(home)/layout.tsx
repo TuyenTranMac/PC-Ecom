@@ -6,6 +6,7 @@ import configPromise from '@payload-config'
 import { Category } from "@/payload-types";
 import { format } from "path";
 import { CategoryUI } from "@/lib/formatters/categoryFormatter";
+import { CustomCategory } from "./search-filter/types";
 
 
 
@@ -31,7 +32,11 @@ const layout = async ({children} : Props) => {
     }
   })
   
-  const formattedData = CategoryUI(data.docs);
+  const formattedData: CustomCategory[] = CategoryUI(data.docs).map((cat: any) => ({
+    ...cat,
+    updatedAt: cat.updatedAt ?? "",
+    createdAt: cat.createdAt ?? "",
+  }));
   // const formatedData = data.docs.map((doc) => ({
   //   ...doc,
   //   subcategories: (doc.subcategories?.docs ?? [].map((doc) => ({
@@ -39,8 +44,6 @@ const layout = async ({children} : Props) => {
   //       subcategories:undefined
   // })))
   // }))
-      console.log(  formattedData)
-      console.log('default date:',data)
   return (
 
     <div className="flex flex-col min-h-screen">

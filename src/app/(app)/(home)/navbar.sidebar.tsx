@@ -25,7 +25,7 @@ export const NavBarSideBar = ({
             side="left"
             className="p-0 transition-none"
         >
-            <SheetHeader className="p-4 border-b bg-teal-500 ">
+            <SheetHeader className="p-4 border-b bg-secondary">
                 <div className="flex items-center">
                     <SheetTitle className="font-bold" >
                         Menu

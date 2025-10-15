@@ -1,8 +1,9 @@
 import { Category } from "@/payload-types"
 import CategoryDropdown from "./CategoryDropdown"
 import { CategoryUI } from "@/lib/formatters/categoryFormatter"
+import { CustomCategory } from "./types"
 interface CategoriesProps{
-    categoriesData:any
+    categoriesData:CustomCategory[]
 }
 
 

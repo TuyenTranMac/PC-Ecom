@@ -1,10 +1,11 @@
 import Categories from "./categories";
 import SearchInput from "./SearchInput";
+import { CustomCategory } from "./types";
 
 
 
 interface Props{
-    data: any;
+    data: CustomCategory[];
 }
 
 

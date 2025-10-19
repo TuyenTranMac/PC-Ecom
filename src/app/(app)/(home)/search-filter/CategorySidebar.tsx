@@ -40,10 +40,10 @@ const CategorySidebar = ({
       }
       else{
         if(category.slug === 'all'){
-          router.push("/src")
+          router.push("/")
         }
         else{
-          router.push(`${category.slug}`)
+          router.push(`/${category.slug}`)
         }
       }
     }

@@ -2,6 +2,7 @@ import { Sheet,SheetContent,SheetHeader,SheetTitle} from "@/components/ui/sheet"
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 
+
 interface NavbarItem{
     href:string;
     children:React.ReactNode;
@@ -19,13 +20,14 @@ export const NavBarSideBar = ({
     onOpenChange,
 
 }: Props) => {
+
     return(
         <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetContent
             side="left"
             className="p-0 transition-none"
         >
-            <SheetHeader className="p-4 border-b bg-teal-500 ">
+            <SheetHeader className="p-4 border-b bg-secondary">
                 <div className="flex items-center">
                     <SheetTitle className="font-bold" >
                         Menu

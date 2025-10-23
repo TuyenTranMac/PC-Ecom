@@ -1,22 +1,19 @@
-import { CategoryUI } from '@/lib/formatters/categoryFormatter'
+
 import React from 'react'
 import { useState } from 'react'
-import{
-  Sheet,SheetContent,SheetHeader,SheetTitle
-} from "@/components/ui/sheet"
+import{ Sheet,SheetContent,SheetHeader,SheetTitle} from "@/components/ui/sheet"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Button } from '@/components/ui/button'
 import { ChevronLeftIcon, ChevronRightIcon, Database } from 'lucide-react'
 import categories from './Categories'
 import { useRouter } from 'next/navigation'
+import { CategoryAllOutput } from '~/modules/categories/type'
 
 interface Props{
   isOpen: boolean,
   onOpenChange: (isOpen: boolean) => void,
-  data: CategoryUI[]
+  data: CategoryAllOutput
 }
-
-
 
 const CategorySidebar = ({
   isOpen,
@@ -25,13 +22,13 @@ const CategorySidebar = ({
 
 }:Props) => {
   const router = useRouter()
-  const [parentCategory,setParentCategory] = useState<CategoryUI[] | null>(null)
-  const [selectedCategory,setSelectedCategory] = useState<CategoryUI | null>(null)
+  const [parentCategory,setParentCategory] = useState<CategoryAllOutput | null>(null)
+  const [selectedCategory,setSelectedCategory] = useState<CategoryAllOutput[number] | null>(null)
 
   const currentCategory = parentCategory ?? data ?? [];
-  const handleClickSubcategories = (category: CategoryUI) => {
+  const handleClickSubcategories = (category: CategoryAllOutput[number]) => {
     if(category.subcategories && category.subcategories.length >0){
-      setParentCategory(category.subcategories)
+      setParentCategory(category.subcategories as CategoryAllOutput )
       setSelectedCategory(category)
     }
     else {

@@ -1,23 +1,19 @@
 'use client'
-import { Category } from "@/payload-types"
 import CategoryDropdown from "./CategoryDropdown"
-import { CategoryUI } from "@/lib/formatters/categoryFormatter"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ListFilterIcon } from "lucide-react"
 import CategorySidebar from "./CategorySidebar"
-// import { CustomCategory } from "./types"
-interface CategoriesProps{
-    data:CategoryUI[]
-}
+import { UseCategory } from "../../trpcHelper/useCategory"
 
-const categories = ({data}:CategoriesProps) => {
+const categories = () => {
+    const {data} = UseCategory()
     const containerRef = useRef<HTMLDivElement>(null);
     const measureRef = useRef<HTMLDivElement>(null);
     const viewAllRef = useRef<HTMLDivElement>(null);
     
-    const [visibleCount, setVisibleCount] = useState(data.length);
+    const [visibleCount, setVisibleCount] = useState(data.length );
     const [isAnyHovered, setIsAnyHovered] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const activeCategory="all";
@@ -59,7 +55,7 @@ const categories = ({data}:CategoriesProps) => {
             style={{position:"fixed", top: -9999, left: -9999}}
             ref={measureRef}
         >
-            {data.map((categories:CategoryUI) => (
+            {data.map((categories) => (
             <div key={categories.id}>
                 <CategoryDropdown
                     category={categories}
@@ -74,7 +70,7 @@ const categories = ({data}:CategoriesProps) => {
             onMouseEnter={ () => setIsAnyHovered(true)}
             onMouseLeave={ () => setIsAnyHovered(false)}
         >
-            {data.slice(0, visibleCount).map((categories:CategoryUI) => (
+            {data.slice(0, visibleCount).map((categories) => (
                 <div key={categories.id}>
                     <CategoryDropdown
                         category={categories}

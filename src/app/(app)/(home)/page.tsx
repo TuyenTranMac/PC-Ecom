@@ -5,6 +5,11 @@ import { useTRPC } from '~/trpc/client';
 
 
 
+/**
+ * Renders the Home page component.
+ *
+ * @returns A JSX element containing a top-level div with a nested flex column div that displays the text "Home".
+ */
 export default function Home() {
   
   // prefetch(

@@ -2,7 +2,11 @@ import {
   defaultShouldDehydrateQuery,
   QueryClient,
 } from '@tanstack/react-query';
-// import superjson from 'superjson';
+/**
+ * Create a preconfigured QueryClient with sensible defaults for queries, dehydrate, and hydrate.
+ *
+ * @returns A configured `QueryClient` instance with a 30-second query `staleTime` and a dehydrate policy that treats queries selected by the default policy or queries whose state is `pending` as dehydrated.
+ */
 export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {

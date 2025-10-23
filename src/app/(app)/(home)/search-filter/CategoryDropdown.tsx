@@ -5,9 +5,10 @@
     import { useRef, useState } from "react"
     import { useDropDownPosition } from "./use-dropdown-position"
     import {SubcategoryMenu} from "./SubCategoryMenu"
-    import { CategoryUI } from "@/lib/formatters/categoryFormatter"
+    import { CategoryAllOutput } from "~/modules/categories/type"
+
     interface catDropProps{
-        category: CategoryUI,
+        category: CategoryAllOutput[1],
         isActive?: boolean,
         isNavigatedHover?: boolean,
     }
@@ -62,5 +63,4 @@
         </div>
     )
     }
-
     export default CateoryDropdown

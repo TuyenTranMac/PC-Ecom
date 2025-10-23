@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"], 
+      "@/*": ["./src/*"], // Alias mặc định của Next.js
+      "@payload-config": ["./src/payload.config.ts"] // Alias cho payload config
+    },
     "target": "ES2017",
     "lib": [
       "dom",
@@ -22,14 +28,6 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@payload-config": [
-        "./src/payload.config.ts"
-      ]
-    }
   },
   "include": [
     "next-env.d.ts",
@@ -39,5 +37,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+
 }

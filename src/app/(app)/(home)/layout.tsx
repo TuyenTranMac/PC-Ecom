@@ -6,11 +6,11 @@ import configPromise from '@payload-config'
 import { Category } from "@/payload-types";
 import { format } from "path";
 import { CategoryUI } from "@/lib/formatters/categoryFormatter";
-import { HydrateClient, prefetch,trpc } from "~/trpc/server";
+import { HydrateClient, prefetch,trpc } from "@/trpc/server";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useTRPC } from "~/trpc/client";
+import { useTRPC } from "@/trpc/client";
 import { UseCategory } from "../trpcHelper/useTRPC";
 // import { CustomCategory } from "./search-filter/types";
 

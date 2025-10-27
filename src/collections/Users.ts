@@ -1,4 +1,3 @@
-import { username } from 'node_modules/payload/dist/fields/validations'
 import type { CollectionConfig } from 'payload'
 import { string } from 'zod'
 

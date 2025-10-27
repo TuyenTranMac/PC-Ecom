@@ -3,11 +3,9 @@ import React from 'react'
 import { useState } from 'react'
 import{ Sheet,SheetContent,SheetHeader,SheetTitle} from "@/components/ui/sheet"
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Button } from '@/components/ui/button'
 import { ChevronLeftIcon, ChevronRightIcon, Database } from 'lucide-react'
-import categories from './Categories'
 import { useRouter } from 'next/navigation'
-import { CategoryAllOutput } from '~/modules/categories/type'
+import { CategoryAllOutput } from '@/modules/categories/type'
 
 interface Props{
   isOpen: boolean,

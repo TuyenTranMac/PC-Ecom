@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+
     "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-      "paths": {
-      "~/*": ["src/*"], 
-      "@/*": ["./src/*"], // Alias mặc định của Next.js
-      "@payload-config": ["./src/payload.config.ts"] // Alias cho payload config
-    },
+    
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -28,6 +24,12 @@
         "name": "next"
       }
     ],
+    "paths": {
+    "@/*": ["./src/*"], // Alias mặc định của Next.js
+    "@payload-config": [
+        "./src/payload.config.ts"
+      ]
+    },
   },
   "include": [
     "next-env.d.ts",

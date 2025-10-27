@@ -1,7 +1,7 @@
 
 import { Category } from "@/payload-types"
 import Link from "next/link";
-import { CategoryAllOutput } from "~/modules/categories/type";
+import { CategoryAllOutput } from "@/modules/categories/type";
 
 interface SubDropdownProps{
     category: CategoryAllOutput[number]

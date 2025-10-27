@@ -1,7 +1,7 @@
 'use client'
 import Categories from "./Categories";
 import SearchInput from "./SearchInput";
-import { UseCategory } from "../../trpcHelper/useCategory";
+import { UseCategory } from "../../trpcHelper/useTRPC";
 // import { CustomCategory } from "./types";
 
 

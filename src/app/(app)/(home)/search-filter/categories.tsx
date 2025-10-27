@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ListFilterIcon } from "lucide-react"
 import CategorySidebar from "./CategorySidebar"
-import { UseCategory } from "../../trpcHelper/useCategory"
+import { UseCategory } from "../../trpcHelper/useTRPC"
 
 const categories = () => {
     const {data} = UseCategory()

@@ -1,7 +1,6 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query';
-import { useTRPC } from '~/trpc/client';
+import { useAuth } from '../trpcHelper/useTRPC';
 
 
 
@@ -12,10 +11,11 @@ export default function Home() {
   //     text:'Tuyen'
   //   })
   // )
-
+    const {data} = useAuth()
     return(
       <div>
       <div className=" flex flex-col gap-y-4"> Home
+        <p>{JSON.stringify(data.user?.email)}</p>
       </div>
     </div>
     );

@@ -142,6 +142,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

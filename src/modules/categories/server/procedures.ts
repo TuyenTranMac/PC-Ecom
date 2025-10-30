@@ -4,7 +4,7 @@ import config from '@payload-config'
 import { Category } from "@/payload-types";
 export const categoriesRouter = createTRPCRouter({
     all: publicProcedure.query( async ( {ctx}) => {
-        const data = await ctx.payload.find({
+        const data = await ctx.db.find({
             collection: 'categories',
             depth:1,
             pagination:false,

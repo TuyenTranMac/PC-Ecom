@@ -10,3 +10,4 @@ export const useAuth = () => {
     const trpc = useTRPC();
     return useSuspenseQuery(trpc.auth.session.queryOptions());
 }
+

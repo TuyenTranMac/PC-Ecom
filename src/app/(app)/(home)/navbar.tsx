@@ -71,7 +71,7 @@ export const Navbar = () => {
           className="border-1 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-non 
           transition-colors text-lg hover:text-secondary bg-secondary hover:bg-blue-400 "
         >
-           <Link href={"/login"}>
+           <Link href={"/sign-in"}>
             Login
           </Link>
         </Button>

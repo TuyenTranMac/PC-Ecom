@@ -23,6 +23,12 @@ createTRPCOptionsProxy({
 });
 
 
+/**
+ * Wraps children with a React Query HydrationBoundary seeded from the shared query client.
+ *
+ * @param props.children - React nodes to render inside the hydration boundary
+ * @returns A React element that provides dehydrated React Query state to descendant hooks
+ */
 export function HydrateClient(props: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
   return (
@@ -31,6 +37,15 @@ export function HydrateClient(props: { children: React.ReactNode }) {
     </HydrationBoundary>
   );
 }
+/**
+ * Prefetches data for a TRPC query using the shared query client.
+ *
+ * Prefetch behavior adapts to the query shape: if `queryOptions.queryKey[1]?.type` equals
+ * `'infinite'`, the options are prefetched as an infinite query; otherwise they are
+ * prefetched as a standard query.
+ *
+ * @param queryOptions - Query options produced by TRPC/React-Query (`TRPCQueryOptions` return shape)
+ */
 export function prefetch<T extends ReturnType<TRPCQueryOptions<any>>>(
   queryOptions: T,
 ) {

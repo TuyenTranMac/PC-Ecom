@@ -1,102 +1,97 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { Poppins } from "next/font/google"
-import Link from "next/link"
-import { usePathname } from "next/navigation";
-import { NavBarSideBar } from "./navbar.sidebar"
-import { useState } from "react"
-import { MenuIcon, MenuSquareIcon } from "lucide-react"
+'use client';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Poppins } from 'next/font/google';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { NavBarSideBar } from './navbar.sidebar';
+import { useState } from 'react';
+import { MenuIcon } from 'lucide-react';
 interface NavbarItemProps {
-  href: string,
-  children: React.ReactNode,
-  isActive: boolean
+  href: string;
+  children: React.ReactNode;
+  isActive: boolean;
 }
 
-const NavbarItem = ({href,children,isActive}:NavbarItemProps) => {
-  return(
+const NavbarItem = ({ href, children, isActive }: NavbarItemProps) => {
+  return (
     <Button
-      asChild 
-      variant={"outline"} 
-      className={cn("bg-transparent hover:bg-transparent rounded-full hover:border-primary border-transparent px-3.5 text-lg"
-        ,isActive &&"bg-black text-white hover:bg-black hover:text-white")}
+      asChild
+      variant={'outline'}
+      className={cn(
+        'hover:border-primary rounded-full border-transparent bg-transparent px-3.5 text-lg hover:bg-transparent',
+        isActive && 'bg-black text-white hover:bg-black hover:text-white'
+      )}
     >
       <Link href={href}>{children}</Link>
     </Button>
-  )
-}
+  );
+};
 
-const navbarItems =[
-  {href:"/", children:"Home"},
-  {href:'/About', children:"About"},
-  {href:'/MarketPlace', children:"Market Place"},
-  {href:'/Contact', children:"Contact"},
-
-]
+const navbarItems = [
+  { href: '/', children: 'Home' },
+  { href: '/About', children: 'About' },
+  { href: '/MarketPlace', children: 'Market Place' },
+  { href: '/Contact', children: 'Contact' },
+];
 
 const poppins = Poppins({
-    subsets:["latin"],
-    weight:["700"]
-})
+  subsets: ['latin'],
+  weight: ['700'],
+});
 export const Navbar = () => {
-  const pathName = usePathname()
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false)
+  const pathName = usePathname();
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   return (
-    <nav className="h-20 flex border-b justify-between  font-medium bg-secondary">
-      <Link href="" className="pl-6 flex items-center">
-        <span className={cn("text-5xl font-semibold ", poppins.className)}>JustGear</span>
+    <nav className='bg-secondary flex h-20 justify-between border-b font-medium'>
+      <Link href='' className='flex items-center pl-6'>
+        <span className={cn('text-5xl font-semibold', poppins.className)}>
+          JustGear
+        </span>
       </Link>
       <NavBarSideBar
         items={navbarItems}
         open={isSideBarOpen}
         onOpenChange={setIsSideBarOpen}
       />
-      <div className="items-center gap-4 hidden lg:flex ">
-        {navbarItems.map((item)=> (
+      <div className='hidden items-center gap-4 lg:flex'>
+        {navbarItems.map((item) => (
           <NavbarItem
-            isActive={pathName === item.href} key={item.href}
-
+            isActive={pathName === item.href}
+            key={item.href}
             {...item}
-            >
+          >
             {item.children}
-            
           </NavbarItem>
         ))}
       </div>
-      <div className="hidden lg:flex">
-        
-        <Button 
+      <div className='hidden lg:flex'>
+        <Button
           asChild
-          variant={"elevated"}
-          className="border-1 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-non 
-          transition-colors text-lg hover:text-secondary bg-secondary hover:bg-blue-400 "
+          variant={'elevated'}
+          className='rounded-non hover:text-secondary bg-secondary h-full border border-t-0 border-r-0 border-b-0 px-12 text-lg transition-colors hover:bg-blue-400'
         >
-           <Link href={"/sign-in"}>
-            Login
-          </Link>
+          <Link href={'/auth'}>Login</Link>
         </Button>
         <Button
           asChild
-          variant={"elevated"}
-          className="border-l border-t-0 border-b-0 border-r-0 px-12 font-bold font-stretch-95% h-full rounded-non 
-          transition-colors text-lg hover:text-primary bg-secondary hover:bg-amber-300"
+          variant={'elevated'}
+          className='rounded-non hover:text-primary bg-secondary h-full border-t-0 border-r-0 border-b-0 border-l px-12 text-lg font-bold font-stretch-95% transition-colors hover:bg-amber-300'
         >
-          <Link href={"/sign-up"}>
-            Start Selling
-          </Link>
+          <Link href={''}>Start Selling</Link>
         </Button>
       </div>
-      <div className="flex lg:hidden items-center justify-center">
+      <div className='flex items-center justify-center lg:hidden'>
         <Button
-          variant={"ghost"}
-          className="size-12 border-transparent"
+          variant={'ghost'}
+          className='size-12 border-transparent'
           onClick={() => setIsSideBarOpen(true)}
         >
-          <MenuIcon/>
+          <MenuIcon />
         </Button>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

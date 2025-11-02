@@ -1,11 +1,10 @@
     'use client'
     import { Button } from "@/components/ui/button"
-    import { Category } from "@/payload-types"
     import { cn } from "@/lib/utils"
     import { useRef, useState } from "react"
     import { useDropDownPosition } from "./use-dropdown-position"
     import {SubcategoryMenu} from "./SubCategoryMenu"
-    import { CategoryAllOutput } from "~/modules/categories/type"
+    import { CategoryAllOutput } from "@/modules/categories/type"
 
     interface catDropProps{
         category: CategoryAllOutput[1],

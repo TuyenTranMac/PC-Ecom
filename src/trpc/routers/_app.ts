@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 import { categoriesRouter } from '@/modules/categories/server/procedures';
 import { createTRPCRouter } from '../init';
 import { authRouter } from '@/modules/auth/server/procedures';

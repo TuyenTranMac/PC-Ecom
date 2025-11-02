@@ -1,6 +1,4 @@
 import { publicProcedure, createTRPCRouter } from "@/trpc/init"
-import { getPayload } from "payload";
-import config from '@payload-config'
 import { Category } from "@/payload-types";
 export const categoriesRouter = createTRPCRouter({
     all: publicProcedure.query( async ( {ctx}) => {

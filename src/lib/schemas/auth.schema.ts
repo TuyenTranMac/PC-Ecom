@@ -1,7 +1,7 @@
 import {email, z} from "zod"
 
 export const registerSchema = z.object({
-    email: z.string().email("Email không hợp lệ"),
+    email: z.email("Email chưa đúng định dạng"),
     password: z.string()
         .min(6, "Mật khẩu phải có ít nhất 6 ký tự")
         .regex(/^(?=.*[A-Z])(?=.*\d).+$/, "Mật khẩu phải có ít nhất 1 chữ hoa và 1 chữ số"),

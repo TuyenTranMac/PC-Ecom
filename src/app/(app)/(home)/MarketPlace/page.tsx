@@ -1,9 +1,16 @@
+import { Button } from "@/components/ui/button";
 
-
+// Helper function to simulate a delay
 const MarketPlace = () => {
-  return (
-    <div>MarketPlace</div>
-  )
-}
+  // Simulate a 3-second data fetch
 
-export default MarketPlace
+  return (
+    <div>
+      <Button>AAAAAAA</Button>
+      <Button>AAAAAAA</Button>
+      <Button>AAAAAAA</Button>
+    </div>
+  );
+};
+
+export default MarketPlace;

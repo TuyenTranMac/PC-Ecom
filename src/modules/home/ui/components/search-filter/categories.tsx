@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ListFilterIcon } from "lucide-react";
 import CategorySidebar from "./CategorySidebar";
-import { UseCategory } from "../../trpcHelper/useTRPC";
+import { UseCategory } from "@/app/(app)/trpcHelper/useTRPC";
+import Link from "next/link";
 
 const categories = () => {
   const { data } = UseCategory();
@@ -30,7 +31,6 @@ const categories = () => {
       if (!containerRef.current || !measureRef.current || !viewAllRef.current) {
         return;
       }
-
       const container_W = containerRef.current.offsetWidth;
       const viewAll_W = viewAllRef.current.offsetWidth;
       const avilable_W = container_W - viewAll_W;
@@ -61,13 +61,13 @@ const categories = () => {
         ref={measureRef}
       >
         {data.map((categories) => (
-          <div key={categories.id}>
+          <Link key={categories.id} href={`/${categories.slug}`}>
             <CategoryDropdown
               category={categories}
               isActive={activeCategory === categories.slug}
               isNavigatedHover={false}
             />
-          </div>
+          </Link>
         ))}
       </div>
       <div

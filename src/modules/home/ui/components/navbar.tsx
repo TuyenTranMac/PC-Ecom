@@ -41,12 +41,16 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["700"],
 });
-export const Navbar = () => {
+
+interface Props {
+  session: any | null;
+}
+export const Navbar = ({ session }: Props) => {
   const pathName = usePathname();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-
-  const trpc = useTRPC();
-  const session = useQuery(trpc.auth.getMe.queryOptions());
+  console.log("session", session);
+  // const trpc = useTRPC();
+  // const session = useQuery(trpc.auth.getMe.queryOptions());
   return (
     <nav className="bg-secondary flex h-20 justify-between border-b font-medium">
       <Link href="" className="flex items-center pl-6">
@@ -70,7 +74,7 @@ export const Navbar = () => {
           </NavbarItem>
         ))}
       </div>
-      {session.data?.user && (
+      {session && (
         <div className="hidden lg:flex">
           <Button
             asChild
@@ -81,7 +85,7 @@ export const Navbar = () => {
           </Button>
         </div>
       )}
-      {!session.data?.user && (
+      {!session && (
         <div className="hidden lg:flex">
           <Button
             asChild

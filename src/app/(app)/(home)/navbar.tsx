@@ -6,7 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavBarSideBar } from "./navbar.sidebar";
 import { useState } from "react";
-import { MenuIcon } from "lucide-react";
+import { BookmarkCheck, MenuIcon } from "lucide-react";
+import { useTRPC } from "@/trpc/client";
+import { useQuery } from "@tanstack/react-query";
 interface NavbarItemProps {
   href: string;
   children: React.ReactNode;
@@ -42,6 +44,9 @@ const poppins = Poppins({
 export const Navbar = () => {
   const pathName = usePathname();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+
+  const trpc = useTRPC();
+  const session = useQuery(trpc.auth.getMe.queryOptions());
   return (
     <nav className="bg-secondary flex h-20 justify-between border-b font-medium">
       <Link href="" className="flex items-center pl-6">
@@ -65,22 +70,36 @@ export const Navbar = () => {
           </NavbarItem>
         ))}
       </div>
-      <div className="hidden lg:flex">
-        <Button
-          asChild
-          variant={"elevated"}
-          className="rounded-non hover:text-secondary bg-secondary h-full border border-t-0 border-r-0 border-b-0 px-12 text-lg transition-colors hover:bg-blue-400"
-        >
-          <Link href={"/auth"}>Login</Link>
-        </Button>
-        <Button
-          asChild
-          variant={"elevated"}
-          className="rounded-non hover:text-primary bg-secondary h-full border-t-0 border-r-0 border-b-0 border-l px-12 text-lg font-bold font-stretch-95% transition-colors hover:bg-amber-300"
-        >
-          <Link href={""}>Start Selling</Link>
-        </Button>
-      </div>
+      {session.data?.user && (
+        <div className="hidden lg:flex">
+          <Button
+            asChild
+            variant={"elevated"}
+            className="rounded-non hover:text-primary bg-secondary h-full border-t-0 border-r-0 border-b-0 border-l px-12 text-lg font-bold font-stretch-95% transition-colors hover:bg-amber-300"
+          >
+            <Link href={""}>Start Selling</Link>
+          </Button>
+        </div>
+      )}
+      {!session.data?.user && (
+        <div className="hidden lg:flex">
+          <Button
+            asChild
+            variant={"elevated"}
+            className="rounded-non hover:text-secondary bg-secondary h-full border border-t-0 border-r-0 border-b-0 px-12 text-lg transition-colors hover:bg-blue-400"
+          >
+            <Link href={"/auth"}>Login</Link>
+          </Button>
+          <Button
+            asChild
+            variant={"elevated"}
+            className="rounded-non hover:text-primary bg-secondary h-full border-t-0 border-r-0 border-b-0 border-l px-12 text-lg font-bold font-stretch-95% transition-colors hover:bg-amber-300"
+          >
+            <Link href={""}>Start Selling</Link>
+          </Button>
+        </div>
+      )}
+
       <div className="flex items-center justify-center lg:hidden">
         <Button
           variant={"ghost"}

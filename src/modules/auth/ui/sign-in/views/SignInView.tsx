@@ -11,17 +11,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SignInInput, singinSchema } from "@/lib/schemas/auth.schema";
+import {
+  SignInInput,
+  loginSchema,
+  registerSchema,
+} from "@/lib/schemas/auth.schema";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
-import { ArrowLeftIcon, FormInput } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { ArrowLeftIcon, FormInput, Users } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
+import z from "zod";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,26 +39,42 @@ interface Props {
 const SignInView = ({ onToggle }: Props) => {
   const router = useRouter();
   const trpc = useTRPC();
-  const login = useMutation(
-    trpc.auth.login.mutationOptions({
-      onError: (error) => {
-        toast.error(error.message); // Giờ nó sẽ hoạt động
-      },
-      onSuccess: () => {
-        toast.success("Login Successfully!", {
-          duration: 1200,
-          onAutoClose: () => {
-            router.push("/");
-          },
-        });
-      },
-    })
-  );
+  const queryClient = useQueryClient();
+  const login = useMutation({
+    mutationFn: async (values: z.infer<typeof loginSchema>) => {
+      const req = await fetch("api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      if (!req.ok) {
+        const error = await req.json();
+        throw new Error(error.message);
+      }
+      const data = await req.json();
+      console.log(data);
+      return data;
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(trpc.auth.getMe.queryFilter());
+      toast.success("Login Successfully!", {
+        duration: 1200,
+        onAutoClose: () => {
+          router.push("/");
+        },
+      });
+    },
+  });
   const onSubmit = (value: SignInInput) => {
     login.mutate(value);
   };
   const form = useForm<SignInInput>({
-    resolver: zodResolver(singinSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",

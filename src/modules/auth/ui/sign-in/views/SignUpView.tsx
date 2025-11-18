@@ -17,12 +17,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { ArrowLeftIcon, FormInput } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
+import { UseRegister } from "@/app/(app)/trpcHelper/useTRPC";
+import { success } from "zod";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,6 +36,7 @@ interface Props {
 const SignUpView = ({ onToggle }: Props) => {
   const router = useRouter();
   const trpc = useTRPC();
+  const queryClient = useQueryClient();
   const register = useMutation(
     trpc.auth.register.mutationOptions({
       onError: (error) => {
@@ -41,6 +44,7 @@ const SignUpView = ({ onToggle }: Props) => {
       },
 
       onSuccess: () => {
+        queryClient.invalidateQueries(trpc.auth.getMe.queryFilter());
         toast.success("Đăng ký thành công!", {
           duration: 1200,
           onAutoClose: () => {},
@@ -50,7 +54,6 @@ const SignUpView = ({ onToggle }: Props) => {
     })
   );
 
-  const [isRedirecting, setIsRedirecting] = useState(false);
   const onSubmit = (value: RegisterInput) => {
     register.mutate(value);
   };

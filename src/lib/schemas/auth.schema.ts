@@ -13,10 +13,10 @@ export const registerSchema = z.object({
         .transform((val) => val.toLowerCase()),
 })
 
-export const singinSchema = z.object({
+export const loginSchema = z.object({
     email: z.email(),
     password: z.string().min(6).regex(/^(?=.*[A-Z])(?=.*\d).+$/, "Password phải có ít nhất 1 chữ hoa kết hợp số(0-9)"),
 })
 
 export type RegisterInput = z.infer<typeof registerSchema>
-export type SignInInput = z.infer<typeof singinSchema>
+export type SignInInput = z.infer<typeof loginSchema>

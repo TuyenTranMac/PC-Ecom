@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 
 
@@ -8,6 +8,10 @@ export const UseCategory = () => {
 }
 export const useAuth = () => {
     const trpc = useTRPC();
-    return useSuspenseQuery(trpc.auth.session.queryOptions());
+    return useSuspenseQuery(trpc.auth.getMe.queryOptions());
 }
-
+export const UseRegister = () => {
+    const trpc = useTRPC();
+    return useMutation(trpc.auth.register.mutationOptions(
+    ));
+}

@@ -6,9 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavBarSideBar } from "./navbar.sidebar";
 import { useState } from "react";
-import { BookmarkCheck, MenuIcon } from "lucide-react";
-import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
+import { MenuIcon } from "lucide-react";
+import { useSession } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
 interface NavbarItemProps {
   href: string;
   children: React.ReactNode;
@@ -42,13 +41,10 @@ const poppins = Poppins({
   weight: ["700"],
 });
 
-interface Props {
-  session: any | null;
-}
-export const Navbar = ({ session }: Props) => {
+export const Navbar = () => {
+  const { user } = useSession();
   const pathName = usePathname();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  console.log("session", session);
   // const trpc = useTRPC();
   // const session = useQuery(trpc.auth.getMe.queryOptions());
   return (
@@ -74,7 +70,7 @@ export const Navbar = ({ session }: Props) => {
           </NavbarItem>
         ))}
       </div>
-      {session && (
+      {user ? (
         <div className="hidden lg:flex">
           <Button
             asChild
@@ -84,8 +80,7 @@ export const Navbar = ({ session }: Props) => {
             <Link href={""}>Start Selling</Link>
           </Button>
         </div>
-      )}
-      {!session && (
+      ) : (
         <div className="hidden lg:flex">
           <Button
             asChild

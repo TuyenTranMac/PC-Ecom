@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
+import { useSession } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
 
 interface NavbarItem {
   href: string;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export const NavBarSideBar = ({ items, open, onOpenChange }: Props) => {
+  const { user } = useSession();
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="left" className="p-0 transition-none">
@@ -39,13 +41,15 @@ export const NavBarSideBar = ({ items, open, onOpenChange }: Props) => {
             </Link>
           ))}
           <div className="border-t">
-            <Link
-              onClick={() => onOpenChange(false)}
-              href={"/auth"}
-              className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
-            >
-              Login
-            </Link>
+            {user ? (
+              <Link
+                onClick={() => onOpenChange(false)}
+                href={"/auth"}
+                className="w-full text-left p-4 hover:bg-black hover:text-white flex items-center text-base font-medium"
+              >
+                Login
+              </Link>
+            ) : null}
             <Link
               onClick={() => onOpenChange(false)}
               href={"/auth"}

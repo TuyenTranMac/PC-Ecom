@@ -1,26 +1,28 @@
+import { getUserInfoSeverSide } from "@/lib/auth/UserSeverSideHelper";
 import Footer from "../../../modules/home/ui/components/Footer";
 import Navbar from "../../../modules/home/ui/components/navbar";
-import SearchFilter from "@/modules/home/ui/components/search-filter";
 import { caller, HydrateClient, prefetch, trpc } from "@/trpc/server";
 import { Suspense } from "react";
+import { SessionProvider } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
+import Category from "@/modules/home/ui/components/search-filter/Category";
 
 interface Props {
   children: React.ReactNode;
 }
 const layout = async ({ children }: Props) => {
-  const callMe = await caller;
-  const session = callMe.auth.getMe();
-
+  const user = await getUserInfoSeverSide();
   return (
     <HydrateClient>
-      <div className="flex flex-col min-h-screen">
-        <Navbar session={session} />
-        <Suspense fallback={<div>Loading...</div>}>
-          <SearchFilter />
-        </Suspense>
-        <div className="flex-1">{children}</div>
-        <Footer />
-      </div>
+      <SessionProvider session={user}>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Category />
+          </Suspense>
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
+      </SessionProvider>
     </HydrateClient>
   );
 };

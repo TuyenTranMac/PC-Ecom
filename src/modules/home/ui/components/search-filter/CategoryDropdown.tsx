@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { useDropDownPosition } from "./use-dropdown-position";
 import { SubcategoryMenu } from "./SubCategoryMenu";
 import { CategoryAllOutput } from "@/modules/categories/type";
-
+import Link from "next/link";
 interface catDropProps {
   category: CategoryAllOutput[1];
   isActive?: boolean;
@@ -37,15 +37,16 @@ const CateoryDropdown = ({
     >
       <div className="relative  ">
         <Button
+          asChild
           className={cn(
-            "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black ",
+            "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
             isActive && !isNavigatedHover && "bg-white border-primary",
             isOpen &&
               "bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-1 -translate-y-1 transition-all"
           )}
-          variant={"elevated"}
+          variant="elevated"
         >
-          {category.name}
+          <Link href={`/${category.slug}`}>{category.name}</Link>
         </Button>
         {category.subcategories?.length > 0 && (
           <div

@@ -1,13 +1,12 @@
-import React from "react";
-
 interface Props {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
-const page = ({ params }: Props) => {
-  const { category } = params;
+
+const CategoryPage = async ({ params }: Props) => {
+  const { category } = await params;
   return <div>Category: {category}</div>;
 };
 
-export default page;
+export default CategoryPage;

@@ -1,21 +1,21 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { BookmarkCheck, SearchIcon } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useTRPC } from "@/trpc/client";
 import { useQuery } from "@tanstack/react-query";
 import { tr } from "date-fns/locale";
+import { useSession } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
 interface Props {
   disable?: boolean;
 }
 
 const SearchInput = ({ disable }: Props) => {
+  const { user } = useSession();
   const [isOpen, setIsOpen] = useState(false);
-  const trpc = useTRPC();
-  const session = useQuery(trpc.auth.getMe.queryOptions());
   return (
     <div className="flex flex-row items-center gap-2 w-full">
       <div className="relative flex items-center w-full">
@@ -31,13 +31,13 @@ const SearchInput = ({ disable }: Props) => {
           placeholder="Search product"
           disabled={disable}
         />
-        {session.data?.user && (
+        {user ? (
           <Button variant="elevated">
             <Link href={""}>
               <BookmarkCheck />
             </Link>
           </Button>
-        )}
+        ) : null}
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import { caller } from "@/trpc/server";
+import { caller, trpc } from "@/trpc/server";
 import Overlay from "./overlay";
 import { redirect } from "next/navigation";
+import { getUserInfoSeverSide } from "@/lib/auth/UserSeverSideHelper";
 const page = async () => {
-  const session = await caller.auth.getMe();
+  const user = await getUserInfoSeverSide();
 
-  if (session.user) {
+  if (user) {
     redirect("/");
   }
   return <Overlay />;

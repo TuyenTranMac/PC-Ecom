@@ -8,6 +8,6 @@ export default function Home() {
   //     text:'Tuyen'
   //   })
   // )
-  const { data } = useAuth();
+  // const { data } = useAuth();
   return <div className=" flex flex-col gap-y-4">Home</div>;
 }

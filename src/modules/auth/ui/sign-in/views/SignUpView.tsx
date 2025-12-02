@@ -12,13 +12,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RegisterInput, registerSchema } from "@/lib/schemas/auth.schema";
+import { SignUpInput, signUpSchema } from "@/lib/schemas/auth.schema";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { ArrowLeftIcon, FormInput } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useTRPC } from "@/trpc/client";
+import { useTRPC } from "@/server/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -38,13 +38,12 @@ const SignUpView = ({ onToggle }: Props) => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const register = useMutation(
-    trpc.auth.register.mutationOptions({
+    trpc.auth.signUp.mutationOptions({
       onError: (error) => {
         toast.error(error.message);
       },
 
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.auth.getMe.queryFilter());
         toast.success("Đăng ký thành công!", {
           duration: 1200,
           onAutoClose: () => {},
@@ -54,11 +53,11 @@ const SignUpView = ({ onToggle }: Props) => {
     })
   );
 
-  const onSubmit = (value: RegisterInput) => {
+  const onSubmit = (value: SignUpInput) => {
     register.mutate(value);
   };
-  const form = useForm<RegisterInput>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<SignUpInput>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: "",
       password: "",

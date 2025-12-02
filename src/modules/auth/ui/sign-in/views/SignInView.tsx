@@ -1,4 +1,5 @@
 "use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -11,22 +12,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  SignInInput,
-  loginSchema,
-  registerSchema,
-} from "@/lib/schemas/auth.schema";
+import { SignInInput, signInSchema } from "@/lib/schemas/auth.schema";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
-import { ArrowLeftIcon, FormInput, Users } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useTRPC } from "@/trpc/client";
+import { ArrowLeftIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
-import z from "zod";
+import { signIn } from "next-auth/react"; // ← Import từ NextAuth
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -36,55 +31,51 @@ const poppins = Poppins({
 interface Props {
   onToggle: () => void;
 }
+
 const SignInView = ({ onToggle }: Props) => {
   const router = useRouter();
-  const trpc = useTRPC();
-  const queryClient = useQueryClient();
-  const login = useMutation({
-    mutationFn: async (values: z.infer<typeof loginSchema>) => {
-      const req = await fetch("api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      if (!req.ok) {
-        const error = await req.json();
-        throw new Error(error.message);
-      }
-      const data = await req.json();
-      console.log(data);
-      return data;
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(trpc.auth.getMe.queryFilter());
-      toast.success("Login Successfully!", {
-        duration: 1200,
-        onAutoClose: () => {
-          router.push("/");
-        },
-      });
-    },
-  });
-  const onSubmit = (value: SignInInput) => {
-    login.mutate(value);
-  };
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<SignInInput>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  if (login.isPending) {
-    return <SignInFormSkeleton />;
-  }
-  if (login.isSuccess) {
+  const onSubmit = async (values: SignInInput) => {
+    setIsLoading(true);
+
+    try {
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        // Đăng nhập thất bại
+        toast.error("Email hoặc mật khẩu không đúng");
+        setIsLoading(false);
+        return;
+      }
+
+      // Đăng nhập thành công
+      toast.success("Đăng nhập thành công!", {
+        duration: 1200,
+        onAutoClose: () => {
+          router.push("/");
+          router.refresh();
+        },
+      });
+    } catch (error) {
+      toast.error("Có lỗi xảy ra, vui lòng thử lại");
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
     return <SignInFormSkeleton />;
   }
 
@@ -104,16 +95,16 @@ const SignInView = ({ onToggle }: Props) => {
             size="sm"
             onClick={onToggle}
           >
-            {" "}
             Sign Up
           </Button>
         </div>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col gap-8 p-4 lg:p-16"
           >
-            <div className="">
+            <div className="space-y-4">
               {/* Email */}
               <FormField
                 name="email"
@@ -121,44 +112,44 @@ const SignInView = ({ onToggle }: Props) => {
                   <FormItem>
                     <FormLabel className="text-base">Email</FormLabel>
                     <FormControl>
-                      <Input {...field} type="email"></Input>
+                      <Input {...field} type="email" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+              {/* Password */}
               <FormField
                 name="password"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base">Password</FormLabel>
                     <FormControl>
-                      <Input {...field} type="password"></Input>
+                      <Input {...field} type="password" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+
             <Button
-              disabled={login.isPending}
+              disabled={isLoading}
               size="lg"
               variant="elevated"
               type="submit"
               className="bg-black text-white hover:bg-white hover:text-black"
             >
-              Log In
+              {isLoading ? "Đang xử lý..." : "Đăng nhập"}
             </Button>
           </form>
         </Form>
       </div>
-
-      {/* <div className="h-screen w-full lg:col-span-2 hidden lg:block" 
-            style={{backgroundImage:"url('/bg-signin.png')", backgroundSize:"cover", backgroundPosition:"center"}}
-          />  */}
     </div>
   );
 };
+
 function SignInFormSkeleton() {
   return (
     <div className="container mx-auto px-4 py-8">

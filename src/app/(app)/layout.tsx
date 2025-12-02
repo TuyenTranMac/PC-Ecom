@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import {  TRPCReactProvider } from "@/trpc/client";
-import {toast} from 'sonner'
+import { TRPCReactProvider } from "@/server/client";
+import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 const dmSans = DM_Sans({
-    subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "ECOM-VENDOR",
@@ -20,14 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${dmSans.className}} antialiased`}
-      >
+      <body className={`${dmSans.className}} antialiased`}>
         <TRPCReactProvider>
           {children}
           <Toaster richColors position="top-right" />
         </TRPCReactProvider>
-        
       </body>
     </html>
   );

@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignUpInput, signUpSchema } from "@/lib/schemas/auth.schema";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { Poppins } from "next/font/google";
 import { ArrowLeftIcon, FormInput } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -22,8 +22,6 @@ import { useTRPC } from "@/server/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
-import { UseRegister } from "@/app/(app)/trpcHelper/useTRPC";
 import { success } from "zod";
 
 const poppins = Poppins({

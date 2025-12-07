@@ -35,7 +35,7 @@ export const SubcategoryMenu = ({
           {category.children?.map((children) => (
             <Link
               key={children.slug}
-              href={`/${category.slug}/${children.slug}`}
+              href={`/shop/${category.slug}/${children.slug}`}
               className="w-full text-left p-4 hover:bg-black hover:text-white flex justify-between items-center underline font-medium "
             >
               {children.name}

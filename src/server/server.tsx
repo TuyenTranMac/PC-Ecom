@@ -43,5 +43,10 @@ export function prefetch<T extends ReturnType<TRPCQueryOptions<any>>>(
     void queryClient.prefetchQuery(queryOptions);
   }
 }
-export const caller = appRouter.createCaller(createTRPCContext());
+
+// Server-side caller: createTRPCContext()
+export const api = cache(async () => {
+  const ctx = await createTRPCContext();
+  return appRouter.createCaller(ctx);
+});
 //

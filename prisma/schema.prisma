@@ -39,7 +39,7 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  username          String
+  username      String
   email         String    @unique
   emailVerified DateTime?
   image         String?
@@ -50,7 +50,9 @@ model User {
 
   accounts      Account[]
   sessions      Session[]
-  products      Product[] // Quan hệ với sản phẩm sau này
+  subscription  Subscription? // Gói đăng ký (chỉ cho VENDOR)
+  store         Store? // Cửa hàng (chỉ VENDOR mới có)
+  wishlist      Wishlist[] // Danh sách yêu thích
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -70,7 +72,34 @@ enum Role {
   ADMIN
 }
 
-// --- 2. CATEGORY MODEL (Đệ quy - Recursive) ---
+// --- 2. STORE MODEL (Cửa hàng cho Vendor) ---
+model Store {
+  id            String   @id @default(cuid())
+  name          String   // Tên cửa hàng
+  slug          String   @unique // Subdomain: tuyentran.gear.org
+  description   String?  @db.Text
+  logo          String?  // URL logo cửa hàng
+  banner        String?  // URL banner
+  
+  // Quan hệ với User (1-1)
+  ownerId       String   @unique
+  owner         User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Cấu hình thanh toán (SePay config)
+  paymentConfig Json?    // {"sepayAccountId": "xxx", "apiKey": "xxx"}
+  
+  // Sản phẩm của shop
+  products      Product[]
+  
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([ownerId])
+}
+
+// --- 3. CATEGORY MODEL (Đệ quy - Recursive) ---
 // Ví dụ: Gear > Bàn phím > Bàn phím cơ
 model Category {
   id        String     @id @default(cuid())
@@ -90,7 +119,7 @@ model Category {
   @@index([parentId])
 }
 
-// Model Product 
+// --- 4. PRODUCT MODEL ---
 model Product {
   id          String   @id @default(cuid())
   name        String
@@ -98,22 +127,84 @@ model Product {
   description String?  @db.Text
   price       Float
   comparePrice Float?
-  images      Json? // Lưu một mảng các URL ảnh
-  isArchived  Boolean  @default(false) // Để ẩn sản phẩm thay vì xóa
-  isFeatured  Boolean  @default(false)
+  stock       Int      @default(0) // Số lượng tồn kho
+  images      Json?    // Lưu mảng các URL ảnh: ["url1", "url2"]
+  isArchived  Boolean  @default(false) // Ẩn sản phẩm thay vì xóa
+  isFeatured  Boolean  @default(false) // Sản phẩm nổi bật
+  wishlistCount Int    @default(0) // Số lượt thích - dùng cho sản phẩm nổi bật
+  
+  // Quan hệ với Category
   categoryId  String
   category    Category @relation(fields: [categoryId], references: [id])
 
-  storeId     String   // ID => (User)
-  user        User     @relation(fields: [storeId], references: [id])
+  // Quan hệ với Store (thay vì User)
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  // Quan hệ với Wishlist
+  wishlists   Wishlist[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@unique([storeId,slug])
-
+  @@unique([storeId, slug])
   @@index([categoryId])
   @@index([storeId])
   @@index([slug])
   @@index([isFeatured])
+  @@index([wishlistCount])
+}
+
+// --- 5. SUBSCRIPTION MODEL (Gói đăng ký cho Vendor) ---
+model Subscription {
+  id        String           @id @default(cuid())
+  userId    String           @unique
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  plan      SubscriptionPlan @default(FREE) // FREE hoặc PRO
+  status    SubscriptionStatus @default(ACTIVE) // ACTIVE, CANCELLED, EXPIRED
+  
+  // Thông tin thanh toán
+  startDate DateTime         @default(now())
+  endDate   DateTime?        // Null nếu là FREE, có giá trị nếu PRO
+  
+  // Metadata cho tính năng
+  maxProducts      Int      @default(10)  // FREE: 10, PRO: unlimited
+  maxImages        Int      @default(3)   // FREE: 3 ảnh/sản phẩm, PRO: 10
+  customDomain     Boolean  @default(false) // Chỉ PRO
+  prioritySupport  Boolean  @default(false) // Chỉ PRO
+  
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  
+  @@index([userId])
+  @@index([plan])
+  @@index([status])
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  PENDING
+}
+
+// --- 6. WISHLIST MODEL (Danh sách yêu thích) ---
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId]) // Mỗi user chỉ thích 1 product 1 lần
+  @@index([userId])
+  @@index([productId])
 }

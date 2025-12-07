@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { useRef, useState } from "react";
 import { useDropDownPosition } from "./use-dropdown-position";
 import { SubcategoryMenu } from "./SubCategoryMenu";
@@ -46,7 +46,7 @@ const CateoryDropdown = ({
           )}
           variant="elevated"
         >
-          <Link href={`/${category.slug}`}>{category.name}</Link>
+          <Link href={`/shop/${category.slug}`}>{category.name}</Link>
         </Button>
         {category.children?.length > 0 && (
           <div

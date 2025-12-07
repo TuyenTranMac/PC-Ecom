@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,8 @@ import { NavBarSideBar } from "./navbar.sidebar";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
 import { useSession } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
+import { CartSheet } from "@/modules/cart/ui/CartSheet";
+import { WishlistSheet } from "@/modules/wishlist/ui/WishlistSheet";
 interface NavbarItemProps {
   href: string;
   children: React.ReactNode;
@@ -69,6 +71,11 @@ export const Navbar = () => {
             {item.children}
           </NavbarItem>
         ))}
+        {/* Cart & Wishlist Icons */}
+        <div className="flex items-center gap-2">
+          <CartSheet />
+          {user && <WishlistSheet />}
+        </div>
       </div>
       {user ? (
         <div className="hidden lg:flex">
@@ -99,7 +106,9 @@ export const Navbar = () => {
         </div>
       )}
 
-      <div className="flex items-center justify-center lg:hidden">
+      <div className="flex items-center gap-2 lg:hidden">
+        <CartSheet />
+        {user && <WishlistSheet />}
         <Button
           variant={"ghost"}
           className="size-12 border-transparent"

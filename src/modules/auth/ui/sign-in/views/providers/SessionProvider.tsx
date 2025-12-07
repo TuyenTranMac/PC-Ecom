@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
-import { User } from "@/payload-types";
+import { User } from "@prisma/client";
 
 // Định nghĩa kiểu cho Context
 interface SessionContextType {
@@ -10,24 +10,24 @@ interface SessionContextType {
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
 
-export function SessionProvider({
+export const SessionProvider = ({
   children,
   session,
 }: {
   children: ReactNode;
   session: User | null;
-}) {
+}) => {
   return (
     <SessionContext.Provider value={{ user: session }}>
       {children}
     </SessionContext.Provider>
   );
-}
+};
 
-export function useSession() {
+export const useSession = () => {
   const context = useContext(SessionContext);
   if (context === undefined) {
     throw new Error("useSession must be used within a SessionProvider");
   }
   return context;
-}
+};

@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import SignInView from "@/modules/auth/ui/sign-in/views/SignInView";
 import SignUpView from "@/modules/auth/ui/sign-in/views/SignUpView";
 import { useState } from "react";

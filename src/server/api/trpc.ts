@@ -85,7 +85,7 @@ export const adminProcedure = t.procedure.use(async function isAdmin(opts) {
   if (ctx.user.role !== "ADMIN") {
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: "Chỉendor hoặc Admin mới có quyền thực hiện thao tác này",
+      message: "Chỉ Admin mới có quyền thực hiện thao tác này",
     });
   }
 

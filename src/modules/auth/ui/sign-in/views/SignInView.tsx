@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignInInput, signInSchema } from "@/lib/schemas/auth.schema";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { Poppins } from "next/font/google";
 import { ArrowLeftIcon } from "lucide-react";
 import { toast } from "sonner";

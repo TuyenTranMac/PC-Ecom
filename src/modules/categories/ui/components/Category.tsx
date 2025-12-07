@@ -2,26 +2,33 @@
 import CategoryDropdown from "./CategoryDropdown";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import { ListFilterIcon, UndoIcon } from "lucide-react";
 import CategorySidebar from "./CategorySidebar";
-import { UseCategory } from "@/app/(app)/trpcHelper/useTRPC";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { black } from "colorette";
+// import { black } from "colorette";
 import SearchInput from "./SearchInput";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CategoryBreadcrumb } from "./BreadCrumbs";
+import { Category as CategoryType } from "@prisma/client";
 
-const Category = () => {
+// Extend Prisma type để include relation children
+type CategoryWithChildren = CategoryType & {
+  children?: CategoryType[];
+};
+
+interface Props {
+  data: CategoryWithChildren[];
+}
+
+const Category = ({ data }: Props) => {
   const params = useParams();
   const categoryParam = (params.category as String) || null;
   const childrenParam = params.subcategory as string | null;
-  const { data } = UseCategory();
   const containerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const viewAllRef = useRef<HTMLDivElement>(null);
-
   const [visibleCount, setVisibleCount] = useState(data.length);
   const [isAnyHovered, setIsAnyHovered] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -36,14 +43,14 @@ const Category = () => {
   const activeCategoryData = data.find(
     (category) => category.slug === activeCategory
   );
-
   const activeCategoryName = activeCategoryData?.name || null;
   const activeCategoryColor = activeCategoryData?.color || "#F5F5F5";
 
+  // Safely access children relation
+  const subcategories = activeCategoryData?.children || [];
   const activeSubcategoryName =
-    activeCategoryData?.children?.find(
-      (children) => children.slug === activeSubcategory
-    )?.name || null;
+    subcategories.find((child) => child.slug === activeSubcategory)?.name ||
+    null;
 
   useEffect(() => {
     const calVisible = () => {
@@ -71,7 +78,6 @@ const Category = () => {
     resizeObsever.observe(containerRef.current!);
     return () => resizeObsever.disconnect();
   }, [data.length]);
-  console.log("CATEGORY DATA:", data);
   return (
     <div
       className="px-4 lg:px-12 py-8 border-b flex flex-col gap-4 w-full"

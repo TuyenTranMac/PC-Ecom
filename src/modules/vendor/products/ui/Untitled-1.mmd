@@ -1,0 +1,312 @@
+%%{init: { 
+  'theme': 'base',
+  'themeVariables': {
+    'background': '#ffffff',
+    'primaryColor': '#ffffff',
+    'primaryTextColor': '#ffffffff',
+    'lineColor': '#000000',
+    'fontSize': '20px',
+    'fontFamily': 'Inter, Arial, sans-serif'
+  },
+  'themeCSS': `
+    .label, .nodeLabel, .relationLabel, .edgeLabel { 
+      fill: #ffffffff !important; 
+      color: #ffffffff !important; 
+      font-size: 50px !important; 
+      font-weight: 600; 
+    }
+    .edgePath { stroke-width: 2.5px; stroke: #000 !important; }
+    .cluster rect, .node rect, .node polygon { 
+      stroke: #000 !important; 
+      fill: #fff !important; 
+    }
+  `
+}}%%
+
+classDiagram
+direction LR
+
+classDef auth fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000;
+classDef store fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000;
+classDef order fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#000;
+
+class User {
+  +id: String
+  +username: String
+  +email: String
+  +password: String
+  +role: Role
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createUser(data)
+  +updateUser(id, data)
+  +deleteUser(id)
+  +findUserByEmail(email)
+  +findUserById(id)
+  +listUsers(pagination, filters)
+  +changeRole(userId, role)
+}
+
+class Account {
+  +id: String
+  +userId: String
+  +type: String
+  +provider: String
+  +providerAccountId: String
+  +refresh_token?: Text
+  +access_token?: Text
+  +expires_at?: Int
+  +token_type?: String
+  +scope?: String
+  +id_token?: Text
+  +session_state?: String
+  +linkProvider(userId, provider, accountData)
+  +unlinkProvider(userId, provider)
+  +getProviderAccount(userId, provider)
+}
+
+class Store {
+  +id: String
+  +name: String
+  +slug: String
+  +description?: Text
+  +logo?: String
+  +banner?: String
+  +ownerId: String
+  +paymentConfig?: Json
+  +isActive: Boolean
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createStore(ownerId, data)
+  +updateStore(slug, data)
+  +deactivateStore(slug)
+  +getStoreBySlug(slug)
+  +getStoreByOwner(ownerId)
+  +listStores(pagination, filters)
+  +updatePaymentConfig(slug, config)
+}
+
+class Category {
+  +id: String
+  +name: String
+  +slug: String
+  +color?: String
+  +parentId?: String
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createCategory(data)
+  +updateCategory(id, data)
+  +deleteCategory(id)
+  +getCategoryBySlug(slug)
+  +listCategories(pagination, filters)
+  +listChildren(parentId)
+  +getTree(rootId?)
+}
+
+class Product {
+  +id: String
+  +name: String
+  +slug: String
+  +description?: Text
+  +price: Float
+  +comparePrice?: Float
+  +stock: Int
+  +images?: Json
+  +isArchived: Boolean
+  +isFeatured: Boolean
+  +wishlistCount: Int
+  +categoryId: String
+  +storeId: String
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createProduct(storeId, data)
+  +updateProduct(productId, data)
+  +archiveProduct(productId)
+  +deleteProduct(productId)
+  +getProductBySlug(storeSlug, slug)
+  +listProducts(filters, pagination, sort)
+  +listByCategory(categoryId, pagination)
+  +listFeatured(limit)
+  +listLatest(limit)
+  +adjustStock(productId, delta)
+  +incrementWishlistCount(productId)
+  +decrementWishlistCount(productId)
+}
+
+class Subscription {
+  +id: String
+  +userId: String
+  +plan: SubscriptionPlan
+  +status: SubscriptionStatus
+  +startDate: DateTime
+  +endDate?: DateTime
+  +maxProducts: Int
+  +maxImages: Int
+  +customDomain: Boolean
+  +prioritySupport: Boolean
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +activateFree(userId)
+  +upgradeToPro(userId, meta)
+  +cancelPro(userId)
+  +getSubscriptionByUser(userId)
+  +listProVendors()
+}
+
+class Wishlist {
+  +id: String
+  +userId: String
+  +productId: String
+  +createdAt: DateTime
+  +toggle(userId, productId)
+  +isInWishlist(userId, productId)
+  +listByUser(userId)
+  +remove(userId, productId)
+  +countByProduct(productId)
+}
+
+class Address {
+  +id: String
+  +userId: String
+  +fullName: String
+  +phone: String
+  +addressLine1: String
+  +addressLine2?: String
+  +ward?: String
+  +district?: String
+  +province?: String
+  +country: String
+  +isDefault: Boolean
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createAddress(userId, data)
+  +updateAddress(id, data)
+  +deleteAddress(id)
+  +setDefault(userId, addressId)
+  +listAddresses(userId)
+}
+
+class Order {
+  +id: String
+  +code: String
+  +userId?: String
+  +storeId: String
+  +status: OrderStatus
+  +currency: String
+  +subtotal: Decimal
+  +discountTotal: Decimal
+  +shippingFee: Decimal
+  +taxTotal: Decimal
+  +total: Decimal
+  +paymentMethod: PaymentMethod
+  +paymentStatus: PaymentStatus
+  +couponCode?: String
+  +couponValue?: Decimal
+  +shippingAddressId?: String
+  +billingAddressId?: String
+  +notes?: Text
+  +meta?: Json
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createOrderFromCart(userId?, storeId, cartSnapshot, addresses, coupon?)
+  +confirmOrder(orderId)
+  +markProcessing(orderId)
+  +markShipped(orderId, tracking)
+  +markDelivered(orderId)
+  +completeOrder(orderId)
+  +cancelOrder(orderId, reason)
+  +refundOrder(orderId, amount)
+  +getOrderByCode(code)
+  +listOrdersByUser(userId, pagination)
+  +listOrdersByStore(storeId, pagination, status?)
+}
+
+class OrderItem {
+  +id: String
+  +orderId: String
+  +productId: String
+  +productName: String
+  +productSlug: String
+  +storeSlug: String
+  +price: Decimal
+  +comparePrice?: Decimal
+  +quantity: Int
+  +lineTotal: Decimal
+  +imageUrl?: String
+  +variantSku?: String
+  +attributes?: Json
+  +createdAt: DateTime
+  +addItem(orderId, snapshot)
+  +updateQuantity(itemId, quantity)
+  +removeItem(itemId)
+  +listItems(orderId)
+}
+
+class Payment {
+  +id: String
+  +orderId: String
+  +provider: String
+  +method: PaymentMethod
+  +transactionId?: String
+  +amount: Decimal
+  +status: PaymentStatus
+  +payload?: Json
+  +errorMessage?: Text
+  +createdAt: DateTime
+  +updatedAt: DateTime
+  +createPayment(orderId, amount, method)
+  +markAuthorized(paymentId, transactionId, payload)
+  +markPaid(paymentId, transactionId, payload)
+  +markFailed(paymentId, error)
+  +markRefunded(paymentId, amount)
+  +getPaymentsByOrder(orderId)
+}
+
+class Role { <<enum>> USER / VENDOR / ADMIN }
+class SubscriptionPlan { <<enum>> FREE / PRO }
+class SubscriptionStatus { <<enum>> ACTIVE / CANCELLED / EXPIRED / PENDING }
+class PaymentStatus { <<enum>> PENDING / AUTHORIZED / PAID / FAILED / REFUNDED / CANCELLED }
+class PaymentMethod { <<enum>> SEPAY COD BANK_TRANSFER }
+class OrderStatus { <<enum>> PENDING / CONFIRMED / PROCESSING / SHIPPED / DELIVERED / COMPLETED / CANCELLED / REFUNDED }
+
+class VerificationToken {
+  +identifier: String
+  +token: String
+  +expires: DateTime
+  +createToken(identifier)
+  +verifyToken(identifier, token)
+  +invalidateToken(token)
+}
+
+
+%% Relations (no Session)
+User "1" o-- "n" Account : accounts
+User "1" o-- "1" Subscription : subscription
+User "1" o-- "0..1" Store : store
+User "1" o-- "n" Wishlist : wishlist
+User "1" o-- "n" Address : addresses
+User "1" o-- "n" Order : orders
+
+Store "1" o-- "n" Product : products
+Store "1" o-- "n" Order : orders
+Store "1" o-- "1" User : owner
+
+Category "1" o-- "n" Product : products
+Category "1" o-- "n" Category : children
+Category "0..1" o-- "1" Category : parent
+
+Product "1" o-- "n" Wishlist : wishlists
+Product "1" o-- "n" OrderItem : orderItems
+Product "n" o-- "1" Store : store
+Product "n" o-- "1" Category : category
+
+Wishlist "n" o-- "1" User : user
+Wishlist "n" o-- "1" Product : product
+
+Address "1" o-- "n" Order : shipping (Order.shippingAddress)
+Address "1" o-- "n" Order : billing  (Order.billingAddress)
+
+Order "1" o-- "n" OrderItem : items
+Order "1" o-- "n" Payment   : payments
+Order "n" o-- "0..1" User   : user
+Order "n" o-- "1" Store     : store

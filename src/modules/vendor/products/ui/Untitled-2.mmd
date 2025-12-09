@@ -1,0 +1,60 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+    VendorRoot(["VENDOR AREA<br>Role: VENDOR<br>Protected"]) --> Dashboard["Dashboard<br>/vendor"] & Products["Quan ly san pham<br>/vendor/products"] & VOrders["Quan ly don hang<br>/vendor/orders"] & Revenue["Doanh thu<br>/vendor/revenue"]
+    
+    Dashboard --> DashStats["Thong ke tong quan<br>Cards: Revenue/Orders/Views"] & DashChart["Bieu do doanh thu<br>Line chart 30 ngay"] & DashRecent["Hoat dong gan day<br>Recent orders/products"]
+    
+    Products --> ProductList["Danh sach san pham<br>Table voi filter/search"]
+    ProductList --> ProductNew["Them san pham moi<br>/vendor/products/new"] & ProductEdit["Sua san pham<br>/vendor/products/edit/id"] & ProductDelete["Xoa san pham<br>Confirm dialog"]
+    
+    ProductNew --> ProductForm1["Form nhap thong tin<br>Name/Price/Category/Images"]
+    ProductEdit --> ProductForm2["Form chinh sua<br>Update du lieu"]
+    
+    VOrders --> VOrderList["Danh sach don hang<br>Filter: Status/Date"]
+    VOrderList --> VOrderDetail["Chi tiet don hang<br>/vendor/orders/id"]
+    
+    VOrderDetail --> VOrderConfirm["Xac nhan don<br>Status: PROCESSING"] & VOrderShip["Chuan bi hang<br>Status: SHIPPING"] & VOrderComplete["Hoan thanh<br>Status: COMPLETED"] & VOrderCancel["Huy don<br>Status: CANCELLED"]
+    
+    Revenue --> RevenueStats["Thong ke chi tiet<br>/vendor/revenue/stats"] & RevenueWithdraw["Rut tien<br>/vendor/revenue/withdraw"] & RevenueHistory["Lich su giao dich<br>/vendor/revenue/history"]
+    
+    RevenueStats --> RevenueChart["Bieu do<br>Revenue by month"] & RevenueSummary["Tong ket<br>Total/Pending/Withdrawn"]
+    
+    RevenueWithdraw --> WithdrawForm["Form rut tien<br>Amount/Bank info"]
+    WithdrawForm --> WithdrawConfirm["Xac nhan rut<br>OTP verification"]
+
+    VendorRoot:::rootStyle
+    Dashboard:::mainStyle
+    Products:::mainStyle
+    VOrders:::mainStyle
+    Revenue:::mainStyle
+    DashStats:::subStyle
+    DashChart:::subStyle
+    DashRecent:::subStyle
+    ProductList:::subStyle
+    ProductNew:::actionStyle
+    ProductEdit:::actionStyle
+    ProductDelete:::actionStyle
+    ProductForm1:::formStyle
+    ProductForm2:::formStyle
+    VOrderList:::subStyle
+    VOrderDetail:::actionStyle
+    VOrderConfirm:::actionStyle
+    VOrderShip:::actionStyle
+    VOrderComplete:::actionStyle
+    VOrderCancel:::actionStyle
+    RevenueStats:::subStyle
+    RevenueWithdraw:::subStyle
+    RevenueHistory:::subStyle
+    RevenueChart:::actionStyle
+    RevenueSummary:::actionStyle
+    WithdrawForm:::formStyle
+    WithdrawConfirm:::formStyle
+    
+    classDef rootStyle fill:#ff9800,stroke:#e65100,color:#fff,stroke-width:3px
+    classDef mainStyle fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef subStyle fill:#ffe0b2,stroke:#ef6c00,stroke-width:2px
+    classDef actionStyle fill:#ffcc80,stroke:#e65100,stroke-width:1px
+    classDef formStyle fill:#ffd54f,stroke:#f57f17,stroke-width:2px

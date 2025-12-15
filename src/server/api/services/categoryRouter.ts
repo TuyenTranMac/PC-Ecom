@@ -13,22 +13,38 @@ export const categoriesRouter = createTRPCRouter({
         parentId: null,
       },
       include: {
-        children: true,
+        Category: true,
+        other_Category: true,
       },
     });
 
     return data;
   }),
 
+  // Lấy tất cả categories dạng flat (cho form select)
+  getAllFlat: publicProcedure.query(async ({ ctx }) => {
+    const categories = await ctx.db.category.findMany({
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        parentId: true,
+      },
+      orderBy: [{ parentId: "asc" }, { name: "asc" }],
+    });
+
+    return categories;
+  }),
+
   // Lấy tất cả categories (bao gồm subcategories) cho admin
   getAllForAdmin: adminProcedure.query(async ({ ctx }) => {
     const categories = await ctx.db.category.findMany({
       include: {
-        children: true,
-        parent: true,
+        other_Category: true,
+        Category: true,
         _count: {
           select: {
-            products: true,
+            Product: true,
           },
         },
       },
@@ -47,8 +63,8 @@ export const categoriesRouter = createTRPCRouter({
       const category = await ctx.db.category.findUnique({
         where: { slug: input.slug },
         include: {
-          children: true,
-          parent: true,
+          other_Category: true,
+          Category: true,
         },
       });
 

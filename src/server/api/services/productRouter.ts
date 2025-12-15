@@ -32,8 +32,8 @@ export const productRouter = createTRPCRouter({
           createdAt: "desc",
         },
         include: {
-          category: true,
-          store: {
+          Category: true,
+          Store: {
             select: {
               id: true,
               name: true,
@@ -60,8 +60,8 @@ export const productRouter = createTRPCRouter({
       const data = await ctx.db.product.findUnique({
         where: { storeId_slug: { storeId: input.userId, slug: input.slug } },
         include: {
-          category: true,
-          store: {
+          Category: true,
+          Store: {
             select: {
               id: true,
               name: true,
@@ -88,14 +88,14 @@ export const productRouter = createTRPCRouter({
           isArchived: false,
         },
         include: {
-          category: {
+          Category: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,
@@ -122,9 +122,9 @@ export const productRouter = createTRPCRouter({
       const store = await ctx.db.store.findUnique({
         where: { ownerId: ctx.session.user.id },
         include: {
-          owner: {
+          User: {
             include: {
-              subscription: true,
+              Subscription: true,
             },
           },
         },
@@ -138,7 +138,7 @@ export const productRouter = createTRPCRouter({
       }
 
       // Kiểm tra giới hạn số lượng sản phẩm
-      const subscription = store.owner.subscription;
+      const subscription = store.User?.Subscription;
       if (subscription && subscription.maxProducts !== -1) {
         const currentProductCount = await ctx.db.product.count({
           where: { storeId: store.id },
@@ -188,13 +188,13 @@ export const productRouter = createTRPCRouter({
           images: input.images || [],
         },
         include: {
-          category: {
+          Category: {
             select: {
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               name: true,
               slug: true,
@@ -228,7 +228,7 @@ export const productRouter = createTRPCRouter({
         storeId: store.id,
       },
       include: {
-        category: {
+        Category: {
           select: {
             name: true,
             slug: true,
@@ -259,7 +259,7 @@ export const productRouter = createTRPCRouter({
         },
         take: input.limit,
         include: {
-          category: {
+          Category: {
             select: {
               name: true,
               slug: true,
@@ -289,13 +289,13 @@ export const productRouter = createTRPCRouter({
         },
         take: input.limit,
         include: {
-          category: {
+          Category: {
             select: {
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,
@@ -325,13 +325,13 @@ export const productRouter = createTRPCRouter({
         },
         take: input.limit,
         include: {
-          category: {
+          Category: {
             select: {
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,
@@ -367,13 +367,13 @@ export const productRouter = createTRPCRouter({
         take: limit + 1,
         cursor: cursor ? { id: cursor } : undefined,
         include: {
-          category: {
+          Category: {
             select: {
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,
@@ -396,6 +396,24 @@ export const productRouter = createTRPCRouter({
         products,
         nextCursor,
       };
+    }),
+
+  // Lấy tổng số sản phẩm trong marketplace
+  getTotalCount: publicProcedure
+    .input(
+      z.object({
+        categoryId: z.string().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const count = await ctx.db.product.count({
+        where: {
+          isArchived: false,
+          ...(input.categoryId && { categoryId: input.categoryId }),
+        },
+      });
+
+      return count;
     }),
 
   // Tìm kiếm sản phẩm
@@ -421,14 +439,14 @@ export const productRouter = createTRPCRouter({
         },
         take: limit,
         include: {
-          category: {
+          Category: {
             select: {
               id: true,
               name: true,
               slug: true,
             },
           },
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,

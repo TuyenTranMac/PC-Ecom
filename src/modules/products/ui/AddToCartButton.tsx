@@ -108,3 +108,4 @@ export const AddToCartButton = ({ product }: Props) => {
     </Button>
   );
 };
+

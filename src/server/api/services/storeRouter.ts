@@ -1,4 +1,8 @@
-import { publicProcedure, vendorProcedure, createTRPCRouter } from "@/server/api/trpc";
+import {
+  publicProcedure,
+  vendorProcedure,
+  createTRPCRouter,
+} from "@/server/api/trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
@@ -22,7 +26,7 @@ export const storeRouter = createTRPCRouter({
     const store = await ctx.db.store.findUnique({
       where: { ownerId: ctx.session.user.id },
       include: {
-        owner: {
+        User: {
           select: {
             id: true,
             username: true,
@@ -32,7 +36,7 @@ export const storeRouter = createTRPCRouter({
         },
         _count: {
           select: {
-            products: true, // Đếm số sản phẩm
+            Product: true, // Đếm số sản phẩm
           },
         },
       },
@@ -55,12 +59,12 @@ export const storeRouter = createTRPCRouter({
       const store = await ctx.db.store.findUnique({
         where: { slug: input.slug },
         include: {
-          owner: {
+          User: {
             select: {
               username: true,
             },
           },
-          products: {
+          Product: {
             where: {
               isArchived: false,
             },
@@ -69,7 +73,7 @@ export const storeRouter = createTRPCRouter({
               createdAt: "desc",
             },
             include: {
-              category: {
+              Category: {
                 select: {
                   name: true,
                   slug: true,
@@ -79,7 +83,7 @@ export const storeRouter = createTRPCRouter({
           },
           _count: {
             select: {
-              products: true,
+              Product: true,
             },
           },
         },
@@ -201,4 +205,3 @@ export const storeRouter = createTRPCRouter({
     };
   }),
 });
-

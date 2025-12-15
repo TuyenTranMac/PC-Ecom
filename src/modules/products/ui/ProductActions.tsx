@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ShoppingCartIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 interface Product {
   id: string;
@@ -11,6 +12,12 @@ interface Product {
   price: number;
   stock: number;
   images: any;
+  storeId?: string;
+  Store?: {
+    id: string;
+    name: string;
+    slug: string;
+  };
 }
 
 interface Props {
@@ -19,61 +26,100 @@ interface Props {
 
 export const ProductActions = ({ product }: Props) => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const addToCart = () => {
-    const images = (product.images as string[]) || [];
-    const firstImage = images[0] || "";
-
-    const cartItem = {
-      id: product.id,
-      name: product.name,
-      slug: product.slug,
-      price: product.price,
-      image: firstImage,
-      quantity: 1,
-      stock: product.stock,
-    };
-
-    // Lấy cart hiện tại
-    const stored = localStorage.getItem("cart");
-    const cart = stored ? JSON.parse(stored) : [];
-
-    // Check xem đã có trong cart chưa
-    const existingIndex = cart.findIndex((item: any) => item.id === product.id);
-
-    if (existingIndex > -1) {
-      // Tăng số lượng
-      const newQuantity = cart[existingIndex].quantity + 1;
-      if (newQuantity > product.stock) {
-        toast({
-          title: "Vượt quá số lượng trong kho",
-          description: `Chỉ còn ${product.stock} sản phẩm`,
-          variant: "destructive",
-        });
-        return;
-      }
-      cart[existingIndex].quantity = newQuantity;
-    } else {
-      // Thêm mới
-      cart.push(cartItem);
+    if (product.stock <= 0) {
+      toast({
+        title: "Hết hàng",
+        description: "Sản phẩm này hiện không còn hàng",
+        variant: "destructive",
+      });
+      return;
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cart-updated"));
-
-    toast({
-      title: "Đã thêm vào giỏ hàng",
-      description: product.name,
+    // Debug: Check product structure
+    console.log("Product data:", {
+      id: product.id,
+      storeId: product.storeId,
+      Store: product.Store,
     });
+
+    if (!product.storeId && !product.Store?.id) {
+      toast({
+        title: "Lỗi",
+        description: "Sản phẩm thiếu thông tin cửa hàng",
+        variant: "destructive",
+      });
+      console.error("Missing store info:", product);
+      return;
+    }
+
+    try {
+      // Lấy cart hiện tại từ localStorage
+      const stored = localStorage.getItem("cart");
+      const currentCart = stored ? JSON.parse(stored) : [];
+
+      // Kiểm tra sản phẩm đã có trong cart chưa
+      const existingIndex = currentCart.findIndex(
+        (item: any) => item.id === product.id
+      );
+
+      if (existingIndex >= 0) {
+        // Tăng quantity
+        const newQuantity = currentCart[existingIndex].quantity + 1;
+        if (newQuantity > product.stock) {
+          toast({
+            title: "Không đủ hàng",
+            description: `Chỉ còn ${product.stock} sản phẩm trong kho`,
+            variant: "destructive",
+          });
+          return;
+        }
+        currentCart[existingIndex].quantity = newQuantity;
+      } else {
+        // Thêm mới
+        const cartItem = {
+          id: product.id,
+          name: product.name,
+          slug: product.slug,
+          price: product.price,
+          image:
+            product.images && Array.isArray(product.images)
+              ? (product.images[0] as string)
+              : null,
+          quantity: 1,
+          stock: product.stock,
+          storeId: product.storeId || product.Store?.id,
+          storeName: product.Store?.name,
+        };
+        currentCart.push(cartItem);
+      }
+
+      // Lưu lại localStorage
+      localStorage.setItem("cart", JSON.stringify(currentCart));
+
+      toast({
+        title: "Thành công",
+        description: "Đã thêm vào giỏ hàng",
+      });
+
+      // Trigger cart update
+      window.dispatchEvent(new Event("cart-updated"));
+      router.refresh();
+    } catch (error) {
+      toast({
+        title: "Lỗi",
+        description: "Không thể thêm vào giỏ hàng",
+        variant: "destructive",
+      });
+    }
   };
 
   const buyNow = () => {
     addToCart();
-    // TODO: Navigate to checkout page
-    toast({
-      title: "Chức năng đang phát triển",
-      description: "Sẽ chuyển đến trang thanh toán",
-    });
+    // Navigate to checkout
+    router.push("/checkout");
   };
 
   return (

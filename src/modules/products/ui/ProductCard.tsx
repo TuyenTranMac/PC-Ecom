@@ -18,12 +18,12 @@ interface Product {
   stock: number;
   images: any;
   wishlistCount: number;
-  store: {
+  Store: {
     id: string;
     name: string;
     slug: string;
   };
-  category: {
+  Category: {
     name: string;
     slug: string;
   };
@@ -146,7 +146,7 @@ export const ProductCard = ({
         <div className="mb-2 flex items-start justify-between gap-2">
           <h3 className="line-clamp-1 font-semibold">{product.name}</h3>
           <span className="text-xs text-muted-foreground shrink-0">
-            {product.category.name}
+            {product.Category.name}
           </span>
         </div>
 
@@ -162,7 +162,7 @@ export const ProductCard = ({
               {product.price.toLocaleString("vi-VN")}₫
             </span>
             <span className="text-xs text-muted-foreground">
-              bởi {product.store.name}
+              bởi {product.Store.name}
             </span>
           </div>
           <div className="flex flex-col items-end gap-1">

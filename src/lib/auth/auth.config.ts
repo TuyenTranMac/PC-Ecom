@@ -16,7 +16,7 @@ export const authConfig = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      
+
       async authorize(credentials) {
         // 1. Validate input bằng Zod
         const parsed = signInSchema.safeParse(credentials);
@@ -62,11 +62,11 @@ export const authConfig = {
         token.role = user.role;
         token.username = user.username;
       }
-      
+
       // QUAN TRỌNG: Không query DB ở đây vì middleware chạy trên Edge Runtime
       // Nếu cần refresh role/username, phải làm ở server action/API route riêng
       // và gọi update() từ client
-      
+
       return token;
     },
 
@@ -82,17 +82,15 @@ export const authConfig = {
   },
 
   pages: {
-    signIn: "/auth", // Redirect về trang auth của bạn
+    signIn: "/auth",
   },
 
   session: {
-    strategy: "jwt", // Dùng JWT thay vì database sessions
+    strategy: "jwt",
   },
 
   events: {
-    // Khi signOut, đảm bảo redirect về main domain
-    async signOut(message) {
-    },
+    async signOut(message) {},
   },
   cookies: {
     sessionToken: {
@@ -103,9 +101,11 @@ export const authConfig = {
         path: "/",
         secure: useSecureCookies,
         // QUAN TRỌNG: Dấu chấm ở đầu (.gear.org) cho phép tất cả subdomain truy cập cookie
-        // Với localhost, ta thường để undefined hoặc set trong file hosts, 
+        // Với localhost, ta thường để undefined hoặc set trong file hosts,
         // nhưng để đơn giản ta sẽ logic như sau:
-        domain: useSecureCookies ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` : undefined,
+        domain: useSecureCookies
+          ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+          : undefined,
       },
     },
   },

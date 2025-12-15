@@ -5,52 +5,46 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/utils";
 import { ListFilterIcon, UndoIcon } from "lucide-react";
 import CategorySidebar from "./CategorySidebar";
+import { UseCategory } from "@/app/(app)/trpcHelper/useTRPC";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-// import { black } from "colorette";
+
 import SearchInput from "./SearchInput";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CategoryBreadcrumb } from "./BreadCrumbs";
-import { Category as CategoryType } from "@prisma/client";
 
-// Extend Prisma type để include relation children
-type CategoryWithChildren = CategoryType & {
-  children?: CategoryType[];
-};
-
-interface Props {
-  data: CategoryWithChildren[];
-}
-
-const Category = ({ data }: Props) => {
+const Category = () => {
   const params = useParams();
   const categoryParam = (params.category as String) || null;
   const childrenParam = params.subcategory as string | null;
+  const { data } = UseCategory();
+  const categories = data ?? [];
   const containerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
   const viewAllRef = useRef<HTMLDivElement>(null);
-  const [visibleCount, setVisibleCount] = useState(data.length);
+
+  const [visibleCount, setVisibleCount] = useState(categories.length);
   const [isAnyHovered, setIsAnyHovered] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const activeCategory = (categoryParam as string) || null;
   const activeSubcategory = (childrenParam as string) || null;
-  const activeCategoryIndex = data.findIndex(
+  const activeCategoryIndex = categories.findIndex(
     (cat) => cat.slug === activeCategory
   );
   //danh mục đang được chọn và được lấy từ data
   const isActiveCategoryHidden =
     activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1;
-  const activeCategoryData = data.find(
+  const activeCategoryData = categories.find(
     (category) => category.slug === activeCategory
   );
+
   const activeCategoryName = activeCategoryData?.name || null;
   const activeCategoryColor = activeCategoryData?.color || "#F5F5F5";
 
-  // Safely access children relation
-  const subcategories = activeCategoryData?.children || [];
   const activeSubcategoryName =
-    subcategories.find((child) => child.slug === activeSubcategory)?.name ||
-    null;
+    activeCategoryData?.other_Category?.find(
+      (children) => children.slug === activeSubcategory
+    )?.name || null;
 
   useEffect(() => {
     const calVisible = () => {
@@ -77,7 +71,8 @@ const Category = ({ data }: Props) => {
     const resizeObsever = new ResizeObserver(calVisible);
     resizeObsever.observe(containerRef.current!);
     return () => resizeObsever.disconnect();
-  }, [data.length]);
+  }, [categories.length]);
+
   return (
     <div
       className="px-4 lg:px-12 py-8 border-b flex flex-col gap-4 w-full"
@@ -91,7 +86,7 @@ const Category = ({ data }: Props) => {
           style={{ position: "fixed", top: -9999, left: -9999 }}
           ref={measureRef}
         >
-          {data.map((categories) => (
+          {categories.map((categories) => (
             <div key={categories.id}>
               <CategoryDropdown
                 category={categories}
@@ -107,7 +102,7 @@ const Category = ({ data }: Props) => {
           onMouseEnter={() => setIsAnyHovered(true)}
           onMouseLeave={() => setIsAnyHovered(false)}
         >
-          {data.slice(0, visibleCount).map((categories) => (
+          {categories.slice(0, visibleCount).map((categories) => (
             <div key={categories.id}>
               <CategoryDropdown
                 category={categories}
@@ -137,7 +132,7 @@ const Category = ({ data }: Props) => {
         <CategorySidebar
           isOpen={isSidebarOpen}
           onOpenChange={setIsSidebarOpen}
-          data={data}
+          data={categories}
         />
       </div>
       <CategoryBreadcrumb

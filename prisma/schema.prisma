@@ -1,527 +1,291 @@
-// prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
-// --- 1. AUTHENTICATION MODELS (Chuẩn NextAuth) ---
-
 model Account {
-  id String @id @default(cuid())
-
-  userId String
-
-  type String
-
-  provider String
-
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
   providerAccountId String
-
-  refresh_token String? @db.Text
-
-  access_token String? @db.Text
-
-  expires_at Int?
-
-  token_type String?
-
-  scope String?
-
-  id_token String? @db.Text
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model User {
-  id String @id @default(cuid())
+model Address {
+  id                                     String   @id @default(cuid())
+  userId                                 String
+  fullName                               String
+  phone                                  String
+  addressLine1                           String
+  addressLine2                           String?
+  ward                                   String?
+  district                               String?
+  province                               String?
+  country                                String   @default("VN")
+  isDefault                              Boolean  @default(false)
+  createdAt                              DateTime @default(now())
+  updatedAt                              DateTime @updatedAt
+  User                                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order_Order_billingAddressIdToAddress  Order[]  @relation("Order_billingAddressIdToAddress")
+  Order_Order_shippingAddressIdToAddress Order[]  @relation("Order_shippingAddressIdToAddress")
 
-  username String
-
-  email String @unique
-
-  emailVerified DateTime?
-
-  image String?
-
-  password String // Dành cho đăng nhập credentials (email/pass)
-
-  // Phân quyền: Admin, Người bán (Vendor), Người mua (User)
-
-  role Role @default(USER)
-
-  accounts Account[]
-
-  subscription Subscription? // Gói đăng ký (chỉ cho VENDOR)
-
-  store Store? // Cửa hàng (chỉ VENDOR mới có)
-
-  wishlist Wishlist[] // Danh sách yêu thích
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  Address Address[]
-  Order   Order[]
+  @@index([userId])
 }
-
-model VerificationToken {
-  identifier String
-
-  token String @unique
-
-  expires DateTime
-
-  @@unique([identifier, token])
-}
-
-enum Role {
-  USER
-
-  VENDOR
-
-  ADMIN
-}
-
-// --- 2. STORE MODEL (Cửa hàng cho Vendor) ---
-
-model Store {
-  id String @id @default(cuid())
-
-  name String // Tên cửa hàng
-
-  slug String @unique // Subdomain: tuyentran.gear.org
-
-  description String? @db.Text
-
-  logo String? // URL logo cửa hàng
-
-  banner String? // URL banner
-
-  // Quan hệ với User (1-1)
-
-  ownerId String @unique
-
-  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-
-  // Cấu hình thanh toán (SePay config)
-
-  paymentConfig Json? // {"sepayAccountId": "xxx", "apiKey": "xxx"}
-
-  // Sản phẩm của shop
-
-  products Product[]
-
-  isActive Boolean @default(true)
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  Order Order[]
-
-  @@index([slug])
-  @@index([ownerId])
-}
-
-// --- 3. CATEGORY MODEL (Đệ quy - Recursive) ---
-
-// Ví dụ: Gear > Bàn phím > Bàn phím cơ
 
 model Category {
-  id String @id @default(cuid())
-
-  name String
-
-  slug String @unique // URL thân thiện: ban-phim-co
-
-  color String?
-
-  // Quan hệ đệ quy để làm danh mục cha/con
-
-  parentId String?
-
-  parent Category? @relation("CategoryHierarchy", fields: [parentId], references: [id])
-
-  children Category[] @relation("CategoryHierarchy")
-
-  products Product[]
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
+  id             String     @id @default(cuid())
+  name           String
+  slug           String     @unique
+  color          String?
+  parentId       String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  Category       Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  other_Category Category[] @relation("CategoryToCategory")
+  Product        Product[]
 
   @@index([parentId])
 }
 
-// --- 4. PRODUCT MODEL ---
+model Order {
+  id                                       String        @id @default(cuid())
+  code                                     String        @unique
+  userId                                   String?
+  storeId                                  String
+  status                                   OrderStatus   @default(PENDING)
+  currency                                 String        @default("VND")
+  subtotal                                 Decimal       @db.Decimal(18, 2)
+  discountTotal                            Decimal       @default(0) @db.Decimal(18, 2)
+  shippingFee                              Decimal       @default(0) @db.Decimal(18, 2)
+  taxTotal                                 Decimal       @default(0) @db.Decimal(18, 2)
+  total                                    Decimal       @db.Decimal(18, 2)
+  paymentMethod                            PaymentMethod @default(SEPAY)
+  paymentStatus                            PaymentStatus @default(PENDING)
+  couponCode                               String?
+  couponValue                              Decimal?      @db.Decimal(18, 2)
+  shippingAddressId                        String?
+  billingAddressId                         String?
+  notes                                    String?
+  meta                                     Json?
+  createdAt                                DateTime      @default(now())
+  updatedAt                                DateTime      @updatedAt
+  Address_Order_billingAddressIdToAddress  Address?      @relation("Order_billingAddressIdToAddress", fields: [billingAddressId], references: [id])
+  Address_Order_shippingAddressIdToAddress Address?      @relation("Order_shippingAddressIdToAddress", fields: [shippingAddressId], references: [id])
+  Store                                    Store         @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  User                                     User?         @relation(fields: [userId], references: [id])
+  OrderItem                                OrderItem[]
+  Payment                                  Payment[]
+
+  @@index([code])
+  @@index([paymentStatus])
+  @@index([status])
+  @@index([storeId])
+  @@index([userId])
+}
+
+model OrderItem {
+  id           String   @id @default(cuid())
+  orderId      String
+  productId    String
+  productName  String
+  productSlug  String
+  storeSlug    String
+  price        Decimal  @db.Decimal(18, 2)
+  comparePrice Decimal? @db.Decimal(18, 2)
+  quantity     Int
+  lineTotal    Decimal  @db.Decimal(18, 2)
+  imageUrl     String?
+  variantSku   String?
+  attributes   Json?
+  createdAt    DateTime @default(now())
+  Order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  Product      Product  @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  orderId       String
+  provider      String        @default("SePay")
+  method        PaymentMethod @default(SEPAY)
+  transactionId String?
+  amount        Decimal       @db.Decimal(18, 2)
+  status        PaymentStatus @default(PENDING)
+  payload       Json?
+  errorMessage  String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Order         Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status])
+  @@index([transactionId])
+}
 
 model Product {
-  id String @id @default(cuid())
-
-  name String
-
-  slug String
-
-  description String? @db.Text
-
-  price Float
-
-  comparePrice Float?
-
-  stock Int @default(0) // Số lượng tồn kho
-
-  images Json? // Lưu mảng các URL ảnh: ["url1", "url2"]
-
-  isArchived Boolean @default(false) // Ẩn sản phẩm thay vì xóa
-
-  isFeatured Boolean @default(false) // Sản phẩm nổi bật
-
-  wishlistCount Int @default(0) // Số lượt thích - dùng cho sản phẩm nổi bật
-
-  // Quan hệ với Category
-
-  categoryId String
-
-  category Category @relation(fields: [categoryId], references: [id])
-
-  // Quan hệ với Store (thay vì User)
-
-  storeId String
-
-  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
-
-  // Quan hệ với Wishlist
-
-  wishlists Wishlist[]
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  OrderItem OrderItem[]
+  id            String      @id @default(cuid())
+  name          String
+  slug          String
+  description   String?
+  price         Float
+  comparePrice  Float?
+  images        Json?
+  isArchived    Boolean     @default(false)
+  isFeatured    Boolean     @default(false)
+  categoryId    String
+  storeId       String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  stock         Int         @default(0)
+  wishlistCount Int         @default(0)
+  OrderItem     OrderItem[]
+  Category      Category    @relation(fields: [categoryId], references: [id])
+  Store         Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  Wishlist      Wishlist[]
 
   @@unique([storeId, slug])
   @@index([categoryId])
-  @@index([storeId])
-  @@index([slug])
   @@index([isFeatured])
+  @@index([slug])
+  @@index([storeId])
   @@index([wishlistCount])
 }
 
-// --- 5. SUBSCRIPTION MODEL (Gói đăng ký cho Vendor) ---
+model Store {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  description   String?
+  logo          String?
+  banner        String?
+  ownerId       String    @unique
+  paymentConfig Json?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Order         Order[]
+  Product       Product[]
+  User          User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId])
+  @@index([slug])
+}
 
 model Subscription {
-  id String @id @default(cuid())
+  id              String             @id @default(cuid())
+  userId          String             @unique
+  plan            SubscriptionPlan   @default(FREE)
+  status          SubscriptionStatus @default(ACTIVE)
+  startDate       DateTime           @default(now())
+  endDate         DateTime?
+  maxProducts     Int                @default(10)
+  maxImages       Int                @default(3)
+  customDomain    Boolean            @default(false)
+  prioritySupport Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  User            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  userId String @unique
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  plan SubscriptionPlan @default(FREE) // FREE hoặc PRO
-
-  status SubscriptionStatus @default(ACTIVE) // ACTIVE, CANCELLED, EXPIRED
-
-  // Thông tin thanh toán
-
-  startDate DateTime @default(now())
-
-  endDate DateTime? // Null nếu là FREE, có giá trị nếu PRO
-
-  // Metadata cho tính năng
-
-  maxProducts Int @default(10) // FREE: 10, PRO: unlimited
-
-  maxImages Int @default(3) // FREE: 3 ảnh/sản phẩm, PRO: 10
-
-  customDomain Boolean @default(false) // Chỉ PRO
-
-  prioritySupport Boolean @default(false) // Chỉ PRO
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
   @@index([plan])
   @@index([status])
+  @@index([userId])
+}
+
+model User {
+  id            String        @id @default(cuid())
+  username      String
+  email         String        @unique
+  emailVerified DateTime?
+  image         String?
+  password      String
+  role          Role          @default(USER)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Account       Account[]
+  Address       Address[]
+  Order         Order[]
+  Store         Store?
+  Subscription  Subscription?
+  Wishlist      Wishlist[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  quantity  Int      @default(1)
+  Product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([productId])
+  @@index([userId])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  SEPAY
+  COD
+  BANK_TRANSFER
+}
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum Role {
+  USER
+  VENDOR
+  ADMIN
 }
 
 enum SubscriptionPlan {
   FREE
-
   PRO
 }
 
 enum SubscriptionStatus {
   ACTIVE
-
   CANCELLED
-
   EXPIRED
-
   PENDING
-}
-
-// --- 6. WISHLIST MODEL (Danh sách yêu thích) ---
-
-model Wishlist {
-  id String @id @default(cuid())
-
-  userId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  productId String
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-
-  @@unique([userId, productId]) // Mỗi user chỉ thích 1 product 1 lần
-  @@index([userId])
-  @@index([productId])
-}
-
-// Trạng thái thanh toán
-
-enum PaymentStatus {
-  PENDING
-
-  AUTHORIZED
-
-  PAID
-
-  FAILED
-
-  REFUNDED
-
-  CANCELLED
-}
-
-// Phương thức thanh toán (mở rộng về sau)
-
-enum PaymentMethod {
-  SEPAY
-
-  COD
-
-  BANK_TRANSFER
-}
-
-// Trạng thái đơn hàng tổng thể
-
-enum OrderStatus {
-  PENDING // tạo đơn, chưa thanh toán
-
-  CONFIRMED // đã xác nhận (thanh toán hợp lệ hoặc COD)
-
-  PROCESSING // đang xử lý/đóng gói
-
-  SHIPPED // đã giao cho đơn vị vận chuyển
-
-  DELIVERED // khách đã nhận
-
-  COMPLETED // kết thúc (thành công)
-
-  CANCELLED // hủy bởi khách/shop
-
-  REFUNDED // hoàn tiền toàn phần
-}
-
-// Địa chỉ người dùng (dùng cho shipping/billing)
-
-model Address {
-  id String @id @default(cuid())
-
-  userId String
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  fullName String
-
-  phone String
-
-  addressLine1 String
-
-  addressLine2 String?
-
-  ward String?
-
-  district String?
-
-  province String?
-
-  country String @default("VN")
-
-  isDefault Boolean @default(false)
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  ordersShipping Order[] @relation("OrderShippingAddress")
-
-  ordersBilling Order[] @relation("OrderBillingAddress")
-
-  @@index([userId])
-}
-
-// Đơn hàng (multi-vendor: 1 order gắn với 1 store)
-
-model Order {
-  id String @id @default(cuid())
-
-  code String @unique // mã đơn (hiển thị cho khách)
-
-  userId String? // user có thể null nếu guest checkout (tùy chọn)
-
-  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-
-  storeId String // đơn thuộc một cửa hàng (vendor)
-
-  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
-
-  status OrderStatus @default(PENDING)
-
-  // Tổng tiền theo thời điểm tạo đơn (snapshot)
-
-  currency String @default("VND")
-
-  subtotal Decimal @db.Decimal(18, 2) // sum(lineTotal)
-
-  discountTotal Decimal @default(0) @db.Decimal(18, 2)
-
-  shippingFee Decimal @default(0) @db.Decimal(18, 2)
-
-  taxTotal Decimal @default(0) @db.Decimal(18, 2)
-
-  total Decimal @db.Decimal(18, 2)
-
-  // Phương thức + trạng thái thanh toán
-
-  paymentMethod PaymentMethod @default(SEPAY)
-
-  paymentStatus PaymentStatus @default(PENDING)
-
-  // Ghi nhận coupon tại thời điểm đặt (nếu có)
-
-  couponCode String?
-
-  couponValue Decimal? @db.Decimal(18, 2)
-
-  // Địa chỉ giao hàng/billing (snapshot từ Address tại thời điểm đặt)
-
-  shippingAddressId String?
-
-  shippingAddress Address? @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id], onDelete: SetNull)
-
-  billingAddressId String?
-
-  billingAddress Address? @relation("OrderBillingAddress", fields: [billingAddressId], references: [id], onDelete: SetNull)
-
-  notes String? @db.Text
-
-  meta Json? // thông tin phụ (VD: mã vận đơn)
-
-  items OrderItem[]
-
-  payments Payment[]
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
-  @@index([storeId])
-  @@index([status])
-  @@index([paymentStatus])
-  @@index([code])
-}
-
-// Dòng sản phẩm trong đơn (snapshot giá/tên tại thời điểm mua)
-
-model OrderItem {
-  id String @id @default(cuid())
-
-  orderId String
-
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  productId String
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
-
-  // Snapshot thông tin hiển thị
-
-  productName String
-
-  productSlug String
-
-  storeSlug String
-
-  // Giá + số lượng tại thời điểm đặt
-
-  price Decimal @db.Decimal(18, 2)
-
-  comparePrice Decimal? @db.Decimal(18, 2)
-
-  quantity Int
-
-  lineTotal Decimal @db.Decimal(18, 2) // price * quantity - lineDiscount
-
-  // Ảnh đại diện (snapshot)
-
-  imageUrl String?
-
-  // Thuộc tính/biến thể (nếu có, mở rộng sau)
-
-  variantSku String?
-
-  attributes Json?
-
-  createdAt DateTime @default(now())
-
-  @@index([orderId])
-  @@index([productId])
-}
-
-// Thanh toán (ghi nhận từ SePay hoặc phương thức khác)
-
-model Payment {
-  id String @id @default(cuid())
-
-  orderId String
-
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  provider String @default("SePay")
-
-  method PaymentMethod @default(SEPAY)
-
-  transactionId String? // mã giao dịch từ provider
-
-  amount Decimal @db.Decimal(18, 2)
-
-  status PaymentStatus @default(PENDING)
-
-  payload Json? // raw payload từ provider
-
-  errorMessage String? @db.Text
-
-  createdAt DateTime @default(now())
-
-  updatedAt DateTime @updatedAt
-
-  @@index([orderId])
-  @@index([status])
-  @@index([transactionId])
 }

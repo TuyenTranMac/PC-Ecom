@@ -28,6 +28,11 @@ const navItems = [
     icon: StoreIcon,
   },
   {
+    href: "/vendor/orders",
+    label: "Đơn hàng của bạn",
+    icon: SettingsIcon,
+  },
+  {
     href: "/vendor/settings",
     label: "Cài đặt",
     icon: SettingsIcon,

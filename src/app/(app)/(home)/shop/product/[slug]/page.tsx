@@ -54,10 +54,10 @@ const ProductDetailPage = async ({ params }: Props) => {
         </Link>
         {" / "}
         <Link
-          href={`/shop/${product.category.slug}`}
+          href={`/shop/${product.Category.slug}`}
           className="hover:text-foreground"
         >
-          {product.category.name}
+          {product.Category.name}
         </Link>
         {" / "}
         <span className="text-foreground">{product.name}</span>
@@ -112,12 +112,12 @@ const ProductDetailPage = async ({ params }: Props) => {
           <div>
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <div className="mt-2 flex items-center gap-2">
-              <Badge variant="outline">{product.category.name}</Badge>
+              <Badge variant="outline">{product.Category.name}</Badge>
               <Link
-                href={`/vendor/${product.store.slug}`}
+                href={`/vendor/${product.Store.slug}`}
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
-                Bởi {product.store.name}
+                Bởi {product.Store.name}
               </Link>
             </div>
           </div>

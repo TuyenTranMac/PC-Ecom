@@ -139,7 +139,7 @@ export const ProductList = ({ initialProducts }: Props) => {
                       {product.name}
                     </TableCell>
                     <TableCell>
-                      <Badge variant="outline">{product.category.name}</Badge>
+                      <Badge variant="outline">{product.Category.name}</Badge>
                     </TableCell>
                     <TableCell>
                       {product.price.toLocaleString("vi-VN")}₫
@@ -201,3 +201,4 @@ export const ProductList = ({ initialProducts }: Props) => {
     </div>
   );
 };
+

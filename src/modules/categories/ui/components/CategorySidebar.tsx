@@ -95,3 +95,4 @@ const CategorySidebar = ({ isOpen, onOpenChange, data }: Props) => {
 };
 
 export default CategorySidebar;
+

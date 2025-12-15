@@ -26,7 +26,10 @@ const CategoryPage = async ({ params }: Props) => {
   }
 
   // Lấy tất cả IDs của category và children để filter products
-  const categoryIds = [category.id, ...category.children.map((c) => c.id)];
+  const categoryIds = [
+    category.id,
+    ...category.other_Category.map((c) => c.id),
+  ];
 
   // Lấy products thuộc category này hoặc children của nó
   const { products } = await caller.product.getAllForMarketplace({
@@ -35,7 +38,7 @@ const CategoryPage = async ({ params }: Props) => {
   });
 
   // Lấy products của tất cả subcategories
-  const childProductsPromises = category.children.map((child) =>
+  const childProductsPromises = category.other_Category.map((child) =>
     caller.product.getAllForMarketplace({
       limit: 50,
       categoryId: child.id,
@@ -54,10 +57,10 @@ const CategoryPage = async ({ params }: Props) => {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       {/* Subcategories Navigation */}
-      {category.children.length > 0 && (
+      {category.other_Category.length > 0 && (
         <div className="mb-8 rounded-lg border bg-card p-4">
           <div className="flex flex-wrap gap-2">
-            {category.children.map((child) => (
+            {category.other_Category.map((child) => (
               <Link
                 key={child.id}
                 href={`/shop/${categorySlug}/${child.slug}`}

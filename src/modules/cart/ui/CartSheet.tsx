@@ -199,8 +199,13 @@ export const CartSheet = () => {
                     {totalPrice.toLocaleString("vi-VN")}₫
                   </span>
                 </div>
-                <Button className="w-full" size="lg">
-                  Thanh toán
+                <Button
+                  className="w-full"
+                  size="lg"
+                  asChild
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link href="/checkout">Thanh toán</Link>
                 </Button>
                 <Button
                   variant="outline"
@@ -218,3 +223,4 @@ export const CartSheet = () => {
     </Sheet>
   );
 };
+

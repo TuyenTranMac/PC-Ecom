@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/utils";
 import { Poppins } from "next/font/google";
@@ -6,10 +7,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavBarSideBar } from "./navbar.sidebar";
 import { useState } from "react";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, User } from "lucide-react";
 import { useSession } from "@/modules/auth/ui/sign-in/views/providers/SessionProvider";
 import { CartSheet } from "@/modules/cart/ui/CartSheet";
 import { WishlistSheet } from "@/modules/wishlist/ui/WishlistSheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 interface NavbarItemProps {
   href: string;
   children: React.ReactNode;
@@ -78,14 +88,52 @@ export const Navbar = () => {
         </div>
       </div>
       {user ? (
-        <div className="hidden lg:flex">
-          <Button
-            asChild
-            variant={"elevated"}
-            className="rounded-non hover:text-primary bg-secondary h-full border-t-0 border-r-0 border-b-0 border-l px-12 text-lg font-bold font-stretch-95% transition-colors hover:bg-amber-300"
-          >
-            <Link href={""}>Start Selling</Link>
-          </Button>
+        <div className="hidden items-center gap-2 pr-6 lg:flex">
+          {/* User Dropdown Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="relative h-10 w-10 rounded-full"
+              >
+                <Avatar>
+                  <AvatarImage
+                    src={user.image || undefined}
+                    alt={user.username || "User"}
+                  />
+                  <AvatarFallback>
+                    <User className="h-5 w-5" />
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium">
+                    {user.username || "User"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/profile" className="cursor-pointer">
+                  <User className="mr-2 h-4 w-4" />
+                  Profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link
+                  href=""
+                  className="cursor-pointer font-bold text-amber-600"
+                >
+                  Start Selling
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       ) : (
         <div className="hidden lg:flex">

@@ -1,11 +1,19 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
-import { User } from "@prisma/client";
+
+// Định nghĩa kiểu cho Session User (không phải full Prisma User)
+type SessionUser = {
+  id: string;
+  username: string;
+  email: string;
+  image?: string | null;
+  role: "USER" | "VENDOR" | "ADMIN";
+} | null;
 
 // Định nghĩa kiểu cho Context
 interface SessionContextType {
-  user: User | null;
+  user: SessionUser;
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -15,7 +23,7 @@ export const SessionProvider = ({
   session,
 }: {
   children: ReactNode;
-  session: User | null;
+  session: SessionUser;
 }) => {
   return (
     <SessionContext.Provider value={{ user: session }}>

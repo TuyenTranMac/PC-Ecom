@@ -107,3 +107,4 @@ export const PricingCard = ({
     </Card>
   );
 };
+

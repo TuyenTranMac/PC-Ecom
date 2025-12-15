@@ -2,7 +2,15 @@ import { createTRPCRouter, adminProcedure } from "../trpc";
 import { z } from "zod";
 
 export const adminRouter = createTRPCRouter({
-  // Lấy thống kê tổng quan
+  revokeVendor: adminProcedure
+    .input(z.object({ userId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.db.user.update({
+        where: { id: input.userId },
+        data: { role: "USER" },
+      });
+      return { success: true, user, userId: input.userId };
+    }),
   getStats: adminProcedure.query(async ({ ctx }) => {
     const [
       totalUsers,
@@ -60,7 +68,7 @@ export const adminRouter = createTRPCRouter({
           email: true,
           role: true,
           createdAt: true,
-          store: {
+          Store: {
             select: {
               id: true,
               name: true,
@@ -98,15 +106,15 @@ export const adminRouter = createTRPCRouter({
         cursor: cursor ? { id: cursor } : undefined,
         orderBy: { createdAt: "desc" },
         include: {
-          subscription: true,
-          store: {
+          Subscription: true,
+          Store: {
             select: {
               id: true,
               name: true,
               slug: true,
               _count: {
                 select: {
-                  products: true,
+                  Product: true,
                 },
               },
             },

@@ -1,16 +1,18 @@
 import { api } from "@/server/server";
-import { ProductCard } from "@/modules/products/ui/ProductCard";
 import { getSession } from "@/lib/auth/session";
+import { MarketplaceProducts } from "@/modules/products/ui/MarketplaceProducts";
 
 const MarketplacePage = async () => {
   const caller = await api();
   const session = await getSession();
   const userId = session?.user?.id;
 
-  const [{ products }, userWishlist] = await Promise.all([
-    caller.product.getAllForMarketplace({ limit: 24 }),
-    userId ? caller.wishlist.getAll() : Promise.resolve([]),
-  ]);
+  const [{ products, nextCursor }, userWishlist, totalCount] =
+    await Promise.all([
+      caller.product.getAllForMarketplace({ limit: 72 }), // Fetch 72 sản phẩm (24*3) ban đầu
+      userId ? caller.wishlist.getAll() : Promise.resolve([]),
+      caller.product.getTotalCount({}), // Lấy tổng số sản phẩm
+    ]);
 
   const wishlistProductIds = new Set(userWishlist.map((w) => w.productId));
 
@@ -24,35 +26,21 @@ const MarketplacePage = async () => {
         </p>
       </div>
 
-      {/* Filters Section - TODO: Thêm sau */}
+      {/* Filters Section */}
       <div className="mb-6 flex items-center justify-between rounded-lg border bg-card p-4">
         <p className="text-muted-foreground text-sm">
-          Hiển thị {products.length} sản phẩm
+          Tổng cộng {totalCount} sản phẩm
         </p>
         {/* TODO: Thêm filter/sort sau */}
       </div>
 
-      {/* Products Grid */}
-      {products.length === 0 ? (
-        <div className="flex min-h-[400px] items-center justify-center rounded-lg border bg-muted/30">
-          <div className="text-center">
-            <p className="text-muted-foreground text-lg">
-              Chưa có sản phẩm nào trong marketplace
-            </p>
-          </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isInWishlist={wishlistProductIds.has(product.id)}
-              isLoggedIn={!!userId}
-            />
-          ))}
-        </div>
-      )}
+      <MarketplaceProducts
+        initialProducts={products}
+        initialCursor={nextCursor}
+        totalCount={totalCount}
+        wishlistProductIds={wishlistProductIds}
+        isLoggedIn={!!userId}
+      />
     </div>
   );
 };

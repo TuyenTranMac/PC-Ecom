@@ -15,6 +15,7 @@ import {
   BarChart3,
   Settings,
   ExternalLink,
+  ShoppingCart,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -193,6 +194,12 @@ export const DashboardContent = ({
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Button asChild className="h-auto flex-col py-6">
+            <Link href={`/vendor/${store.slug}/dashboard/orders`}>
+              <ShoppingCart className="mb-2 h-8 w-8" />
+              <span className="text-base">Quản lý đơn hàng</span>
+            </Link>
+          </Button>
+          <Button asChild className="h-auto flex-col py-6" variant="outline">
             <Link href="/vendor/products/new">
               <Package className="mb-2 h-8 w-8" />
               <span className="text-base">Thêm sản phẩm mới</span>

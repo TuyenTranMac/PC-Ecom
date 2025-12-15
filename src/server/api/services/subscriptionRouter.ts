@@ -1,4 +1,8 @@
-import { publicProcedure, protectedProcedure, createTRPCRouter } from "@/server/api/trpc";
+import {
+  publicProcedure,
+  protectedProcedure,
+  createTRPCRouter,
+} from "@/server/api/trpc";
 import { subscriptionPlanSchema } from "@/lib/schemas/subscription.schema";
 
 export const subscriptionRouter = createTRPCRouter({
@@ -53,7 +57,7 @@ export const subscriptionRouter = createTRPCRouter({
     const subscription = await ctx.db.subscription.findUnique({
       where: { userId: ctx.session.user.id },
       include: {
-        user: {
+        User: {
           select: {
             id: true,
             username: true,
@@ -77,7 +81,7 @@ export const subscriptionRouter = createTRPCRouter({
           prioritySupport: false,
         },
         include: {
-          user: {
+          User: {
             select: {
               id: true,
               username: true,
@@ -123,7 +127,7 @@ export const subscriptionRouter = createTRPCRouter({
       // Lấy thông tin user đầy đủ
       const user = await ctx.db.user.findUnique({
         where: { id: ctx.session.user.id },
-        include: { store: true },
+        include: { Store: true },
       });
 
       if (!user) {
@@ -139,7 +143,7 @@ export const subscriptionRouter = createTRPCRouter({
       }
 
       // Tạo Store nếu chưa có (dùng username làm slug cho subdomain)
-      if (!user.store) {
+      if (!user.Store) {
         // Tạo slug từ username (loại bỏ ký tự đặc biệt, chuyển thành lowercase)
         const slug = user.username
           .toLowerCase()

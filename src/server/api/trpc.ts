@@ -4,21 +4,18 @@ import superjson from "superjson";
 import { cache } from "react";
 import { getSession } from "@/lib/auth/session";
 
-// ✅ 1. Tạo Context với session
 export const createTRPCContext = cache(async () => {
   const session = await getSession();
 
   return {
     db,
-    session, // Toàn bộ session object
-    user: session?.user || null, // User hoặc null (type-safe)
+    session,
+    user: session?.user || null,
   };
 });
 
-// ✅ 2. Định nghĩa type Context
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
 
-// ✅ 3. Khởi tạo tRPC với transformer
 export const t = initTRPC.context<Context>().create({
   transformer: superjson, // Serialize Date, Map, Set, etc.
   errorFormatter({ shape }) {
@@ -26,36 +23,35 @@ export const t = initTRPC.context<Context>().create({
   },
 });
 
-
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 
 export const protectedProcedure = t.procedure.use(async function isAuth(opts) {
-    const {ctx} = opts;
-    if(!ctx.session || !ctx.user){
-       throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "Bạn cần đăng nhập để thực hiện thao tác này",
-      });
-    }
-    return opts.next({
-      ctx: {
-        ...ctx,
-        //update context
-        session: ctx.session, 
-        user: ctx.user
-      }
-    })
-})
+  const { ctx } = opts;
+  if (!ctx.session || !ctx.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Bạn cần đăng nhập để thực hiện thao tác này",
+    });
+  }
+  return opts.next({
+    ctx: {
+      ...ctx,
+      //update context
+      session: ctx.session,
+      user: ctx.user,
+    },
+  });
+});
 export const vendorProcedure = t.procedure.use(async function isVendor(opts) {
-  const { ctx } = opts
+  const { ctx } = opts;
 
-   if(!ctx.session || !ctx.user){
-       throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "Bạn cần đăng nhập để thực hiện thao tác này",
-      });
-    }
+  if (!ctx.session || !ctx.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Bạn cần đăng nhập để thực hiện thao tác này",
+    });
+  }
 
   if (ctx.user.role !== "VENDOR" && ctx.user.role !== "ADMIN") {
     throw new TRPCError({
@@ -65,22 +61,22 @@ export const vendorProcedure = t.procedure.use(async function isVendor(opts) {
   }
 
   return opts.next({
-    ctx:{
+    ctx: {
       ...ctx,
       session: ctx.session,
-      user: ctx.user
-    }
-  })
-})
+      user: ctx.user,
+    },
+  });
+});
 export const adminProcedure = t.procedure.use(async function isAdmin(opts) {
-  const { ctx } = opts
+  const { ctx } = opts;
 
-   if(!ctx.session || !ctx.user){
-       throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "Bạn cần đăng nhập để thực hiện thao tác này",
-      });
-    }
+  if (!ctx.session || !ctx.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Bạn cần đăng nhập để thực hiện thao tác này",
+    });
+  }
 
   if (ctx.user.role !== "ADMIN") {
     throw new TRPCError({
@@ -90,13 +86,11 @@ export const adminProcedure = t.procedure.use(async function isAdmin(opts) {
   }
 
   return opts.next({
-    ctx:{
+    ctx: {
       ...ctx,
       session: ctx.session,
-      user: ctx.user
-    }
-  })
-})
+      user: ctx.user,
+    },
+  });
+});
 export const publicProcedure = t.procedure;
-
-

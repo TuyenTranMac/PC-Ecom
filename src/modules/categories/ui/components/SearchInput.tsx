@@ -60,3 +60,4 @@ const SearchInput = ({ disable }: Props) => {
 };
 
 export default SearchInput;
+

@@ -5,7 +5,7 @@ export const useTRPC = () => useTRPCClient();
 
 export const UseCategory = () => {
   const trpc = useTRPC();
-  return useSuspenseQuery(trpc.categories.all.queryOptions());
+  return useSuspenseQuery(trpc.categories.getAll.queryOptions());
 };
 // export const useAuth = () => {
 //     const trpc = useTRPC();

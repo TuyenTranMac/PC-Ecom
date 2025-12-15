@@ -102,7 +102,7 @@ export const WishlistSheet = () => {
             <>
               <div className="flex-1 space-y-4 overflow-y-auto max-h-[calc(100vh-200px)]">
                 {wishlist.map((item) => {
-                  const images = (item.product.images as string[]) || [];
+                  const images = (item.Product.images as string[]) || [];
                   const firstImage = images[0];
 
                   return (
@@ -111,14 +111,14 @@ export const WishlistSheet = () => {
                       className="flex gap-3 rounded-lg border p-3"
                     >
                       <Link
-                        href={`/shop/product/${item.product.slug}`}
+                        href={`/shop/product/${item.Product.slug}`}
                         className="relative h-20 w-20 shrink-0 overflow-hidden rounded"
                         onClick={() => setIsOpen(false)}
                       >
                         {firstImage ? (
                           <Image
                             src={firstImage}
-                            alt={item.product.name}
+                            alt={item.Product.name}
                             fill
                             className="object-cover"
                           />
@@ -130,33 +130,33 @@ export const WishlistSheet = () => {
                       </Link>
                       <div className="flex flex-1 flex-col gap-2">
                         <Link
-                          href={`/shop/product/${item.product.slug}`}
+                          href={`/shop/product/${item.Product.slug}`}
                           className="text-sm font-semibold hover:underline line-clamp-2"
                           onClick={() => setIsOpen(false)}
                         >
-                          {item.product.name}
+                          {item.Product.name}
                         </Link>
                         <div className="flex items-center justify-between">
                           <div className="flex flex-col gap-1">
                             <span className="text-sm font-bold text-primary">
-                              {item.product.price.toLocaleString("vi-VN")}₫
+                              {item.Product.price.toLocaleString("vi-VN")}₫
                             </span>
                             <span className="text-xs text-muted-foreground">
-                              {item.product.store.name}
+                              {item.Product.Store.name}
                             </span>
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="h-8 w-8 text-destructive"
-                            onClick={() => handleRemove(item.productId)}
+                            onClick={() => handleRemove(item.ProductId)}
                             disabled={removeMutation.isPending}
                           >
                             <Trash2Icon className="h-4 w-4" />
                           </Button>
                         </div>
                         <span className="text-xs text-muted-foreground">
-                          Kho: {item.product.stock}
+                          Kho: {item.Product.stock}
                         </span>
                       </div>
                     </div>
@@ -179,3 +179,5 @@ export const WishlistSheet = () => {
     </Sheet>
   );
 };
+
+

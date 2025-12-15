@@ -212,3 +212,4 @@ export const CategoryDialog = ({
     </Dialog>
   );
 };
+

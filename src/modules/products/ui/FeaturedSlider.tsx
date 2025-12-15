@@ -9,26 +9,12 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { ProductCard } from "./ProductCard";
+import type { AppRouter } from "@/server/api/routers/rootRouter";
+import type { inferProcedureOutput } from "@trpc/server";
 
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description: string | null;
-  price: number;
-  stock: number;
-  images: any;
-  wishlistCount: number;
-  store: {
-    id: string;
-    name: string;
-    slug: string;
-  };
-  category: {
-    name: string;
-    slug: string;
-  };
-}
+// Infer type từ tRPC procedure output (type-safe 100%)
+type FeaturedOutput = inferProcedureOutput<AppRouter["product"]["getFeatured"]>;
+type Product = FeaturedOutput[number];
 
 interface Props {
   products: Product[];

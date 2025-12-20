@@ -65,13 +65,11 @@ export const CheckoutForm = () => {
     },
   });
 
-  // Đọc giỏ hàng từ localStorage
   useEffect(() => {
     const stored = localStorage.getItem("cart");
     if (stored) {
       const items = JSON.parse(stored);
 
-      // Validate và filter items có storeId
       const validItems = items.filter((item: any) => {
         if (!item.storeId) {
           console.warn("Item thiếu storeId, bỏ qua:", item);
@@ -81,7 +79,6 @@ export const CheckoutForm = () => {
       });
 
       if (validItems.length !== items.length) {
-        // Có items không hợp lệ, cập nhật localStorage
         localStorage.setItem("cart", JSON.stringify(validItems));
         toast.error(
           "Một số sản phẩm trong giỏ hàng không hợp lệ đã được xóa. Vui lòng thêm lại."
@@ -91,7 +88,6 @@ export const CheckoutForm = () => {
       setCartItems(validItems);
       form.setValue("cartItems", validItems);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Tính toán từ localStorage
@@ -117,7 +113,7 @@ export const CheckoutForm = () => {
     trpc.order.createOrder.mutationOptions({
       onSuccess: (data) => {
         toast.success(data.message);
-        // Xóa cart khỏi localStorage trước khi redirect
+
         localStorage.removeItem("cart");
         window.dispatchEvent(new Event("cart-updated"));
         router.push("/orders");

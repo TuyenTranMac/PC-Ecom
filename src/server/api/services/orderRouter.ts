@@ -124,7 +124,6 @@ export const orderRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
 
-      // 1. Validate cart items từ localStorage
       const cartItems = input.cartItems || [];
 
       if (!cartItems || cartItems.length === 0) {
@@ -134,7 +133,6 @@ export const orderRouter = createTRPCRouter({
         });
       }
 
-      // 2. Fetch full product data để validate và lấy storeId
       const productIds = cartItems.map((item) => item.id);
       const products = await ctx.db.product.findMany({
         where: { id: { in: productIds } },
@@ -149,7 +147,6 @@ export const orderRouter = createTRPCRouter({
         },
       });
 
-      // 3. Validate stock và map với localStorage data
       const validatedItems = cartItems.map((cartItem) => {
         const product = products.find((p) => p.id === cartItem.id);
         if (!product) {
@@ -170,7 +167,6 @@ export const orderRouter = createTRPCRouter({
         };
       });
 
-      // 4. Nhóm items theo storeId
       const ordersByStore = validatedItems.reduce(
         (acc, item) => {
           const storeId = item.Product.storeId;
@@ -183,14 +179,11 @@ export const orderRouter = createTRPCRouter({
         {} as Record<string, typeof validatedItems>
       );
 
-      // 3. Tạo địa chỉ nếu chưa có
       let shippingAddressId: string;
 
       if (input.useExistingAddress && input.existingAddressId) {
-        // Sử dụng địa chỉ có sẵn
         shippingAddressId = input.existingAddressId;
       } else {
-        // Tạo địa chỉ mới
         const address = await ctx.db.address.create({
           data: {
             fullName: input.shippingAddress.fullName,
@@ -207,23 +200,20 @@ export const orderRouter = createTRPCRouter({
         shippingAddressId = address.id;
       }
 
-      // 4. Transaction: Tạo tất cả đơn hàng (tách theo store)
       const createdOrders = await ctx.db.$transaction(async (tx) => {
         const orders = [];
 
         for (const [storeId, items] of Object.entries(ordersByStore)) {
-          // Tính tổng tiền cho store này
+          // Tính tổng tiền cho store
           const subtotal = items.reduce((sum, item) => {
             return sum + item.Product.price * item.quantity;
           }, 0);
 
-          const shippingFee = 30000; // Fixed shipping
+          const shippingFee = 30000;
           const total = subtotal + shippingFee;
 
-          // Generate order code
           const orderCode = `ORD-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
 
-          // Tạo Order
           const order = await tx.order.create({
             data: {
               code: orderCode,
@@ -239,7 +229,6 @@ export const orderRouter = createTRPCRouter({
               billingAddressId: shippingAddressId, // Same as shipping
               notes: input.note || null,
 
-              // Tạo OrderItems
               OrderItem: {
                 create: items.map((item) => {
                   const lineTotal = item.Product.price * item.quantity;
@@ -365,7 +354,6 @@ export const orderRouter = createTRPCRouter({
       return order;
     }),
 
-  // ========== VENDOR PROCEDURES ==========
   // Lấy danh sách đơn hàng của shop (Vendor only)
   getVendorOrders: vendorProcedure
     .input(

@@ -35,11 +35,9 @@ export const AddToCartButton = ({ product }: Props) => {
   const addToCart = () => {
     setIsAdding(true);
 
-    // Lấy cart từ localStorage
     const cartStr = localStorage.getItem("cart");
     const cart: CartItem[] = cartStr ? JSON.parse(cartStr) : [];
 
-    // Check stock
     if (product.stock <= 0) {
       toast({
         title: "Hết hàng",
@@ -50,11 +48,9 @@ export const AddToCartButton = ({ product }: Props) => {
       return;
     }
 
-    // Check nếu đã có trong cart
     const existingIndex = cart.findIndex((item) => item.id === product.id);
 
     if (existingIndex >= 0) {
-      // Tăng quantity
       const currentQty = cart[existingIndex].quantity;
       if (currentQty >= product.stock) {
         toast({
@@ -81,7 +77,6 @@ export const AddToCartButton = ({ product }: Props) => {
       cart.push(newItem);
     }
 
-    // Save lại localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
     toast({
@@ -91,7 +86,6 @@ export const AddToCartButton = ({ product }: Props) => {
 
     setIsAdding(false);
 
-    // Trigger custom event để update cart count ở header
     window.dispatchEvent(new Event("cart-updated"));
   };
 
@@ -108,4 +102,3 @@ export const AddToCartButton = ({ product }: Props) => {
     </Button>
   );
 };
-

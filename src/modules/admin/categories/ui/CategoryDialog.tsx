@@ -104,7 +104,7 @@ export const CategoryDialog = ({
       name,
       slug,
       description: description || undefined,
-      parentId: parentId || undefined,
+      parentId: parentId && parentId !== "NONE" ? parentId : undefined,
     };
 
     if (category) {
@@ -181,12 +181,12 @@ export const CategoryDialog = ({
 
           <div className="space-y-2">
             <Label htmlFor="parent">Danh mục cha (tùy chọn)</Label>
-            <Select value={parentId} onValueChange={setParentId}>
+            <Select value={parentId || undefined} onValueChange={setParentId}>
               <SelectTrigger>
                 <SelectValue placeholder="Không có (Root category)" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Không có</SelectItem>
+                <SelectItem value="NONE">Không có</SelectItem>
                 {parentCategories.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
@@ -212,4 +212,3 @@ export const CategoryDialog = ({
     </Dialog>
   );
 };
-

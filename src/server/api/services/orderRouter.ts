@@ -181,23 +181,67 @@ export const orderRouter = createTRPCRouter({
 
       let shippingAddressId: string;
 
+      // TRƯỜNG HỢP 1: User chọn địa chỉ cũ từ dropdown
       if (input.useExistingAddress && input.existingAddressId) {
+        // Validation kỹ hơn: Đảm bảo địa chỉ này thực sự thuộc về user đang login
+        const existingAddress = await ctx.db.address.findFirst({
+          where: {
+            id: input.existingAddressId,
+            userId: userId, // Quan trọng: Tránh việc user giả mạo ID của người khác
+          },
+        });
+
+        if (!existingAddress) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Địa chỉ giao hàng không hợp lệ",
+          });
+        }
+
         shippingAddressId = input.existingAddressId;
-      } else {
-        const address = await ctx.db.address.create({
-          data: {
+      }
+      // TRƯỜNG HỢP 2: User nhập form địa chỉ (có thể là mới, hoặc nhập lại thông tin cũ)
+      else {
+        // Bước 1: Tìm xem trong DB đã có địa chỉ nào y hệt của user này chưa
+        const duplicateAddress = await ctx.db.address.findFirst({
+          where: {
+            userId: userId,
+            // So sánh từng trường một
             fullName: input.shippingAddress.fullName,
             phone: input.shippingAddress.phone,
             addressLine1: input.shippingAddress.addressLine1,
+            // Xử lý cẩn thận các trường optional (null vs undefined)
             addressLine2: input.shippingAddress.addressLine2 || null,
             ward: input.shippingAddress.ward || null,
             district: input.shippingAddress.district,
             province: input.shippingAddress.province,
             country: input.shippingAddress.country,
-            userId,
           },
         });
-        shippingAddressId = address.id;
+
+        if (duplicateAddress) {
+          // Bước 2a: Nếu tìm thấy, tái sử dụng ID cũ
+          shippingAddressId = duplicateAddress.id;
+        } else {
+          // Bước 2b: Nếu không thấy, lúc này mới tạo mới
+          const address = await ctx.db.address.create({
+            data: {
+              fullName: input.shippingAddress.fullName,
+              phone: input.shippingAddress.phone,
+              addressLine1: input.shippingAddress.addressLine1,
+              addressLine2: input.shippingAddress.addressLine2 || null,
+              ward: input.shippingAddress.ward || null,
+              district: input.shippingAddress.district,
+              province: input.shippingAddress.province,
+              country: input.shippingAddress.country,
+              userId,
+              // Tùy chọn: Nếu đây là địa chỉ đầu tiên, set làm mặc định luôn
+              isDefault:
+                (await ctx.db.address.count({ where: { userId } })) === 0,
+            },
+          });
+          shippingAddressId = address.id;
+        }
       }
 
       const createdOrders = await ctx.db.$transaction(async (tx) => {

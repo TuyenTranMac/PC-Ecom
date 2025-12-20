@@ -2,6 +2,7 @@ import { api } from "@/server/server";
 import { getSession } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "@/modules/auth/ui/profile/ProfileForm";
+import { AddressManager } from "@/modules/auth/ui/profile/AddressManager";
 import {
   Card,
   CardContent,
@@ -134,6 +135,12 @@ const ProfilePage = async () => {
           </CardHeader>
           <CardContent>
             <ProfileForm initialData={userProfile} />
+            {/* Quản lý địa chỉ nhận hàng */}
+            <div className="mt-8">
+              {/* Client Component quản lý địa chỉ */}
+
+              <AddressManager />
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -1,0 +1,2169 @@
+{
+  "categories": [
+    {
+      "id": "cmiow9owr000110b0up8d5khf",
+      "name": "Laptop Gaming",
+      "slug": "laptop",
+      "color": "#ef4444",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.283Z",
+      "updatedAt": "2025-12-02T18:11:20.283Z"
+    },
+    {
+      "id": "cmiow9owt000310b0s7ws07km",
+      "name": "Asus ROG/TUF",
+      "slug": "laptop-asus",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.285Z",
+      "updatedAt": "2025-12-02T18:11:20.285Z"
+    },
+    {
+      "id": "cmiow9owu000510b0jdvnfk4q",
+      "name": "MSI",
+      "slug": "laptop-msi",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.286Z",
+      "updatedAt": "2025-12-02T18:11:20.286Z"
+    },
+    {
+      "id": "cmiow9owv000710b0yyuszr88",
+      "name": "Acer Predator",
+      "slug": "laptop-acer",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.287Z",
+      "updatedAt": "2025-12-02T18:11:20.287Z"
+    },
+    {
+      "id": "cmiow9owv000910b0sd1yo3gk",
+      "name": "Lenovo Legion",
+      "slug": "laptop-lenovo",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.288Z",
+      "updatedAt": "2025-12-02T18:11:20.288Z"
+    },
+    {
+      "id": "cmiow9oww000b10b0kr9t53jo",
+      "name": "Dell Alienware",
+      "slug": "laptop-dell",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.288Z",
+      "updatedAt": "2025-12-02T18:11:20.288Z"
+    },
+    {
+      "id": "cmiow9owx000d10b011406t33",
+      "name": "HP Omen",
+      "slug": "laptop-hp",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.289Z",
+      "updatedAt": "2025-12-02T18:11:20.289Z"
+    },
+    {
+      "id": "cmiow9owx000f10b09squ8su1",
+      "name": "Gigabyte Aorus",
+      "slug": "laptop-gigabyte",
+      "color": null,
+      "parentId": "cmiow9owr000110b0up8d5khf",
+      "createdAt": "2025-12-02T18:11:20.290Z",
+      "updatedAt": "2025-12-02T18:11:20.290Z"
+    },
+    {
+      "id": "cmiow9owy000h10b04nezv6sq",
+      "name": "Màn hình",
+      "slug": "man-hinh",
+      "color": "#facc15",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.290Z",
+      "updatedAt": "2025-12-02T18:11:20.290Z"
+    },
+    {
+      "id": "cmiow9owy000j10b0hxknjttn",
+      "name": "LG",
+      "slug": "monitor-lg",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.291Z",
+      "updatedAt": "2025-12-02T18:11:20.291Z"
+    },
+    {
+      "id": "cmiow9owz000l10b0fkrok90p",
+      "name": "Samsung",
+      "slug": "monitor-samsung",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.291Z",
+      "updatedAt": "2025-12-02T18:11:20.291Z"
+    },
+    {
+      "id": "cmiow9ox0000n10b08xbhf4vl",
+      "name": "Asus",
+      "slug": "monitor-asus",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.292Z",
+      "updatedAt": "2025-12-02T18:11:20.292Z"
+    },
+    {
+      "id": "cmiow9ox1000p10b0dc9w1y4v",
+      "name": "Dell",
+      "slug": "monitor-dell",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.293Z",
+      "updatedAt": "2025-12-02T18:11:20.293Z"
+    },
+    {
+      "id": "cmiow9ox1000r10b0wkm71jcg",
+      "name": "ViewSonic",
+      "slug": "monitor-viewsonic",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.294Z",
+      "updatedAt": "2025-12-02T18:11:20.294Z"
+    },
+    {
+      "id": "cmiow9ox2000t10b0yu9e9zaq",
+      "name": "Gigabyte",
+      "slug": "monitor-gigabyte",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.294Z",
+      "updatedAt": "2025-12-02T18:11:20.294Z"
+    },
+    {
+      "id": "cmiow9ox3000v10b0izo03wjp",
+      "name": "MSI",
+      "slug": "monitor-msi",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.295Z",
+      "updatedAt": "2025-12-02T18:11:20.295Z"
+    },
+    {
+      "id": "cmiow9ox3000x10b0eewsztmd",
+      "name": "AOC",
+      "slug": "monitor-aoc",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.296Z",
+      "updatedAt": "2025-12-02T18:11:20.296Z"
+    },
+    {
+      "id": "cmiow9ox4000z10b0b43w4ctq",
+      "name": "E-Dra",
+      "slug": "monitor-edra",
+      "color": null,
+      "parentId": "cmiow9owy000h10b04nezv6sq",
+      "createdAt": "2025-12-02T18:11:20.296Z",
+      "updatedAt": "2025-12-02T18:11:20.296Z"
+    },
+    {
+      "id": "cmiow9ox5001110b08v8moema",
+      "name": "Vi xử lý (CPU)",
+      "slug": "cpu",
+      "color": "#0ea5e9",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.297Z",
+      "updatedAt": "2025-12-02T18:11:20.297Z"
+    },
+    {
+      "id": "cmiow9ox6001310b0wj2kyz8s",
+      "name": "Intel",
+      "slug": "cpu-intel",
+      "color": null,
+      "parentId": "cmiow9ox5001110b08v8moema",
+      "createdAt": "2025-12-02T18:11:20.298Z",
+      "updatedAt": "2025-12-02T18:11:20.298Z"
+    },
+    {
+      "id": "cmiow9ox6001510b0xagcrxm2",
+      "name": "AMD",
+      "slug": "cpu-amd",
+      "color": null,
+      "parentId": "cmiow9ox5001110b08v8moema",
+      "createdAt": "2025-12-02T18:11:20.299Z",
+      "updatedAt": "2025-12-02T18:11:20.299Z"
+    },
+    {
+      "id": "cmiow9ox7001710b0dz58mtxd",
+      "name": "Bo mạch chủ",
+      "slug": "mainboard",
+      "color": "#3b82f6",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.300Z",
+      "updatedAt": "2025-12-02T18:11:20.300Z"
+    },
+    {
+      "id": "cmiow9ox8001910b059g4tpl4",
+      "name": "Asus",
+      "slug": "mainboard-asus",
+      "color": null,
+      "parentId": "cmiow9ox7001710b0dz58mtxd",
+      "createdAt": "2025-12-02T18:11:20.300Z",
+      "updatedAt": "2025-12-02T18:11:20.300Z"
+    },
+    {
+      "id": "cmiow9ox8001b10b0dcsoa4yi",
+      "name": "MSI",
+      "slug": "mainboard-msi",
+      "color": null,
+      "parentId": "cmiow9ox7001710b0dz58mtxd",
+      "createdAt": "2025-12-02T18:11:20.301Z",
+      "updatedAt": "2025-12-02T18:11:20.301Z"
+    },
+    {
+      "id": "cmiow9ox9001d10b0e0m45ocg",
+      "name": "Gigabyte",
+      "slug": "mainboard-gigabyte",
+      "color": null,
+      "parentId": "cmiow9ox7001710b0dz58mtxd",
+      "createdAt": "2025-12-02T18:11:20.302Z",
+      "updatedAt": "2025-12-02T18:11:20.302Z"
+    },
+    {
+      "id": "cmiow9oxa001f10b0tt4myib6",
+      "name": "ASRock",
+      "slug": "mainboard-asrock",
+      "color": null,
+      "parentId": "cmiow9ox7001710b0dz58mtxd",
+      "createdAt": "2025-12-02T18:11:20.302Z",
+      "updatedAt": "2025-12-02T18:11:20.302Z"
+    },
+    {
+      "id": "cmiow9oxb001h10b0fw8t4nm4",
+      "name": "NZXT",
+      "slug": "mainboard-nzxt",
+      "color": null,
+      "parentId": "cmiow9ox7001710b0dz58mtxd",
+      "createdAt": "2025-12-02T18:11:20.303Z",
+      "updatedAt": "2025-12-02T18:11:20.303Z"
+    },
+    {
+      "id": "cmiow9oxc001j10b0eba6mcuq",
+      "name": "Card màn hình",
+      "slug": "vga",
+      "color": "#10b981",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.304Z",
+      "updatedAt": "2025-12-02T18:11:20.304Z"
+    },
+    {
+      "id": "cmiow9oxc001l10b0exb2vyyq",
+      "name": "Asus",
+      "slug": "vga-asus",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.305Z",
+      "updatedAt": "2025-12-02T18:11:20.305Z"
+    },
+    {
+      "id": "cmiow9oxd001n10b08kujvt6g",
+      "name": "MSI",
+      "slug": "vga-msi",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.305Z",
+      "updatedAt": "2025-12-02T18:11:20.305Z"
+    },
+    {
+      "id": "cmiow9oxd001p10b0x8zv39jb",
+      "name": "Gigabyte",
+      "slug": "vga-gigabyte",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.306Z",
+      "updatedAt": "2025-12-02T18:11:20.306Z"
+    },
+    {
+      "id": "cmiow9oxe001r10b0o3gwdre4",
+      "name": "Colorful",
+      "slug": "vga-colorful",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.306Z",
+      "updatedAt": "2025-12-02T18:11:20.306Z"
+    },
+    {
+      "id": "cmiow9oxe001t10b0plbor3xv",
+      "name": "Zotac",
+      "slug": "vga-zotac",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.307Z",
+      "updatedAt": "2025-12-02T18:11:20.307Z"
+    },
+    {
+      "id": "cmiow9oxf001v10b0nc9i8zjl",
+      "name": "Galax",
+      "slug": "vga-galax",
+      "color": null,
+      "parentId": "cmiow9oxc001j10b0eba6mcuq",
+      "createdAt": "2025-12-02T18:11:20.308Z",
+      "updatedAt": "2025-12-02T18:11:20.308Z"
+    },
+    {
+      "id": "cmiow9oxg001x10b0p4cm9k04",
+      "name": "RAM",
+      "slug": "ram",
+      "color": "#f59e0b",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.309Z",
+      "updatedAt": "2025-12-02T18:11:20.309Z"
+    },
+    {
+      "id": "cmiow9oxh001z10b0j4oqi57s",
+      "name": "Corsair",
+      "slug": "ram-corsair",
+      "color": null,
+      "parentId": "cmiow9oxg001x10b0p4cm9k04",
+      "createdAt": "2025-12-02T18:11:20.309Z",
+      "updatedAt": "2025-12-02T18:11:20.309Z"
+    },
+    {
+      "id": "cmiow9oxh002110b0hyy93gnc",
+      "name": "G.Skill",
+      "slug": "ram-gskill",
+      "color": null,
+      "parentId": "cmiow9oxg001x10b0p4cm9k04",
+      "createdAt": "2025-12-02T18:11:20.310Z",
+      "updatedAt": "2025-12-02T18:11:20.310Z"
+    },
+    {
+      "id": "cmiow9oxi002310b0i4b5huoj",
+      "name": "Kingston",
+      "slug": "ram-kingston",
+      "color": null,
+      "parentId": "cmiow9oxg001x10b0p4cm9k04",
+      "createdAt": "2025-12-02T18:11:20.310Z",
+      "updatedAt": "2025-12-02T18:11:20.310Z"
+    },
+    {
+      "id": "cmiow9oxi002510b0xtenyv87",
+      "name": "Adata/XPG",
+      "slug": "ram-adata",
+      "color": null,
+      "parentId": "cmiow9oxg001x10b0p4cm9k04",
+      "createdAt": "2025-12-02T18:11:20.311Z",
+      "updatedAt": "2025-12-02T18:11:20.311Z"
+    },
+    {
+      "id": "cmiow9oxj002710b0ojbf9s06",
+      "name": "TeamGroup",
+      "slug": "ram-teamgroup",
+      "color": null,
+      "parentId": "cmiow9oxg001x10b0p4cm9k04",
+      "createdAt": "2025-12-02T18:11:20.311Z",
+      "updatedAt": "2025-12-02T18:11:20.311Z"
+    },
+    {
+      "id": "cmiow9oxj002910b0yuleayfb",
+      "name": "Ổ cứng SSD",
+      "slug": "ssd",
+      "color": "#6366f1",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.312Z",
+      "updatedAt": "2025-12-02T18:11:20.312Z"
+    },
+    {
+      "id": "cmiow9oxk002b10b0h58nikiz",
+      "name": "Samsung",
+      "slug": "ssd-samsung",
+      "color": null,
+      "parentId": "cmiow9oxj002910b0yuleayfb",
+      "createdAt": "2025-12-02T18:11:20.312Z",
+      "updatedAt": "2025-12-02T18:11:20.312Z"
+    },
+    {
+      "id": "cmiow9oxk002d10b0zqfm5173",
+      "name": "Western Digital",
+      "slug": "ssd-wd",
+      "color": null,
+      "parentId": "cmiow9oxj002910b0yuleayfb",
+      "createdAt": "2025-12-02T18:11:20.313Z",
+      "updatedAt": "2025-12-02T18:11:20.313Z"
+    },
+    {
+      "id": "cmiow9oxl002f10b0s38prd2f",
+      "name": "Kingston",
+      "slug": "ssd-kingston",
+      "color": null,
+      "parentId": "cmiow9oxj002910b0yuleayfb",
+      "createdAt": "2025-12-02T18:11:20.313Z",
+      "updatedAt": "2025-12-02T18:11:20.313Z"
+    },
+    {
+      "id": "cmiow9oxl002h10b04rrtc7ou",
+      "name": "Crucial",
+      "slug": "ssd-crucial",
+      "color": null,
+      "parentId": "cmiow9oxj002910b0yuleayfb",
+      "createdAt": "2025-12-02T18:11:20.314Z",
+      "updatedAt": "2025-12-02T18:11:20.314Z"
+    },
+    {
+      "id": "cmiow9oxm002j10b0q3d1xv7x",
+      "name": "Nguồn (PSU)",
+      "slug": "psu",
+      "color": "#8b5cf6",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.314Z",
+      "updatedAt": "2025-12-02T18:11:20.314Z"
+    },
+    {
+      "id": "cmiow9oxm002l10b01ql0cj7a",
+      "name": "Corsair",
+      "slug": "psu-corsair",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.315Z",
+      "updatedAt": "2025-12-02T18:11:20.315Z"
+    },
+    {
+      "id": "cmiow9oxn002n10b0bbrkvjg1",
+      "name": "Cooler Master",
+      "slug": "psu-coolermaster",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.315Z",
+      "updatedAt": "2025-12-02T18:11:20.315Z"
+    },
+    {
+      "id": "cmiow9oxn002p10b0odu9stgg",
+      "name": "Asus ROG",
+      "slug": "psu-asus",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.315Z",
+      "updatedAt": "2025-12-02T18:11:20.315Z"
+    },
+    {
+      "id": "cmiow9oxo002r10b0oyhx60cr",
+      "name": "MSI",
+      "slug": "psu-msi",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.316Z",
+      "updatedAt": "2025-12-02T18:11:20.316Z"
+    },
+    {
+      "id": "cmiow9oxo002t10b0a60y1qp8",
+      "name": "Super Flower",
+      "slug": "psu-superflower",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.317Z",
+      "updatedAt": "2025-12-02T18:11:20.317Z"
+    },
+    {
+      "id": "cmiow9oxp002v10b0uma081w5",
+      "name": "Deepcool",
+      "slug": "psu-deepcool",
+      "color": null,
+      "parentId": "cmiow9oxm002j10b0q3d1xv7x",
+      "createdAt": "2025-12-02T18:11:20.317Z",
+      "updatedAt": "2025-12-02T18:11:20.317Z"
+    },
+    {
+      "id": "cmiow9oxp002x10b0z0c8tec7",
+      "name": "Vỏ Case",
+      "slug": "case",
+      "color": "#ec4899",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.318Z",
+      "updatedAt": "2025-12-02T18:11:20.318Z"
+    },
+    {
+      "id": "cmiow9oxq002z10b08cyv9ngw",
+      "name": "NZXT",
+      "slug": "case-nzxt",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.318Z",
+      "updatedAt": "2025-12-02T18:11:20.318Z"
+    },
+    {
+      "id": "cmiow9oxq003110b0q9699hjc",
+      "name": "Corsair",
+      "slug": "case-corsair",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.319Z",
+      "updatedAt": "2025-12-02T18:11:20.319Z"
+    },
+    {
+      "id": "cmiow9oxr003310b0npsbdx6l",
+      "name": "Lian Li",
+      "slug": "case-lianli",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.319Z",
+      "updatedAt": "2025-12-02T18:11:20.319Z"
+    },
+    {
+      "id": "cmiow9oxr003510b0e5j4vwdm",
+      "name": "Mik",
+      "slug": "case-mik",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.320Z",
+      "updatedAt": "2025-12-02T18:11:20.320Z"
+    },
+    {
+      "id": "cmiow9oxs003710b0z2nc9tnd",
+      "name": "Montech",
+      "slug": "case-montech",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.320Z",
+      "updatedAt": "2025-12-02T18:11:20.320Z"
+    },
+    {
+      "id": "cmiow9oxs003910b0530eze74",
+      "name": "Hyte",
+      "slug": "case-hyte",
+      "color": null,
+      "parentId": "cmiow9oxp002x10b0z0c8tec7",
+      "createdAt": "2025-12-02T18:11:20.321Z",
+      "updatedAt": "2025-12-02T18:11:20.321Z"
+    },
+    {
+      "id": "cmiow9oxt003b10b06owg9hd8",
+      "name": "Tản nhiệt",
+      "slug": "cooling",
+      "color": "#06b6d4",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.321Z",
+      "updatedAt": "2025-12-02T18:11:20.321Z"
+    },
+    {
+      "id": "cmiow9oxt003d10b0qmcjy7cx",
+      "name": "Thermalright",
+      "slug": "cool-thermalright",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.322Z",
+      "updatedAt": "2025-12-02T18:11:20.322Z"
+    },
+    {
+      "id": "cmiow9oxt003f10b0yh09rt6p",
+      "name": "Noctua",
+      "slug": "cool-noctua",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.322Z",
+      "updatedAt": "2025-12-02T18:11:20.322Z"
+    },
+    {
+      "id": "cmiow9oxu003h10b0z9zp1vor",
+      "name": "Deepcool",
+      "slug": "cool-deepcool",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.322Z",
+      "updatedAt": "2025-12-02T18:11:20.322Z"
+    },
+    {
+      "id": "cmiow9oxu003j10b0suutrqhc",
+      "name": "Corsair AIO",
+      "slug": "cool-corsair",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.323Z",
+      "updatedAt": "2025-12-02T18:11:20.323Z"
+    },
+    {
+      "id": "cmiow9oxv003l10b0v0m6mxgh",
+      "name": "NZXT AIO",
+      "slug": "cool-nzxt",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.323Z",
+      "updatedAt": "2025-12-02T18:11:20.323Z"
+    },
+    {
+      "id": "cmiow9oxv003n10b0si74fwm4",
+      "name": "ID-Cooling",
+      "slug": "cool-idcooling",
+      "color": null,
+      "parentId": "cmiow9oxt003b10b06owg9hd8",
+      "createdAt": "2025-12-02T18:11:20.324Z",
+      "updatedAt": "2025-12-02T18:11:20.324Z"
+    },
+    {
+      "id": "cmiow9oxw003p10b0m5orbkp0",
+      "name": "Bàn phím cơ",
+      "slug": "ban-phim",
+      "color": "#f43f5e",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.324Z",
+      "updatedAt": "2025-12-02T18:11:20.324Z"
+    },
+    {
+      "id": "cmiow9oxw003r10b0utc10oa5",
+      "name": "Akko",
+      "slug": "kb-akko",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.325Z",
+      "updatedAt": "2025-12-02T18:11:20.325Z"
+    },
+    {
+      "id": "cmiow9oxx003t10b0rlqfx4zd",
+      "name": "Keychron",
+      "slug": "kb-keychron",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.325Z",
+      "updatedAt": "2025-12-02T18:11:20.325Z"
+    },
+    {
+      "id": "cmiow9oxx003v10b01nbsqfb4",
+      "name": "Logitech G",
+      "slug": "kb-logitech",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.326Z",
+      "updatedAt": "2025-12-02T18:11:20.326Z"
+    },
+    {
+      "id": "cmiow9oxy003x10b0ljh2t7za",
+      "name": "Razer",
+      "slug": "kb-razer",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.327Z",
+      "updatedAt": "2025-12-02T18:11:20.327Z"
+    },
+    {
+      "id": "cmiow9oxz003z10b0hc29epbb",
+      "name": "Monsgeek",
+      "slug": "kb-monsgeek",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.327Z",
+      "updatedAt": "2025-12-02T18:11:20.327Z"
+    },
+    {
+      "id": "cmiow9oxz004110b04tsnqlmg",
+      "name": "Glorious",
+      "slug": "kb-glorious",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.328Z",
+      "updatedAt": "2025-12-02T18:11:20.328Z"
+    },
+    {
+      "id": "cmiow9oy0004310b0nhamayoh",
+      "name": "FL-Esports",
+      "slug": "kb-flesports",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.328Z",
+      "updatedAt": "2025-12-02T18:11:20.328Z"
+    },
+    {
+      "id": "cmiow9oy0004510b0t7rpnmw5",
+      "name": "Aula",
+      "slug": "kb-aula",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.329Z",
+      "updatedAt": "2025-12-02T18:11:20.329Z"
+    },
+    {
+      "id": "cmiow9oy1004710b0cs7kxl26",
+      "name": "Rainy75 (Wob)",
+      "slug": "kb-rainy",
+      "color": null,
+      "parentId": "cmiow9oxw003p10b0m5orbkp0",
+      "createdAt": "2025-12-02T18:11:20.329Z",
+      "updatedAt": "2025-12-02T18:11:20.329Z"
+    },
+    {
+      "id": "cmiow9oy1004910b001fqzapn",
+      "name": "Chuột Gaming",
+      "slug": "chuot",
+      "color": "#f97316",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.329Z",
+      "updatedAt": "2025-12-02T18:11:20.329Z"
+    },
+    {
+      "id": "cmiow9oy1004b10b0vhclm8q4",
+      "name": "Logitech G",
+      "slug": "mouse-logitech",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.330Z",
+      "updatedAt": "2025-12-02T18:11:20.330Z"
+    },
+    {
+      "id": "cmiow9oy2004d10b08hdjy6eu",
+      "name": "Razer",
+      "slug": "mouse-razer",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.330Z",
+      "updatedAt": "2025-12-02T18:11:20.330Z"
+    },
+    {
+      "id": "cmiow9oy2004f10b0hmek4ul9",
+      "name": "Zowie",
+      "slug": "mouse-zowie",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.331Z",
+      "updatedAt": "2025-12-02T18:11:20.331Z"
+    },
+    {
+      "id": "cmiow9oy3004h10b08fn2ackn",
+      "name": "Pulsar",
+      "slug": "mouse-pulsar",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.331Z",
+      "updatedAt": "2025-12-02T18:11:20.331Z"
+    },
+    {
+      "id": "cmiow9oy3004j10b0hqa6z3fs",
+      "name": "Lamzu",
+      "slug": "mouse-lamzu",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.332Z",
+      "updatedAt": "2025-12-02T18:11:20.332Z"
+    },
+    {
+      "id": "cmiow9oy4004l10b0zkl5l4bu",
+      "name": "Ninjutso",
+      "slug": "mouse-ninjutso",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.332Z",
+      "updatedAt": "2025-12-02T18:11:20.332Z"
+    },
+    {
+      "id": "cmiow9oy4004n10b04c76n46n",
+      "name": "VXE / VGN",
+      "slug": "mouse-vxe",
+      "color": null,
+      "parentId": "cmiow9oy1004910b001fqzapn",
+      "createdAt": "2025-12-02T18:11:20.333Z",
+      "updatedAt": "2025-12-02T18:11:20.333Z"
+    },
+    {
+      "id": "cmiow9oy5004p10b0i8j1p5nr",
+      "name": "Tai nghe",
+      "slug": "headset",
+      "color": "#d946ef",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.333Z",
+      "updatedAt": "2025-12-02T18:11:20.333Z"
+    },
+    {
+      "id": "cmiow9oy5004r10b05l5cfkzw",
+      "name": "HyperX",
+      "slug": "hs-hyperx",
+      "color": null,
+      "parentId": "cmiow9oy5004p10b0i8j1p5nr",
+      "createdAt": "2025-12-02T18:11:20.334Z",
+      "updatedAt": "2025-12-02T18:11:20.334Z"
+    },
+    {
+      "id": "cmiow9oy6004t10b0w7l8fll2",
+      "name": "SteelSeries",
+      "slug": "hs-steelseries",
+      "color": null,
+      "parentId": "cmiow9oy5004p10b0i8j1p5nr",
+      "createdAt": "2025-12-02T18:11:20.334Z",
+      "updatedAt": "2025-12-02T18:11:20.334Z"
+    },
+    {
+      "id": "cmiow9oy6004v10b094y3hz6f",
+      "name": "Logitech",
+      "slug": "hs-logitech",
+      "color": null,
+      "parentId": "cmiow9oy5004p10b0i8j1p5nr",
+      "createdAt": "2025-12-02T18:11:20.335Z",
+      "updatedAt": "2025-12-02T18:11:20.335Z"
+    },
+    {
+      "id": "cmiow9oy7004x10b0xqevp0v2",
+      "name": "Razer",
+      "slug": "hs-razer",
+      "color": null,
+      "parentId": "cmiow9oy5004p10b0i8j1p5nr",
+      "createdAt": "2025-12-02T18:11:20.335Z",
+      "updatedAt": "2025-12-02T18:11:20.335Z"
+    },
+    {
+      "id": "cmiow9oy7004z10b0do0xyhqu",
+      "name": "Corsair",
+      "slug": "hs-corsair",
+      "color": null,
+      "parentId": "cmiow9oy5004p10b0i8j1p5nr",
+      "createdAt": "2025-12-02T18:11:20.336Z",
+      "updatedAt": "2025-12-02T18:11:20.336Z"
+    },
+    {
+      "id": "cmiow9oy8005110b08tbllb91",
+      "name": "Ghế (Chairs)",
+      "slug": "ghe",
+      "color": "#84cc16",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.336Z",
+      "updatedAt": "2025-12-02T18:11:20.336Z"
+    },
+    {
+      "id": "cmiow9oy9005310b0b42odp6o",
+      "name": "Herman Miller",
+      "slug": "chair-hermanmiller",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.337Z",
+      "updatedAt": "2025-12-02T18:11:20.337Z"
+    },
+    {
+      "id": "cmiow9oy9005510b0z7tfarrd",
+      "name": "Steelcase",
+      "slug": "chair-steelcase",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.338Z",
+      "updatedAt": "2025-12-02T18:11:20.338Z"
+    },
+    {
+      "id": "cmiow9oya005710b0ajv0zvqn",
+      "name": "Secretlab",
+      "slug": "chair-secretlab",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.338Z",
+      "updatedAt": "2025-12-02T18:11:20.338Z"
+    },
+    {
+      "id": "cmiow9oya005910b0y13g2qlo",
+      "name": "Anda Seat",
+      "slug": "chair-andaseat",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.339Z",
+      "updatedAt": "2025-12-02T18:11:20.339Z"
+    },
+    {
+      "id": "cmiow9oyb005b10b0brzgi7n6",
+      "name": "Noblechairs",
+      "slug": "chair-noblechairs",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.339Z",
+      "updatedAt": "2025-12-02T18:11:20.339Z"
+    },
+    {
+      "id": "cmiow9oyb005d10b0xho390os",
+      "name": "Corsair",
+      "slug": "chair-corsair",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.340Z",
+      "updatedAt": "2025-12-02T18:11:20.340Z"
+    },
+    {
+      "id": "cmiow9oyc005f10b0xzx1kolg",
+      "name": "E-Dra",
+      "slug": "chair-edra",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.340Z",
+      "updatedAt": "2025-12-02T18:11:20.340Z"
+    },
+    {
+      "id": "cmiow9oyc005h10b0lvqukeg3",
+      "name": "Sihoo",
+      "slug": "chair-sihoo",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.341Z",
+      "updatedAt": "2025-12-02T18:11:20.341Z"
+    },
+    {
+      "id": "cmiow9oyd005j10b0nx0qrmtb",
+      "name": "Epione",
+      "slug": "chair-epione",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.341Z",
+      "updatedAt": "2025-12-02T18:11:20.341Z"
+    },
+    {
+      "id": "cmiow9oyd005l10b0o0owixlh",
+      "name": "Vchair",
+      "slug": "chair-vchair",
+      "color": null,
+      "parentId": "cmiow9oy8005110b08tbllb91",
+      "createdAt": "2025-12-02T18:11:20.342Z",
+      "updatedAt": "2025-12-02T18:11:20.342Z"
+    },
+    {
+      "id": "cmiow9oye005n10b05vjoexso",
+      "name": "Bàn (Desks)",
+      "slug": "ban",
+      "color": "#a3e635",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.342Z",
+      "updatedAt": "2025-12-02T18:11:20.342Z"
+    },
+    {
+      "id": "cmiow9oye005p10b0w9826y64",
+      "name": "HyperWork",
+      "slug": "desk-hyperwork",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.343Z",
+      "updatedAt": "2025-12-02T18:11:20.343Z"
+    },
+    {
+      "id": "cmiow9oyf005r10b0p4bksrwd",
+      "name": "Epione",
+      "slug": "desk-epione",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.343Z",
+      "updatedAt": "2025-12-02T18:11:20.343Z"
+    },
+    {
+      "id": "cmiow9oyf005t10b08cgffx7l",
+      "name": "Manson",
+      "slug": "desk-manson",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.344Z",
+      "updatedAt": "2025-12-02T18:11:20.344Z"
+    },
+    {
+      "id": "cmiow9oyg005v10b06n0du2fa",
+      "name": "UpGen",
+      "slug": "desk-upgen",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.344Z",
+      "updatedAt": "2025-12-02T18:11:20.344Z"
+    },
+    {
+      "id": "cmiow9oyg005x10b0d86pg8ry",
+      "name": "Bàn Gaming E-Dra",
+      "slug": "desk-edra",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.345Z",
+      "updatedAt": "2025-12-02T18:11:20.345Z"
+    },
+    {
+      "id": "cmiow9oyh005z10b0e2rttdld",
+      "name": "Bàn Warrior",
+      "slug": "desk-warrior",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.345Z",
+      "updatedAt": "2025-12-02T18:11:20.345Z"
+    },
+    {
+      "id": "cmiow9oyh006110b0cl9qb5x1",
+      "name": "IKEA Setup",
+      "slug": "desk-ikea",
+      "color": null,
+      "parentId": "cmiow9oye005n10b05vjoexso",
+      "createdAt": "2025-12-02T18:11:20.346Z",
+      "updatedAt": "2025-12-02T18:11:20.346Z"
+    },
+    {
+      "id": "cmiow9oyh006310b0vhfo5tdm",
+      "name": "Phụ kiện",
+      "slug": "phu-kien",
+      "color": "#64748b",
+      "parentId": null,
+      "createdAt": "2025-12-02T18:11:20.346Z",
+      "updatedAt": "2025-12-02T18:11:20.346Z"
+    },
+    {
+      "id": "cmiow9oyi006510b05czgjh4c",
+      "name": "Lót chuột (Mousepad)",
+      "slug": "acc-mousepad",
+      "color": null,
+      "parentId": "cmiow9oyh006310b0vhfo5tdm",
+      "createdAt": "2025-12-02T18:11:20.346Z",
+      "updatedAt": "2025-12-02T18:11:20.346Z"
+    },
+    {
+      "id": "cmiow9oyi006710b03xkz8f8v",
+      "name": "Arm màn hình",
+      "slug": "acc-arm",
+      "color": null,
+      "parentId": "cmiow9oyh006310b0vhfo5tdm",
+      "createdAt": "2025-12-02T18:11:20.347Z",
+      "updatedAt": "2025-12-02T18:11:20.347Z"
+    },
+    {
+      "id": "cmiow9oyj006910b0j1l7onyq",
+      "name": "Dây cáp Custom",
+      "slug": "acc-cable",
+      "color": null,
+      "parentId": "cmiow9oyh006310b0vhfo5tdm",
+      "createdAt": "2025-12-02T18:11:20.347Z",
+      "updatedAt": "2025-12-02T18:11:20.347Z"
+    },
+    {
+      "id": "cmiow9oyj006b10b0kufav10y",
+      "name": "Keycap",
+      "slug": "acc-keycap",
+      "color": null,
+      "parentId": "cmiow9oyh006310b0vhfo5tdm",
+      "createdAt": "2025-12-02T18:11:20.348Z",
+      "updatedAt": "2025-12-02T18:11:20.348Z"
+    },
+    {
+      "id": "cmiow9oyj006d10b0p76i3fvv",
+      "name": "Switch",
+      "slug": "acc-switch",
+      "color": null,
+      "parentId": "cmiow9oyh006310b0vhfo5tdm",
+      "createdAt": "2025-12-02T18:11:20.348Z",
+      "updatedAt": "2025-12-02T18:11:20.348Z"
+    },
+    {
+      "id": "cmj2wdsvi0000kfnpu49p3yqx",
+      "name": "Card màn hình (VGA)",
+      "slug": "card-man-hinh-vga",
+      "color": "#10b981",
+      "parentId": null,
+      "createdAt": "2025-12-12T13:23:18.511Z",
+      "updatedAt": "2025-12-12T13:23:18.511Z"
+    },
+    {
+      "id": "cmj2wdsvn0001kfnpn22ofygo",
+      "name": "Case PC",
+      "slug": "case-pc",
+      "color": "#8b5cf6",
+      "parentId": null,
+      "createdAt": "2025-12-12T13:23:18.515Z",
+      "updatedAt": "2025-12-12T13:23:18.515Z"
+    },
+    {
+      "id": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "name": "Bộ vi xử lý (CPU)",
+      "slug": "bo-vi-xu-ly-cpu",
+      "color": "#0ea5e9",
+      "parentId": null,
+      "createdAt": "2025-12-12T13:23:18.517Z",
+      "updatedAt": "2025-12-12T13:23:18.517Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "cmj2wdsvu0004kfnpyw4jkldo",
+      "name": "Card màn hình RTX 4060",
+      "slug": "vga-rtx-4060-1765545798520-0",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4060, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 9245796,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (5).jpg",
+        "/Card/card (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.522Z",
+      "updatedAt": "2025-12-12T13:23:18.522Z",
+      "stock": 18,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsvv0006kfnpbavp0rp5",
+      "name": "Card màn hình RTX 4070",
+      "slug": "vga-rtx-4070-1765545798521-1",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4070, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 20806958,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (4).jpg",
+        "/Card/card (4).jpg",
+        "/Card/card (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.524Z",
+      "updatedAt": "2025-12-12T13:23:18.524Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsvw0008kfnpxjwrw25h",
+      "name": "Card màn hình RTX 4080",
+      "slug": "vga-rtx-4080-1765545798521-2",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4080, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 8907359,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (6).jpg",
+        "/Card/card (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.525Z",
+      "updatedAt": "2025-12-12T13:23:18.525Z",
+      "stock": 20,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsvy000akfnpfweqvaou",
+      "name": "Card màn hình RTX 4090",
+      "slug": "vga-rtx-4090-1765545798521-3",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4090, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 8408536,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.526Z",
+      "updatedAt": "2025-12-12T13:23:18.526Z",
+      "stock": 9,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsvz000ckfnptid8md8o",
+      "name": "Card màn hình RTX 4100",
+      "slug": "vga-rtx-4100-1765545798521-4",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4100, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 20866072,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (2).jpg",
+        "/Card/card (4).jpg",
+        "/Card/card (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.527Z",
+      "updatedAt": "2025-12-12T13:23:18.527Z",
+      "stock": 6,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw0000ekfnpfepar6z6",
+      "name": "Card màn hình RTX 4110",
+      "slug": "vga-rtx-4110-1765545798521-5",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4110, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 17559323,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (3).jpg",
+        "/Card/card (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.528Z",
+      "updatedAt": "2025-12-12T13:23:18.528Z",
+      "stock": 14,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw1000gkfnp2fbl9swa",
+      "name": "Card màn hình RTX 4120",
+      "slug": "vga-rtx-4120-1765545798521-6",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4120, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 18448554,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (5).jpg",
+        "/Card/card (2).jpg",
+        "/Card/card (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.529Z",
+      "updatedAt": "2025-12-12T13:23:18.529Z",
+      "stock": 7,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw2000ikfnpqo7iuxu5",
+      "name": "Card màn hình RTX 4130",
+      "slug": "vga-rtx-4130-1765545798521-7",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4130, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 13484557,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.530Z",
+      "updatedAt": "2025-12-12T13:23:18.530Z",
+      "stock": 20,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw2000kkfnpu2k69xmn",
+      "name": "Card màn hình RTX 4140",
+      "slug": "vga-rtx-4140-1765545798521-8",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4140, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 22069886,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (1).jpg",
+        "/Card/card (3).jpg",
+        "/Card/card (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.531Z",
+      "updatedAt": "2025-12-12T13:23:18.531Z",
+      "stock": 6,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw3000mkfnplehq7ry0",
+      "name": "Card màn hình RTX 4150",
+      "slug": "vga-rtx-4150-1765545798521-9",
+      "description": "Card màn hình gaming hiệu năng cao RTX 4150, 8GB VRAM, Ray Tracing, DLSS 3.0",
+      "price": 21632258,
+      "comparePrice": null,
+      "images": [
+        "/Card/card (3).jpg",
+        "/Card/card (2).jpg",
+        "/Card/card (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvi0000kfnpu49p3yqx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.531Z",
+      "updatedAt": "2025-12-12T13:23:18.531Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw4000okfnp7nbjo4eo",
+      "name": "Case Gaming RGB NZXT",
+      "slug": "case-gaming-1765545798521-0",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 2580433,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (5).jpg",
+        "/Case/case (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.532Z",
+      "updatedAt": "2025-12-12T13:23:18.532Z",
+      "stock": 18,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw4000qkfnpf2msdgl9",
+      "name": "Case Gaming RGB Corsair",
+      "slug": "case-gaming-1765545798521-1",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 3556827,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (5).jpg",
+        "/Case/case (5).jpg",
+        "/Case/case (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.533Z",
+      "updatedAt": "2025-12-12T13:23:18.533Z",
+      "stock": 6,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw5000skfnpswnmsixh",
+      "name": "Case Gaming RGB Lian Li",
+      "slug": "case-gaming-1765545798521-2",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 4796029,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.534Z",
+      "updatedAt": "2025-12-12T13:23:18.534Z",
+      "stock": 10,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw6000ukfnpm5votmw4",
+      "name": "Case Gaming RGB Cooler Master",
+      "slug": "case-gaming-1765545798521-3",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 1803776,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (4).jpg",
+        "/Case/case (1).jpg",
+        "/Case/case (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.534Z",
+      "updatedAt": "2025-12-12T13:23:18.534Z",
+      "stock": 15,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw7000wkfnp909n3gbt",
+      "name": "Case Gaming RGB NZXT",
+      "slug": "case-gaming-1765545798521-4",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 4162889,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.535Z",
+      "updatedAt": "2025-12-12T13:23:18.535Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw8000ykfnpbeq6q2rr",
+      "name": "Case Gaming RGB Corsair",
+      "slug": "case-gaming-1765545798521-5",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 1615526,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.536Z",
+      "updatedAt": "2025-12-12T13:23:18.536Z",
+      "stock": 12,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw90010kfnp8j50fc88",
+      "name": "Case Gaming RGB Lian Li",
+      "slug": "case-gaming-1765545798521-6",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 3743458,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (4).jpg",
+        "/Case/case (5).jpg",
+        "/Case/case (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.537Z",
+      "updatedAt": "2025-12-12T13:23:18.537Z",
+      "stock": 18,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsw90012kfnp0ggf1ljw",
+      "name": "Case Gaming RGB Cooler Master",
+      "slug": "case-gaming-1765545798521-7",
+      "description": "Case gaming với thiết kế hiện đại, hỗ trợ tản nhiệt tốt, đèn RGB",
+      "price": 4866309,
+      "comparePrice": null,
+      "images": [
+        "/Case/case (3).jpg",
+        "/Case/case (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvn0001kfnpn22ofygo",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.538Z",
+      "updatedAt": "2025-12-12T13:23:18.538Z",
+      "stock": 5,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswa0014kfnptbgp92vx",
+      "name": "Intel Core i7 Gen 13",
+      "slug": "cpu-intel-1765545798521-0",
+      "description": "Bộ vi xử lý hiệu năng cao, 16 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 7004142,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (4).jpg",
+        "/cpu/cpu (2).jpg",
+        "/cpu/cpu (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.538Z",
+      "updatedAt": "2025-12-12T13:23:18.538Z",
+      "stock": 18,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswb0016kfnp7q3d90pa",
+      "name": "AMD Ryzen 7 Gen 14",
+      "slug": "cpu-amd-1765545798521-1",
+      "description": "Bộ vi xử lý hiệu năng cao, 12 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 12135319,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.539Z",
+      "updatedAt": "2025-12-12T13:23:18.539Z",
+      "stock": 19,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswc0018kfnpdzzl71iq",
+      "name": "Intel Core i7 Gen 15",
+      "slug": "cpu-intel-1765545798521-2",
+      "description": "Bộ vi xử lý hiệu năng cao, 16 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 8085420,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.540Z",
+      "updatedAt": "2025-12-12T13:23:18.540Z",
+      "stock": 11,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswc001akfnpk31vqacc",
+      "name": "AMD Ryzen 7 Gen 16",
+      "slug": "cpu-amd-1765545798521-3",
+      "description": "Bộ vi xử lý hiệu năng cao, 12 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 7167916,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (2).jpg",
+        "/cpu/cpu (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.541Z",
+      "updatedAt": "2025-12-12T13:23:18.541Z",
+      "stock": 10,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswd001ckfnpl9uhp53n",
+      "name": "Intel Core i7 Gen 17",
+      "slug": "cpu-intel-1765545798521-4",
+      "description": "Bộ vi xử lý hiệu năng cao, 16 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 11864522,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.542Z",
+      "updatedAt": "2025-12-12T13:23:18.542Z",
+      "stock": 23,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswe001ekfnp6j9m4oz4",
+      "name": "AMD Ryzen 7 Gen 18",
+      "slug": "cpu-amd-1765545798521-5",
+      "description": "Bộ vi xử lý hiệu năng cao, 12 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 12280425,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (5).jpg",
+        "/cpu/cpu (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.543Z",
+      "updatedAt": "2025-12-12T13:23:18.543Z",
+      "stock": 15,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswg001gkfnpavz1w3kx",
+      "name": "Intel Core i7 Gen 19",
+      "slug": "cpu-intel-1765545798521-6",
+      "description": "Bộ vi xử lý hiệu năng cao, 16 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 6190035,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (4).jpg",
+        "/cpu/cpu (4).jpg",
+        "/cpu/cpu (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.544Z",
+      "updatedAt": "2025-12-12T13:23:18.544Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswg001ikfnpry3ls41s",
+      "name": "AMD Ryzen 7 Gen 20",
+      "slug": "cpu-amd-1765545798521-7",
+      "description": "Bộ vi xử lý hiệu năng cao, 12 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 6423191,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.545Z",
+      "updatedAt": "2025-12-12T13:23:18.545Z",
+      "stock": 28,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswi001kkfnp899atryp",
+      "name": "Intel Core i7 Gen 21",
+      "slug": "cpu-intel-1765545798521-8",
+      "description": "Bộ vi xử lý hiệu năng cao, 16 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 10226465,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (4).jpg",
+        "/cpu/cpu (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.546Z",
+      "updatedAt": "2025-12-12T13:23:18.546Z",
+      "stock": 15,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswj001mkfnpyg2c23z7",
+      "name": "AMD Ryzen 7 Gen 22",
+      "slug": "cpu-amd-1765545798521-9",
+      "description": "Bộ vi xử lý hiệu năng cao, 12 nhân 24 luồng, tốc độ tối đa 5.5GHz",
+      "price": 8884728,
+      "comparePrice": null,
+      "images": [
+        "/cpu/cpu (2).jpg",
+        "/cpu/cpu (3).jpg",
+        "/cpu/cpu (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmj2wdsvo0002kfnpp2i1zrsx",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.547Z",
+      "updatedAt": "2025-12-12T13:23:18.547Z",
+      "stock": 17,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswk001qkfnpu5firraj",
+      "name": "Màn hình Samsung 25\" 164Hz",
+      "slug": "monitor-1765545798521-1",
+      "description": "Màn hình gaming 25 inch, 164Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 5704803,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (2).jpg",
+        "/Monitor/monitor (5).jpg",
+        "/Monitor/monitor (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.548Z",
+      "updatedAt": "2025-12-12T13:23:18.548Z",
+      "stock": 17,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswj001okfnpv4mqzkxu",
+      "name": "Màn hình LG 24\" 144Hz",
+      "slug": "monitor-1765545798521-0",
+      "description": "Màn hình gaming 24 inch, 144Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 4382114,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (3).jpg",
+        "/Monitor/monitor (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.548Z",
+      "updatedAt": "2025-12-12T13:23:18.548Z",
+      "stock": 10,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswl001skfnp1wc330b9",
+      "name": "Màn hình Asus 26\" 184Hz",
+      "slug": "monitor-1765545798521-2",
+      "description": "Màn hình gaming 26 inch, 184Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 8590432,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.549Z",
+      "updatedAt": "2025-12-12T13:23:18.549Z",
+      "stock": 12,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswl001ukfnp51fuiljv",
+      "name": "Màn hình Dell 27\" 204Hz",
+      "slug": "monitor-1765545798521-3",
+      "description": "Màn hình gaming 27 inch, 204Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 3248846,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (4).jpg",
+        "/Monitor/monitor (2).jpg",
+        "/Monitor/monitor (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.550Z",
+      "updatedAt": "2025-12-12T13:23:18.550Z",
+      "stock": 16,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswm001wkfnpilllf0qc",
+      "name": "Màn hình LG 28\" 224Hz",
+      "slug": "monitor-1765545798521-4",
+      "description": "Màn hình gaming 28 inch, 224Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 7437168,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (5).jpg",
+        "/Monitor/monitor (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.551Z",
+      "updatedAt": "2025-12-12T13:23:18.551Z",
+      "stock": 8,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswn001ykfnp76xrs8og",
+      "name": "Màn hình Samsung 29\" 244Hz",
+      "slug": "monitor-1765545798521-5",
+      "description": "Màn hình gaming 29 inch, 244Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 3242345,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (2).jpg",
+        "/Monitor/monitor (2).jpg",
+        "/Monitor/monitor (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.551Z",
+      "updatedAt": "2025-12-12T13:23:18.551Z",
+      "stock": 17,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswn0020kfnpf13vkogr",
+      "name": "Màn hình Asus 30\" 264Hz",
+      "slug": "monitor-1765545798521-6",
+      "description": "Màn hình gaming 30 inch, 264Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 5188523,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.552Z",
+      "updatedAt": "2025-12-12T13:23:18.552Z",
+      "stock": 18,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswo0022kfnpvf8ulkcl",
+      "name": "Màn hình Dell 31\" 284Hz",
+      "slug": "monitor-1765545798521-7",
+      "description": "Màn hình gaming 31 inch, 284Hz, 1ms, IPS/VA, FreeSync/G-Sync",
+      "price": 4849059,
+      "comparePrice": null,
+      "images": [
+        "/Monitor/monitor (1).jpg",
+        "/Monitor/monitor (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owy000h10b04nezv6sq",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.552Z",
+      "updatedAt": "2025-12-12T13:23:18.552Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswp0024kfnpx3d6vf63",
+      "name": "RAM Corsair 16GB DDR5",
+      "slug": "ram-1765545798521-0",
+      "description": "RAM DDR5 16GB, tốc độ 5200MHz, RGB, tản nhiệt nhôm",
+      "price": 4991452,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (3).jpg",
+        "/ram/ram (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.553Z",
+      "updatedAt": "2025-12-12T13:23:18.553Z",
+      "stock": 37,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswp0026kfnphnt3ozdu",
+      "name": "RAM G.Skill 24GB DDR5",
+      "slug": "ram-1765545798521-1",
+      "description": "RAM DDR5 24GB, tốc độ 5400MHz, RGB, tản nhiệt nhôm",
+      "price": 4778061,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (6).jpg",
+        "/ram/ram (6).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.554Z",
+      "updatedAt": "2025-12-12T13:23:18.554Z",
+      "stock": 25,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswq0028kfnpgjfpwmfe",
+      "name": "RAM Kingston 32GB DDR5",
+      "slug": "ram-1765545798521-2",
+      "description": "RAM DDR5 32GB, tốc độ 5600MHz, RGB, tản nhiệt nhôm",
+      "price": 2268667,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.554Z",
+      "updatedAt": "2025-12-20T09:43:08.340Z",
+      "stock": 9,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswr002akfnpfucdy7bm",
+      "name": "RAM Adata 40GB DDR5",
+      "slug": "ram-1765545798521-3",
+      "description": "RAM DDR5 40GB, tốc độ 5800MHz, RGB, tản nhiệt nhôm",
+      "price": 2307991,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.555Z",
+      "updatedAt": "2025-12-12T13:23:18.555Z",
+      "stock": 31,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswt002ckfnpcr26bees",
+      "name": "RAM Corsair 48GB DDR5",
+      "slug": "ram-1765545798521-4",
+      "description": "RAM DDR5 48GB, tốc độ 6000MHz, RGB, tản nhiệt nhôm",
+      "price": 4783910,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (4).jpg",
+        "/ram/ram (2).jpg",
+        "/ram/ram (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.557Z",
+      "updatedAt": "2025-12-12T13:23:18.557Z",
+      "stock": 32,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswt002ekfnpy00270bq",
+      "name": "RAM G.Skill 56GB DDR5",
+      "slug": "ram-1765545798521-5",
+      "description": "RAM DDR5 56GB, tốc độ 6200MHz, RGB, tản nhiệt nhôm",
+      "price": 1763734,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (1).jpg",
+        "/ram/ram (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.558Z",
+      "updatedAt": "2025-12-12T13:23:18.558Z",
+      "stock": 39,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswu002gkfnptj9b8qtk",
+      "name": "RAM Kingston 64GB DDR5",
+      "slug": "ram-1765545798521-6",
+      "description": "RAM DDR5 64GB, tốc độ 6400MHz, RGB, tản nhiệt nhôm",
+      "price": 4858817,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (2).jpg",
+        "/ram/ram (3).jpg",
+        "/ram/ram (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.559Z",
+      "updatedAt": "2025-12-12T13:23:18.559Z",
+      "stock": 34,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswv002ikfnpqt30fghp",
+      "name": "RAM Adata 72GB DDR5",
+      "slug": "ram-1765545798521-7",
+      "description": "RAM DDR5 72GB, tốc độ 6600MHz, RGB, tản nhiệt nhôm",
+      "price": 1609902,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (4).jpg",
+        "/ram/ram (2).jpg",
+        "/ram/ram (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.559Z",
+      "updatedAt": "2025-12-12T13:23:18.559Z",
+      "stock": 30,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsww002kkfnpcor6yh00",
+      "name": "RAM Corsair 80GB DDR5",
+      "slug": "ram-1765545798521-8",
+      "description": "RAM DDR5 80GB, tốc độ 6800MHz, RGB, tản nhiệt nhôm",
+      "price": 2751926,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (3).jpg",
+        "/ram/ram (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.560Z",
+      "updatedAt": "2025-12-20T03:01:10.292Z",
+      "stock": 26,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswx002okfnp3kwlpb50",
+      "name": "SSD Samsung 512GB NVMe",
+      "slug": "ssd-1765545798521-0",
+      "description": "SSD NVMe Gen4 512GB, tốc độ đọc 5000MB/s, TBW cao",
+      "price": 2229017,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (4).jpg",
+        "/ssd/ssd (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.561Z",
+      "updatedAt": "2025-12-20T09:31:35.352Z",
+      "stock": 22,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsww002mkfnpxlo0s0xr",
+      "name": "RAM G.Skill 88GB DDR5",
+      "slug": "ram-1765545798521-9",
+      "description": "RAM DDR5 88GB, tốc độ 7000MHz, RGB, tản nhiệt nhôm",
+      "price": 4256407,
+      "comparePrice": null,
+      "images": [
+        "/ram/ram (6).jpg",
+        "/ram/ram (6).jpg",
+        "/ram/ram (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxg001x10b0p4cm9k04",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.561Z",
+      "updatedAt": "2025-12-12T13:23:18.561Z",
+      "stock": 24,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswy002qkfnpm4cxz7un",
+      "name": "SSD WD 768GB NVMe",
+      "slug": "ssd-1765545798521-1",
+      "description": "SSD NVMe Gen4 768GB, tốc độ đọc 5500MB/s, TBW cao",
+      "price": 3796209,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (1).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": true,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.562Z",
+      "updatedAt": "2025-12-16T14:33:30.901Z",
+      "stock": 0,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdswz002ukfnp1alkkd3r",
+      "name": "SSD Crucial 1280GB NVMe",
+      "slug": "ssd-1765545798521-3",
+      "description": "SSD NVMe Gen4 1280GB, tốc độ đọc 6500MB/s, TBW cao",
+      "price": 2500403,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.564Z",
+      "updatedAt": "2025-12-12T13:23:18.564Z",
+      "stock": 16,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsx0002wkfnp2gwjm97z",
+      "name": "SSD Samsung 1536GB NVMe",
+      "slug": "ssd-1765545798521-4",
+      "description": "SSD NVMe Gen4 1536GB, tốc độ đọc 7000MB/s, TBW cao",
+      "price": 2874600,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (4).jpg",
+        "/ssd/ssd (5).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.564Z",
+      "updatedAt": "2025-12-20T03:43:56.431Z",
+      "stock": 31,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsx0002ykfnpckw4bu0v",
+      "name": "SSD WD 1792GB NVMe",
+      "slug": "ssd-1765545798521-5",
+      "description": "SSD NVMe Gen4 1792GB, tốc độ đọc 7500MB/s, TBW cao",
+      "price": 1325941,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (2).jpg",
+        "/ssd/ssd (4).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.565Z",
+      "updatedAt": "2025-12-12T13:23:18.565Z",
+      "stock": 26,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsx10030kfnp2330lco6",
+      "name": "SSD Kingston 2048GB NVMe",
+      "slug": "ssd-1765545798521-6",
+      "description": "SSD NVMe Gen4 2048GB, tốc độ đọc 8000MB/s, TBW cao",
+      "price": 3902852,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (4).jpg",
+        "/ssd/ssd (2).jpg",
+        "/ssd/ssd (3).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.566Z",
+      "updatedAt": "2025-12-20T03:28:20.390Z",
+      "stock": 2,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmj2wdsx20032kfnpkm1ycydc",
+      "name": "SSD Crucial 2304GB NVMe",
+      "slug": "ssd-1765545798521-7",
+      "description": "SSD NVMe Gen4 2304GB, tốc độ đọc 8500MB/s, TBW cao",
+      "price": 1584141,
+      "comparePrice": null,
+      "images": [
+        "/ssd/ssd (4).jpg",
+        "/ssd/ssd (3).jpg",
+        "/ssd/ssd (2).jpg"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9oxj002910b0yuleayfb",
+      "storeId": "cmioz3nbv0002a4mig9hqzrcg",
+      "createdAt": "2025-12-12T13:23:18.567Z",
+      "updatedAt": "2025-12-16T13:39:53.230Z",
+      "stock": 37,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmjdtes3f0001fgqjex0durzt",
+      "name": "tuyena1",
+      "slug": "tuyena1",
+      "description": "aaaaaa",
+      "price": 12,
+      "comparePrice": 14,
+      "images": [],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owu000510b0jdvnfk4q",
+      "storeId": "cmips6xnx0002xspuo3mflb30",
+      "createdAt": "2025-12-20T04:45:33.244Z",
+      "updatedAt": "2025-12-20T04:45:33.244Z",
+      "stock": 13,
+      "wishlistCount": 0
+    },
+    {
+      "id": "cmjdtkmc40001qxjiblbb9orp",
+      "name": "tuyena2",
+      "slug": "tuyena2",
+      "description": "aaaaaaaaa",
+      "price": 1,
+      "comparePrice": 10,
+      "images": [
+        "https://utfs.io/f/RbddWxFIjuDGAU9J13iRNQTKLP8GFMiqx4sropBdmDUlRcAj"
+      ],
+      "isArchived": false,
+      "isFeatured": false,
+      "categoryId": "cmiow9owu000510b0jdvnfk4q",
+      "storeId": "cmips6xnx0002xspuo3mflb30",
+      "createdAt": "2025-12-20T04:50:05.717Z",
+      "updatedAt": "2025-12-20T04:53:44.719Z",
+      "stock": 20,
+      "wishlistCount": 0
+    }
+  ]
+}

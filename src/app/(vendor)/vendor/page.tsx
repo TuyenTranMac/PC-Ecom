@@ -1,11 +1,13 @@
 import { api } from "@/server/server";
 import { StatsCard } from "@/modules/admin/dashboard/ui/StatsCard";
+import { RevenueChart } from "@/modules/vendor/dashboard/ui/RevenueChart";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const VendorDashboardPage = async () => {
   const caller = await api();
   const products = await caller.product.getMyProducts();
+  const revenueData = await caller.order.getVendorRevenueByMonth();
 
   const totalProducts = products.length;
   const activeProducts = products.filter((p) => !p.isArchived).length;
@@ -45,6 +47,8 @@ const VendorDashboardPage = async () => {
           description="Sản phẩm < 10"
         />
       </div>
+
+      <RevenueChart data={revenueData} />
 
       <div className="rounded-lg border bg-card p-6">
         <h2 className="text-xl font-semibold mb-4">Thao tác nhanh</h2>

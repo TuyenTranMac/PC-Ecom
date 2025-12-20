@@ -620,31 +620,31 @@ export const orderRouter = createTRPCRouter({
         ctx.db.order.count({
           where: {
             status: "CONFIRMED",
-            OrderItem: { some: { storeSlug: store.id } },
+            OrderItem: { some: { storeSlug: store.slug } },
           },
         }),
         ctx.db.order.count({
           where: {
             status: "PROCESSING",
-            OrderItem: { some: { storeSlug: store.id } },
+            OrderItem: { some: { storeSlug: store.slug } },
           },
         }),
         ctx.db.order.count({
           where: {
             status: "SHIPPED",
-            OrderItem: { some: { storeSlug: store.id } },
+            OrderItem: { some: { storeSlug: store.slug } },
           },
         }),
         ctx.db.order.count({
           where: {
             status: "DELIVERED",
-            OrderItem: { some: { storeSlug: store.id } },
+            OrderItem: { some: { storeSlug: store.slug } },
           },
         }),
         ctx.db.order.count({
           where: {
             status: "CANCELLED",
-            OrderItem: { some: { storeSlug: store.id } },
+            OrderItem: { some: { storeSlug: store.slug } },
           },
         }),
       ]);
@@ -652,13 +652,13 @@ export const orderRouter = createTRPCRouter({
     // Tính tổng doanh thu (chỉ đơn DELIVERED)
     const revenueData = await ctx.db.orderItem.aggregate({
       where: {
-        storeSlug: store.id,
+        storeSlug: store.slug,
         Order: {
           status: "DELIVERED",
         },
       },
       _sum: {
-        price: true,
+        lineTotal: true,
         quantity: true,
       },
     });
@@ -672,8 +672,82 @@ export const orderRouter = createTRPCRouter({
       cancelled,
       totalOrders:
         pending + confirmed + processing + shipped + delivered + cancelled,
-      revenue: revenueData._sum.price?.toNumber() ?? 0,
+      revenue: revenueData._sum.lineTotal?.toNumber() ?? 0,
       totalItemsSold: revenueData._sum.quantity ?? 0,
     };
+  }),
+
+  // Lấy doanh thu theo tháng của vendor
+  getVendorRevenueByMonth: vendorProcedure.query(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+
+    const store = await ctx.db.store.findUnique({
+      where: { ownerId: userId },
+      select: { slug: true },
+    });
+
+    if (!store) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Không tìm thấy cửa hàng",
+      });
+    }
+
+    if (!store) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Không tìm thấy cửa hàng",
+      });
+    }
+
+    // Lấy doanh thu theo tháng trong 12 tháng qua
+    const now = new Date();
+    const twelveMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 11, 1);
+
+    console.log("now:", now, "twelveMonthsAgo:", twelveMonthsAgo);
+
+    const revenueData = await ctx.db.$queryRaw<
+      { month: string; revenue: number }[]
+    >`
+      SELECT
+        TO_CHAR(o."createdAt", 'YYYY-MM') as month,
+        SUM(oi."lineTotal")::float as revenue
+      FROM "Order" o
+      JOIN "OrderItem" oi ON o.id = oi."orderId"
+      WHERE oi."storeSlug" = ${store.slug}
+        AND o.status = 'DELIVERED'
+        AND o."createdAt" >= ${twelveMonthsAgo}
+      GROUP BY TO_CHAR(o."createdAt", 'YYYY-MM')
+      ORDER BY month
+    `;
+
+    console.log("Revenue data:", revenueData);
+
+    // Đảm bảo có dữ liệu cho tất cả 12 tháng
+    const months = [];
+    let current = new Date(twelveMonthsAgo);
+    console.log("current initial:", current);
+    for (let i = 0; i < 12; i++) {
+      const year = current.getFullYear();
+      const month = String(current.getMonth() + 1).padStart(2, '0');
+      const monthStr = `${year}-${month}`;
+      months.push(monthStr);
+      current = new Date(current.getFullYear(), current.getMonth() + 1, 1);
+    }
+
+    console.log("Months:", months);
+
+    const finalRevenueMap = new Map(
+      revenueData.map((item) => [item.month, item.revenue])
+    );
+
+    const result = months.map((month) => ({
+      month,
+      revenue: finalRevenueMap.get(month) || 0,
+    }));
+
+    console.log("Result:", result);
+
+    return result;
   }),
 });

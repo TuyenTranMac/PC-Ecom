@@ -18,6 +18,16 @@ async function main() {
     });
   }
 
+  // Import stores trước (vì products cần storeId)
+  console.log("📦 Import stores...");
+  for (const store of data.stores) {
+    await prisma.store.upsert({
+      where: { id: store.id },
+      update: store,
+      create: store,
+    });
+  }
+
   // Import products
   console.log("📦 Import products...");
   for (const product of data.products) {
@@ -29,7 +39,7 @@ async function main() {
   }
 
   console.log(
-    `✅ Import hoàn thành! ${data.categories.length} categories và ${data.products.length} products.`
+    `✅ Import hoàn thành! ${data.categories.length} categories, ${data.stores.length} stores và ${data.products.length} products.`
   );
 }
 

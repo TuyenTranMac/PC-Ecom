@@ -3,10 +3,15 @@ import fs from "fs";
 import path from "path";
 
 async function main() {
-  console.log("🚀 Đang export dữ liệu từ Category và Product...");
+  console.log("🚀 Đang export dữ liệu từ Category, Store và Product...");
 
   // Lấy tất cả categories
   const categories = await prisma.category.findMany({
+    orderBy: { createdAt: "asc" },
+  });
+
+  // Lấy tất cả stores
+  const stores = await prisma.store.findMany({
     orderBy: { createdAt: "asc" },
   });
 
@@ -17,6 +22,7 @@ async function main() {
 
   const data = {
     categories,
+    stores,
     products,
   };
 
@@ -25,7 +31,7 @@ async function main() {
 
   console.log(`✅ Export hoàn thành! Đã lưu vào ${filePath}`);
   console.log(
-    `📊 Tổng: ${categories.length} categories và ${products.length} products.`
+    `📊 Tổng: ${categories.length} categories, ${stores.length} stores và ${products.length} products.`
   );
 }
 

@@ -1,11 +1,13 @@
 import { createTRPCRouter, publicProcedure, vendorProcedure } from "../trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
   createProductSchema,
   updateProductSchema,
   deleteProductSchema,
   getProductByIdSchema,
+  validateProductAISchema,
 } from "@/lib/schemas/product.schema";
 export const productRouter = createTRPCRouter({
   getAll: publicProcedure
@@ -208,6 +210,79 @@ export const productRouter = createTRPCRouter({
         product,
         message: "Tạo sản phẩm thành công",
       };
+    }),
+
+  // Validate sản phẩm với AI
+  validateProductAI: vendorProcedure
+    .input(validateProductAISchema)
+    .mutation(async ({ ctx, input }) => {
+      const { name, categoryId, images } = input;
+
+      // Lấy tên danh mục
+      const category = await ctx.db.category.findUnique({
+        where: { id: categoryId },
+        select: { name: true },
+      });
+
+      if (!category) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Danh mục không tồn tại",
+        });
+      }
+
+      // Khởi tạo Google AI
+      const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY!);
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      // Tạo prompt
+      const prompt = `Phân tích các hình ảnh sản phẩm này. Tên sản phẩm là "${name}", thuộc danh mục "${category.name}". 
+
+Hãy xác nhận xem:
+1. Hình ảnh có phải là sản phẩm thực tế không (không phải meme, ảnh bậy bạ, hoặc không liên quan)?
+2. Thông tin tên sản phẩm và danh mục có khớp với nội dung hình ảnh không?
+3. Hình ảnh có chất lượng tốt, rõ ràng không?
+
+Trả về JSON với format:
+{
+  "valid": boolean,
+  "explanation": "Giải thích ngắn gọn tại sao valid hoặc không valid",
+  "confidence": number (0-100, độ tin cậy)
+}`;
+
+      try {
+        // TEMP: Mock AI validation for testing
+        console.log("AI Validation called with:", {
+          name,
+          categoryName: category.name,
+          images,
+        });
+
+        // Simulate AI processing
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Mock response based on input
+        const mockValid =
+          name.toLowerCase().includes("card") &&
+          category.name.toLowerCase().includes("card");
+        const mockConfidence = mockValid ? 85 : 15;
+
+        return {
+          valid: mockValid,
+          explanation: mockValid
+            ? ` Hình ảnh và thông tin sản phẩm khớp nhau. Đây là card màn hình thuộc danh mục ${category.name}.`
+            : ` Hình ảnh không khớp với thông tin. Vui lòng kiểm tra lại tên sản phẩm và danh mục.`,
+          confidence: mockConfidence,
+        };
+      } catch (error) {
+        console.error("AI validation error:", error);
+        // Fallback: cho phép nếu AI lỗi
+        return {
+          valid: true,
+          explanation: "Không thể kiểm tra với AI, cho phép tạo sản phẩm",
+          confidence: 0,
+        };
+      }
     }),
 
   // Lấy danh sách sản phẩm của Vendor

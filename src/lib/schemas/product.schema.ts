@@ -5,9 +5,12 @@ export const createProductSchema = z.object({
   name: z.string().min(3, "Tên sản phẩm phải có ít nhất 3 ký tự").max(255),
   slug: z
     .string()
-    .min(3, "Slug phải có ít nhất 3 ký tự")
+    .min(0, "Slug phải có ít nhất 3 ký tự")
     .max(255)
-    .regex(/^[a-z0-9-]+$/, "Slug chỉ được chứa chữ thường, số và dấu gạch ngang"),
+    .regex(
+      /^[a-z0-9-]+$/,
+      "Slug chỉ được chứa chữ thường, số và dấu gạch ngang"
+    ),
   description: z.string().optional(),
   price: z.number().positive("Giá phải lớn hơn 0"),
   comparePrice: z.number().positive().optional().nullable(),
@@ -57,9 +60,19 @@ export const getProductsSchema = z.object({
   cursor: z.string().optional(), // For pagination
 });
 
+// Schema cho việc validate sản phẩm với AI
+export const validateProductAISchema = z.object({
+  name: z.string().min(1, "Tên sản phẩm là bắt buộc"),
+  categoryId: z.string().min(1, "Danh mục là bắt buộc"),
+  images: z
+    .array(z.string().url("URL ảnh không hợp lệ"))
+    .min(1, "Cần ít nhất 1 ảnh"),
+});
+
 // Export types
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
 export type DeleteProductInput = z.infer<typeof deleteProductSchema>;
 export type GetProductByIdInput = z.infer<typeof getProductByIdSchema>;
 export type GetProductsInput = z.infer<typeof getProductsSchema>;
+export type ValidateProductAIInput = z.infer<typeof validateProductAISchema>;

@@ -32,6 +32,17 @@ import {
 import { toast } from "sonner";
 import { Loader2, X, Upload } from "lucide-react";
 import { useUploadThing } from "@/lib/uploadthing";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface Category {
   id: string;
@@ -55,6 +66,12 @@ export const VendorProductForm = ({
   const trpc = useTRPC();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploadingImages, setUploadingImages] = useState(false);
+  const [aiValidation, setAiValidation] = useState<{
+    valid: boolean;
+    explanation: string;
+    confidence: number;
+  } | null>(null);
+  const [showValidationDialog, setShowValidationDialog] = useState(false);
 
   const form = useForm<CreateProductInput>({
     resolver: zodResolver(createProductSchema) as any,
@@ -97,6 +114,19 @@ export const VendorProductForm = ({
       },
       onError: (error: any) => {
         toast.error(error.message || "Có lỗi xảy ra khi tạo sản phẩm");
+      },
+    })
+  );
+
+  // Mutation validate với AI
+  const validateAIMutation = useMutation(
+    trpc.product.validateProductAI.mutationOptions({
+      onSuccess: (result) => {
+        setAiValidation(result);
+        setShowValidationDialog(true);
+      },
+      onError: (error: any) => {
+        toast.error("Lỗi khi kiểm tra với AI: " + error.message);
       },
     })
   );
@@ -145,121 +175,190 @@ export const VendorProductForm = ({
     form.setValue("images", updatedUrls);
   };
 
+  // Validate với AI
+  const validateWithAI = () => {
+    const data = form.getValues();
+    if (!data.name || !data.categoryId || imageUrls.length === 0) {
+      toast.error("Vui lòng điền đầy đủ thông tin và upload ít nhất 1 ảnh");
+      return;
+    }
+
+    validateAIMutation.mutate({
+      name: data.name,
+      categoryId: data.categoryId,
+      images: imageUrls,
+    });
+  };
+
   // Submit form
   const onSubmit = (data: CreateProductInput) => {
     createProductMutation.mutate(data);
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        {/* Thông tin cơ bản */}
-        <div className="space-y-4 rounded-lg border p-6">
-          <h2 className="text-lg font-semibold">Thông tin cơ bản</h2>
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {/* Thông tin cơ bản */}
+          <div className="space-y-4 rounded-lg border p-6">
+            <h2 className="text-lg font-semibold">Thông tin cơ bản</h2>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {/* Tên sản phẩm */}
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="sm:col-span-2">
-                  <FormLabel>Tên sản phẩm *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="VD: Chuột Gaming Logitech G502"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Slug */}
-            <FormField
-              control={form.control}
-              name="slug"
-              render={({ field }) => (
-                <FormItem className="sm:col-span-2">
-                  <FormLabel>Slug (URL) *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="chuot-gaming-logitech-g502"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Tự động tạo từ tên sản phẩm. Có thể chỉnh sửa.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Mô tả */}
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem className="sm:col-span-2">
-                  <FormLabel>Mô tả</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Mô tả chi tiết về sản phẩm..."
-                      rows={4}
-                      {...field}
-                      value={field.value || ""}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Category */}
-            <FormField
-              control={form.control}
-              name="categoryId"
-              render={({ field }) => (
-                <FormItem className="sm:col-span-2">
-                  <FormLabel>Danh mục *</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+            <div className="grid gap-4 sm:grid-cols-2">
+              {/* Tên sản phẩm */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="sm:col-span-2">
+                    <FormLabel>Tên sản phẩm *</FormLabel>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Chọn danh mục" />
-                      </SelectTrigger>
+                      <Input
+                        placeholder="VD: Chuột Gaming Logitech G502"
+                        {...field}
+                      />
                     </FormControl>
-                    <SelectContent>
-                      {categories.map((category) => (
-                        <SelectItem key={category.id} value={category.id}>
-                          {category.parentId ? "  └─ " : ""}
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Slug */}
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem className="sm:col-span-2">
+                    <FormLabel>Slug (URL) *</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="chuot-gaming-logitech-g502"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription className="text-xs">
+                      Tự động tạo từ tên sản phẩm. Có thể chỉnh sửa.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Mô tả */}
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="sm:col-span-2">
+                    <FormLabel>Mô tả</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Mô tả chi tiết về sản phẩm..."
+                        rows={4}
+                        {...field}
+                        value={field.value || ""}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Category */}
+              <FormField
+                control={form.control}
+                name="categoryId"
+                render={({ field }) => (
+                  <FormItem className="sm:col-span-2">
+                    <FormLabel>Danh mục *</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Chọn danh mục" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.parentId ? "  └─ " : ""}
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Giá */}
-        <div className="space-y-4 rounded-lg border p-6">
-          <h2 className="text-lg font-semibold">Giá bán</h2>
+          {/* Giá */}
+          <div className="space-y-4 rounded-lg border p-6">
+            <h2 className="text-lg font-semibold">Giá bán</h2>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Giá bán *</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="0"
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormDescription className="text-xs">VNĐ</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="comparePrice"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Giá gốc (so sánh)</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="0"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value ? Number(e.target.value) : null
+                          )
+                        }
+                      />
+                    </FormControl>
+                    <FormDescription className="text-xs">
+                      Để hiển thị % giảm giá
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
+          {/* Kho */}
+          <div className="space-y-4 rounded-lg border p-6">
+            <h2 className="text-lg font-semibold">Kho hàng</h2>
+
             <FormField
               control={form.control}
-              name="price"
+              name="stock"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Giá bán *</FormLabel>
+                <FormItem className="sm:w-1/2">
+                  <FormLabel>Số lượng tồn kho *</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -268,189 +367,200 @@ export const VendorProductForm = ({
                       onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormDescription className="text-xs">VNĐ</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
-            <FormField
-              control={form.control}
-              name="comparePrice"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Giá gốc (so sánh)</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      {...field}
-                      value={field.value ?? ""}
-                      onChange={(e) =>
-                        field.onChange(
-                          e.target.value ? Number(e.target.value) : null
-                        )
+          {/* Upload ảnh */}
+          <div className="space-y-4 rounded-lg border p-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Hình ảnh sản phẩm</h2>
+              <span className="text-muted-foreground text-xs">
+                {imageUrls.length}/{maxImages} ảnh
+              </span>
+            </div>
+
+            {/* Thêm URL trực tiếp */}
+            {imageUrls.length < maxImages && (
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Hoặc paste URL ảnh (Imgur, Cloudinary, etc.)"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      const url = e.currentTarget.value.trim();
+                      if (url && imageUrls.length < maxImages) {
+                        const updatedUrls = [...imageUrls, url];
+                        setImageUrls(updatedUrls);
+                        form.setValue("images", updatedUrls);
+                        e.currentTarget.value = "";
+                        toast.success("Đã thêm ảnh");
+                      }
+                    }
+                  }}
+                />
+              </div>
+            )}
+
+            <div className="grid gap-4">
+              {/* Preview images */}
+              {imageUrls.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                  {imageUrls.map((url, index) => (
+                    <div
+                      key={index}
+                      className="bg-muted group relative aspect-square overflow-hidden rounded-lg border"
+                    >
+                      <img
+                        src={url}
+                        alt={`Product ${index + 1}`}
+                        className="h-full w-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute right-1 top-1 rounded-full bg-black/50 p-1 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                      {index === 0 && (
+                        <div className="absolute bottom-1 left-1 rounded bg-black/70 px-2 py-0.5 text-xs text-white">
+                          Ảnh đại diện
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload button */}
+              {imageUrls.length < maxImages && (
+                <div className="flex items-center justify-center">
+                  <label
+                    htmlFor="image-upload"
+                    className="border-primary/20 hover:bg-muted/50 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors sm:w-auto sm:px-12"
+                  >
+                    {uploadingImages ? (
+                      <Loader2 className="text-muted-foreground h-10 w-10 animate-spin" />
+                    ) : (
+                      <>
+                        <Upload className="text-muted-foreground mb-2 h-10 w-10" />
+                        <p className="text-muted-foreground text-sm font-medium">
+                          Click để upload ảnh
+                        </p>
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          Còn {maxImages - imageUrls.length} ảnh
+                        </p>
+                      </>
+                    )}
+                    <input
+                      id="image-upload"
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                      disabled={
+                        uploadingImages || imageUrls.length >= maxImages
                       }
                     />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Để hiển thị % giảm giá
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
+                  </label>
+                </div>
               )}
-            />
-          </div>
-        </div>
-
-        {/* Kho */}
-        <div className="space-y-4 rounded-lg border p-6">
-          <h2 className="text-lg font-semibold">Kho hàng</h2>
-
-          <FormField
-            control={form.control}
-            name="stock"
-            render={({ field }) => (
-              <FormItem className="sm:w-1/2">
-                <FormLabel>Số lượng tồn kho *</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="0"
-                    {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        {/* Upload ảnh */}
-        <div className="space-y-4 rounded-lg border p-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Hình ảnh sản phẩm</h2>
-            <span className="text-muted-foreground text-xs">
-              {imageUrls.length}/{maxImages} ảnh
-            </span>
-          </div>
-
-          {/* Thêm URL trực tiếp */}
-          {imageUrls.length < maxImages && (
-            <div className="flex gap-2">
-              <Input
-                placeholder="Hoặc paste URL ảnh (Imgur, Cloudinary, etc.)"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    const url = e.currentTarget.value.trim();
-                    if (url && imageUrls.length < maxImages) {
-                      const updatedUrls = [...imageUrls, url];
-                      setImageUrls(updatedUrls);
-                      form.setValue("images", updatedUrls);
-                      e.currentTarget.value = "";
-                      toast.success("Đã thêm ảnh");
-                    }
-                  }
-                }}
-              />
             </div>
-          )}
+          </div>
 
-          <div className="grid gap-4">
-            {/* Preview images */}
-            {imageUrls.length > 0 && (
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                {imageUrls.map((url, index) => (
-                  <div
-                    key={index}
-                    className="bg-muted group relative aspect-square overflow-hidden rounded-lg border"
-                  >
-                    <img
-                      src={url}
-                      alt={`Product ${index + 1}`}
-                      className="h-full w-full object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveImage(index)}
-                      className="absolute right-1 top-1 rounded-full bg-black/50 p-1 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                    {index === 0 && (
-                      <div className="absolute bottom-1 left-1 rounded bg-black/70 px-2 py-0.5 text-xs text-white">
-                        Ảnh đại diện
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Upload button */}
-            {imageUrls.length < maxImages && (
-              <div className="flex items-center justify-center">
-                <label
-                  htmlFor="image-upload"
-                  className="border-primary/20 hover:bg-muted/50 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors sm:w-auto sm:px-12"
-                >
-                  {uploadingImages ? (
-                    <Loader2 className="text-muted-foreground h-10 w-10 animate-spin" />
-                  ) : (
-                    <>
-                      <Upload className="text-muted-foreground mb-2 h-10 w-10" />
-                      <p className="text-muted-foreground text-sm font-medium">
-                        Click để upload ảnh
-                      </p>
-                      <p className="text-muted-foreground mt-1 text-xs">
-                        Còn {maxImages - imageUrls.length} ảnh
-                      </p>
-                    </>
-                  )}
-                  <input
-                    id="image-upload"
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleImageUpload}
-                    disabled={uploadingImages || imageUrls.length >= maxImages}
-                  />
-                </label>
-              </div>
+          {/* Submit buttons */}
+          <div className="flex flex-col gap-3 border-t pt-6 sm:flex-row sm:justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.push("/vendor/products")}
+              disabled={createProductMutation.isPending}
+              className="w-full sm:w-auto"
+            >
+              Hủy
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={validateWithAI}
+              disabled={
+                createProductMutation.isPending ||
+                uploadingImages ||
+                validateAIMutation.isPending
+              }
+              className="w-full sm:w-auto"
+            >
+              {validateAIMutation.isPending
+                ? "Đang kiểm tra..."
+                : "Kiểm tra với AI"}
+            </Button>
+            <Button
+              type="submit"
+              disabled={
+                createProductMutation.isPending ||
+                !aiValidation ||
+                aiValidation.confidence === 0 ||
+                aiValidation.confidence < 50
+              }
+              className="w-full sm:w-auto"
+            >
+              {createProductMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Đang tạo...
+                </>
+              ) : (
+                "Tạo sản phẩm"
+              )}
+            </Button>
+            {(!aiValidation ||
+              aiValidation.confidence === 0 ||
+              aiValidation.confidence < 50) && (
+              <p className="text-sm text-muted-foreground mt-2">
+                Vui lòng kiểm tra với AI trước khi tạo sản phẩm (độ tin cậy phải
+                ≥ 50%)
+              </p>
             )}
           </div>
-        </div>
+        </form>
+      </Form>
 
-        {/* Submit buttons */}
-        <div className="flex flex-col gap-3 border-t pt-6 sm:flex-row sm:justify-end">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => router.push("/vendor/products")}
-            disabled={createProductMutation.isPending}
-            className="w-full sm:w-auto"
-          >
-            Hủy
-          </Button>
-          <Button
-            type="submit"
-            disabled={createProductMutation.isPending}
-            className="w-full sm:w-auto"
-          >
-            {createProductMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Đang tạo...
-              </>
-            ) : (
-              "Tạo sản phẩm"
+      {/* AI Validation Dialog */}
+      <AlertDialog
+        open={showValidationDialog}
+        onOpenChange={setShowValidationDialog}
+      >
+        <AlertDialogOverlay />
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {aiValidation?.valid
+                ? " Kiểm tra thành công"
+                : " Cần kiểm tra lại"}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {aiValidation?.explanation}
+              {aiValidation && (
+                <span className="mt-2 block text-sm text-muted-foreground">
+                  Độ tin cậy: {aiValidation.confidence}%
+                </span>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Đóng</AlertDialogCancel>
+            {aiValidation?.valid && (
+              <AlertDialogAction onClick={() => setShowValidationDialog(false)}>
+                Tiếp tục tạo sản phẩm
+              </AlertDialogAction>
             )}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };

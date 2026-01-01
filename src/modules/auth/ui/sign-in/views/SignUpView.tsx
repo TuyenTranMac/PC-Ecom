@@ -59,6 +59,7 @@ const SignUpView = ({ onToggle }: Props) => {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
       username: "",
     },
   });
@@ -151,6 +152,22 @@ const SignUpView = ({ onToggle }: Props) => {
                   </FormItem>
                 )}
               />
+
+              {/* Confirm Password */}
+              <FormField
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base">
+                      Confirm Password
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} type="password"></Input>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <Button
                 disabled={register.isPending}
                 size="lg"
@@ -189,4 +206,3 @@ function SignInFormSkeleton() {
 }
 
 export default SignUpView;
-
